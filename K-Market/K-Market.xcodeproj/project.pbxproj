@@ -15,6 +15,8 @@
 		3C13A7F929B9B1B600E2FB03 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A7F829B9B1B600E2FB03 /* Product.swift */; };
 		3C13A7FB29B9B3AB00E2FB03 /* ProductPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A7FA29B9B3AB00E2FB03 /* ProductPage.swift */; };
 		3C13A7FD29B9B6BC00E2FB03 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A7FC29B9B6BC00E2FB03 /* LocationData.swift */; };
+		3C13A80029B9BAA900E2FB03 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A7FF29B9BAA900E2FB03 /* NetworkRequest.swift */; };
+		3C13A80229B9C85600E2FB03 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A80129B9C85600E2FB03 /* HTTPMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		3C13A7F829B9B1B600E2FB03 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		3C13A7FA29B9B3AB00E2FB03 /* ProductPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPage.swift; sourceTree = "<group>"; };
 		3C13A7FC29B9B6BC00E2FB03 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		3C13A7FF29B9BAA900E2FB03 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		3C13A80129B9C85600E2FB03 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 				3C13A7F629B9AD9800E2FB03 /* Application */,
 				3C13A7E429B9A74300E2FB03 /* ViewController.swift */,
 				3C13A7F729B9B15B00E2FB03 /* Domain */,
+				3C13A7FE29B9BA8600E2FB03 /* Data */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -103,6 +108,15 @@
 				3C13A7FC29B9B6BC00E2FB03 /* LocationData.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		3C13A7FE29B9BA8600E2FB03 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3C13A7FF29B9BAA900E2FB03 /* NetworkRequest.swift */,
+				3C13A80129B9C85600E2FB03 /* HTTPMethod.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,9 +189,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C13A80029B9BAA900E2FB03 /* NetworkRequest.swift in Sources */,
 				3C13A7FD29B9B6BC00E2FB03 /* LocationData.swift in Sources */,
 				3C13A7FB29B9B3AB00E2FB03 /* ProductPage.swift in Sources */,
 				3C13A7E529B9A74300E2FB03 /* ViewController.swift in Sources */,
+				3C13A80229B9C85600E2FB03 /* HTTPMethod.swift in Sources */,
 				3C13A7F929B9B1B600E2FB03 /* Product.swift in Sources */,
 				3C13A7E129B9A74300E2FB03 /* AppDelegate.swift in Sources */,
 				3C13A7E329B9A74300E2FB03 /* SceneDelegate.swift in Sources */,
