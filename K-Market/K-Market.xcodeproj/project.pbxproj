@@ -17,6 +17,7 @@
 		3C13A7FD29B9B6BC00E2FB03 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A7FC29B9B6BC00E2FB03 /* LocationData.swift */; };
 		3C13A80029B9BAA900E2FB03 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A7FF29B9BAA900E2FB03 /* NetworkRequest.swift */; };
 		3C13A80229B9C85600E2FB03 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A80129B9C85600E2FB03 /* HTTPMethod.swift */; };
+		3C13A80429B9CAE800E2FB03 /* RequestByUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A80329B9CAE800E2FB03 /* RequestByUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		3C13A7FC29B9B6BC00E2FB03 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 		3C13A7FF29B9BAA900E2FB03 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		3C13A80129B9C85600E2FB03 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		3C13A80329B9CAE800E2FB03 /* RequestByUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestByUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,10 +115,19 @@
 		3C13A7FE29B9BA8600E2FB03 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3C13A7FF29B9BAA900E2FB03 /* NetworkRequest.swift */,
-				3C13A80129B9C85600E2FB03 /* HTTPMethod.swift */,
+				3C13A80529B9CB7800E2FB03 /* Network */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		3C13A80529B9CB7800E2FB03 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3C13A7FF29B9BAA900E2FB03 /* NetworkRequest.swift */,
+				3C13A80129B9C85600E2FB03 /* HTTPMethod.swift */,
+				3C13A80329B9CAE800E2FB03 /* RequestByUseCase.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +207,7 @@
 				3C13A80229B9C85600E2FB03 /* HTTPMethod.swift in Sources */,
 				3C13A7F929B9B1B600E2FB03 /* Product.swift in Sources */,
 				3C13A7E129B9A74300E2FB03 /* AppDelegate.swift in Sources */,
+				3C13A80429B9CAE800E2FB03 /* RequestByUseCase.swift in Sources */,
 				3C13A7E329B9A74300E2FB03 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
