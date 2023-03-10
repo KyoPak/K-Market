@@ -11,7 +11,7 @@ protocol CustomRequest {
     var baseURL: String? { get }
     var path: String? { get }
     var query: [URLQueryItem]? { get }
-    var httpMethod: HttpMethod { get }
+    var httpMethod: HTTPMethod { get }
     var url: URL? { get }
 }
 

@@ -10,7 +10,7 @@ import Foundation
 struct ListFetchRequest: CustomRequest {
     var path: String? = "/api/products"
     var query: [URLQueryItem]?
-    var httpMethod: HttpMethod = .GET
+    var httpMethod: HTTPMethod = .GET
     
     init(pageNo: Int, itemsPerPage: Int) {
         query = [
@@ -23,7 +23,7 @@ struct ListFetchRequest: CustomRequest {
 struct DetailFetchRequest: CustomRequest {
     var path: String?
     var query: [URLQueryItem]?
-    var httpMethod: HttpMethod = .GET
+    var httpMethod: HTTPMethod = .GET
     
     init(id: Int) {
         self.path = "/api/products/\(id)"
@@ -33,7 +33,7 @@ struct DetailFetchRequest: CustomRequest {
 struct ImageLoadRequest: CustomRequest {
     var path: String?
     var query: [URLQueryItem]?
-    var httpMethod: HttpMethod = .GET
+    var httpMethod: HTTPMethod = .GET
     var baseURL: String?
     
     init(thumbnail: String) {
