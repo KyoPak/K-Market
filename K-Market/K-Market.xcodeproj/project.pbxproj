@@ -110,9 +110,7 @@
 		3C13A7F729B9B15B00E2FB03 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				3C13A7F829B9B1B600E2FB03 /* Product.swift */,
-				3C13A7FA29B9B3AB00E2FB03 /* ProductPage.swift */,
-				3C13A7FC29B9B6BC00E2FB03 /* LocationData.swift */,
+				3C23C2DD29BB01D000802CEC /* Entity */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -150,6 +148,16 @@
 				3C13A80B29B9CC9A00E2FB03 /* NetworkError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		3C23C2DD29BB01D000802CEC /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				3C13A7F829B9B1B600E2FB03 /* Product.swift */,
+				3C13A7FA29B9B3AB00E2FB03 /* ProductPage.swift */,
+				3C13A7FC29B9B6BC00E2FB03 /* LocationData.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
