@@ -9,10 +9,10 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 protocol FireBaseService {
-    func load(_ data: LocationData, completion: @escaping ([LocationData]) -> Void)
+    func load(completion: @escaping ([LocationData]) -> Void)
     func add(data: LocationData)
     func update(data: LocationData)
-    func delete(data: LocationData)
+    func delete(id: Int)
 }
 
 final class DefaultFireBaseService: FireBaseService {
@@ -25,11 +25,9 @@ final class DefaultFireBaseService: FireBaseService {
     
     private let fireStoreDB = Firestore.firestore().collection(Attribute.collection)
     
-    func load(_ data: LocationData, completion: @escaping ([LocationData]) -> Void) {
-        fireStoreDB.whereField(
-            Attribute.id,
-            isEqualTo: data.id
-        ).getDocuments { querySnapshot, error in
+    func load(completion: @escaping ([LocationData]) -> Void) {
+        fireStoreDB
+            .getDocuments { querySnapshot, error in
             var locationData: [LocationData] = []
             
             guard error == nil else { return }
@@ -52,7 +50,7 @@ final class DefaultFireBaseService: FireBaseService {
 
     func add(data: LocationData) {
         fireStoreDB
-            .document(data.id.description)
+            .document(String(data.id))
             .setData([
                 Attribute.id: data.id,
                 Attribute.local: data.locality,
@@ -62,7 +60,7 @@ final class DefaultFireBaseService: FireBaseService {
     
     func update(data: LocationData) {
         fireStoreDB
-            .document(data.id.description)
+            .document(String(data.id))
             .updateData([
                 Attribute.id: data.id,
                 Attribute.local: data.locality,
@@ -70,9 +68,9 @@ final class DefaultFireBaseService: FireBaseService {
             ])
     }
     
-    func delete(data: LocationData) {
+    func delete(id: Int) {
         fireStoreDB
-            .document(data.id.description)
+            .document(String(id))
             .delete()
     }
     
