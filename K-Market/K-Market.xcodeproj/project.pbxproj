@@ -24,6 +24,9 @@
 		3C23C2E529BB10A300802CEC /* URLComponents+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E429BB10A300802CEC /* URLComponents+Extension.swift */; };
 		3C23C2E729BB12C700802CEC /* DefaultNetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */; };
 		3C23C2EF29BB1E6B00802CEC /* NetworkRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2EE29BB1E6B00802CEC /* NetworkRepositoryTest.swift */; };
+		3C23C2F829BB25BF00802CEC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C23C2F729BB25BF00802CEC /* FirebaseFirestore */; };
+		3C23C2FA29BB25BF00802CEC /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C23C2F929BB25BF00802CEC /* FirebaseFirestoreSwift */; };
+		3C23C2FC29BB26F600802CEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C23C2FB29BB26F500802CEC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,7 @@
 		3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkRepository.swift; sourceTree = "<group>"; };
 		3C23C2EC29BB1E6B00802CEC /* K-MarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "K-MarketTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C23C2EE29BB1E6B00802CEC /* NetworkRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepositoryTest.swift; sourceTree = "<group>"; };
+		3C23C2FB29BB26F500802CEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C23C2F829BB25BF00802CEC /* FirebaseFirestore in Frameworks */,
+				3C23C2FA29BB25BF00802CEC /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +115,7 @@
 			children = (
 				3C13A7E929B9A74500E2FB03 /* Assets.xcassets */,
 				3C13A7EB29B9A74500E2FB03 /* LaunchScreen.storyboard */,
+				3C23C2FB29BB26F500802CEC /* GoogleService-Info.plist */,
 				3C13A7EE29B9A74500E2FB03 /* Info.plist */,
 			);
 			path = Resource;
@@ -247,6 +254,10 @@
 			dependencies = (
 			);
 			name = "K-Market";
+			packageProductDependencies = (
+				3C23C2F729BB25BF00802CEC /* FirebaseFirestore */,
+				3C23C2F929BB25BF00802CEC /* FirebaseFirestoreSwift */,
+			);
 			productName = "K-Market";
 			productReference = 3C13A7DD29B9A74300E2FB03 /* K-Market.app */;
 			productType = "com.apple.product-type.application";
@@ -297,6 +308,9 @@
 				Base,
 			);
 			mainGroup = 3C13A7D429B9A74300E2FB03;
+			packageReferences = (
+				3C23C2F629BB25BF00802CEC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 3C13A7DE29B9A74300E2FB03 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -314,6 +328,7 @@
 			files = (
 				3C13A7ED29B9A74500E2FB03 /* LaunchScreen.storyboard in Resources */,
 				3C13A7EA29B9A74500E2FB03 /* Assets.xcassets in Resources */,
+				3C23C2FC29BB26F600802CEC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +636,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3C23C2F629BB25BF00802CEC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3C23C2F729BB25BF00802CEC /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C23C2F629BB25BF00802CEC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		3C23C2F929BB25BF00802CEC /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C23C2F629BB25BF00802CEC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3C13A7D529B9A74300E2FB03 /* Project object */;
 }
