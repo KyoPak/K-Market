@@ -21,11 +21,11 @@ final class DefaultNetworkRepository: NetworkRepository {
     private var urlRequest: URLRequest? {
         switch requestType {
         case .fetch(let pageNo, let itemsPerPage):
-            return ProductListFetchRequest(pageNo: pageNo, itemsPerPage: itemsPerPage).createRequest()
+            return ListFetchRequest(pageNo: pageNo, itemsPerPage: itemsPerPage).createRequest()
         case .fetchDetail(let productID):
-            return ProductDetailFetchRequest(id: productID).createRequest()
+            return DetailFetchRequest(id: productID).createRequest()
         case .loadImage(let thumbnail):
-            return ProductImageLoadRequest(thumbnail: thumbnail).createRequest()
+            return ImageLoadRequest(thumbnail: thumbnail).createRequest()
         }
     }
     
