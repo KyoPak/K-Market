@@ -8,22 +8,35 @@
 import Foundation
 
 struct ProductListFetchRequest: NetworkRequest {
-    var path: String = "/api/products"
-    var query: [URLQueryItem]
+    var path: String? = "/api/products"
+    var query: [URLQueryItem]?
     var httpMethod: HttpMethod = .GET
     
-    private var pageNo: Int
-    private var itemsPerPage: Int
-    private var url: URL?
-    
     init(pageNo: Int, itemsPerPage: Int) {
-        self.pageNo = pageNo
-        self.itemsPerPage = itemsPerPage
         query = [
             URLQueryItem(name: "page_no", value: String(pageNo)),
             URLQueryItem(name: "items_per_page", value: String(itemsPerPage))
         ]
-        
-        url = createURL()
+    }
+}
+
+struct ProductDetailFetchRequest: NetworkRequest {
+    var path: String?
+    var query: [URLQueryItem]?
+    var httpMethod: HttpMethod = .GET
+    
+    init(id: Int) {
+        self.path = "/api/products/\(id)"
+    }
+}
+
+struct ProductImageLoadRequest: NetworkRequest {
+    var path: String?
+    var query: [URLQueryItem]?
+    var httpMethod: HttpMethod = .GET
+    var baseURL: String?
+    
+    init(thumbnail: String) {
+        baseURL = thumbnail
     }
 }
