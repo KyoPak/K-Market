@@ -1,5 +1,5 @@
 //
-//  NetworkRequest.swift
+//  CustomRequest.swift
 //  K-Market
 //
 //  Created by parkhyo on 2023/03/09.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NetworkRequest {
+protocol CustomRequest {
     var baseURL: String? { get }
     var path: String? { get }
     var query: [URLQueryItem]? { get }
@@ -15,7 +15,7 @@ protocol NetworkRequest {
     var url: URL? { get }
 }
 
-extension NetworkRequest {
+extension CustomRequest {
     var baseURL: String? {
         return "https://openmarket.yagom-academy.kr"
     }

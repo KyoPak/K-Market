@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ListFetchRequest: NetworkRequest {
+struct ListFetchRequest: CustomRequest {
     var path: String? = "/api/products"
     var query: [URLQueryItem]?
     var httpMethod: HttpMethod = .GET
@@ -20,7 +20,7 @@ struct ListFetchRequest: NetworkRequest {
     }
 }
 
-struct DetailFetchRequest: NetworkRequest {
+struct DetailFetchRequest: CustomRequest {
     var path: String?
     var query: [URLQueryItem]?
     var httpMethod: HttpMethod = .GET
@@ -30,7 +30,7 @@ struct DetailFetchRequest: NetworkRequest {
     }
 }
 
-struct ImageLoadRequest: NetworkRequest {
+struct ImageLoadRequest: CustomRequest {
     var path: String?
     var query: [URLQueryItem]?
     var httpMethod: HttpMethod = .GET

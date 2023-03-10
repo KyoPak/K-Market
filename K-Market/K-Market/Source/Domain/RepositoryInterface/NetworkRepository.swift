@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NetworkRepository {
-    func request(completion: @escaping (Result<Data, NetworkError>) -> Void)
+    func request(customRequest: CustomRequest, completion: @escaping (Result<Data, NetworkError>) -> Void)
 }
