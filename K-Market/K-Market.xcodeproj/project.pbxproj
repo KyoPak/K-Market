@@ -23,7 +23,18 @@
 		3C23C2E129BB027B00802CEC /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E029BB027B00802CEC /* NetworkRepository.swift */; };
 		3C23C2E529BB10A300802CEC /* URLComponents+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E429BB10A300802CEC /* URLComponents+Extension.swift */; };
 		3C23C2E729BB12C700802CEC /* DefaultNetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */; };
+		3C23C2EF29BB1E6B00802CEC /* NetworkRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2EE29BB1E6B00802CEC /* NetworkRepositoryTest.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3C23C2F029BB1E6B00802CEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C13A7D529B9A74300E2FB03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C13A7DC29B9A74300E2FB03;
+			remoteInfo = "K-Market";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3C13A7DD29B9A74300E2FB03 /* K-Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "K-Market.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,10 +55,19 @@
 		3C23C2E029BB027B00802CEC /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 		3C23C2E429BB10A300802CEC /* URLComponents+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Extension.swift"; sourceTree = "<group>"; };
 		3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkRepository.swift; sourceTree = "<group>"; };
+		3C23C2EC29BB1E6B00802CEC /* K-MarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "K-MarketTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C23C2EE29BB1E6B00802CEC /* NetworkRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepositoryTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3C13A7DA29B9A74300E2FB03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C23C2E929BB1E6B00802CEC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -61,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				3C13A7DF29B9A74300E2FB03 /* K-Market */,
+				3C23C2ED29BB1E6B00802CEC /* K-MarketTests */,
 				3C13A7DE29B9A74300E2FB03 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				3C13A7DD29B9A74300E2FB03 /* K-Market.app */,
+				3C23C2EC29BB1E6B00802CEC /* K-MarketTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,6 +215,22 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		3C23C2ED29BB1E6B00802CEC /* K-MarketTests */ = {
+			isa = PBXGroup;
+			children = (
+				3C23C2F529BB225600802CEC /* Data */,
+			);
+			path = "K-MarketTests";
+			sourceTree = "<group>";
+		};
+		3C23C2F529BB225600802CEC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3C23C2EE29BB1E6B00802CEC /* NetworkRepositoryTest.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,6 +251,24 @@
 			productReference = 3C13A7DD29B9A74300E2FB03 /* K-Market.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3C23C2EB29BB1E6B00802CEC /* K-MarketTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C23C2F229BB1E6B00802CEC /* Build configuration list for PBXNativeTarget "K-MarketTests" */;
+			buildPhases = (
+				3C23C2E829BB1E6B00802CEC /* Sources */,
+				3C23C2E929BB1E6B00802CEC /* Frameworks */,
+				3C23C2EA29BB1E6B00802CEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C23C2F129BB1E6B00802CEC /* PBXTargetDependency */,
+			);
+			name = "K-MarketTests";
+			productName = "K-MarketTests";
+			productReference = 3C23C2EC29BB1E6B00802CEC /* K-MarketTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -225,6 +281,10 @@
 				TargetAttributes = {
 					3C13A7DC29B9A74300E2FB03 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					3C23C2EB29BB1E6B00802CEC = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 3C13A7DC29B9A74300E2FB03;
 					};
 				};
 			};
@@ -242,6 +302,7 @@
 			projectRoot = "";
 			targets = (
 				3C13A7DC29B9A74300E2FB03 /* K-Market */,
+				3C23C2EB29BB1E6B00802CEC /* K-MarketTests */,
 			);
 		};
 /* End PBXProject section */
@@ -253,6 +314,13 @@
 			files = (
 				3C13A7ED29B9A74500E2FB03 /* LaunchScreen.storyboard in Resources */,
 				3C13A7EA29B9A74500E2FB03 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C23C2EA29BB1E6B00802CEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +348,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3C23C2E829BB1E6B00802CEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C23C2EF29BB1E6B00802CEC /* NetworkRepositoryTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3C23C2F129BB1E6B00802CEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C13A7DC29B9A74300E2FB03 /* K-Market */;
+			targetProxy = 3C23C2F029BB1E6B00802CEC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3C13A7EB29B9A74500E2FB03 /* LaunchScreen.storyboard */ = {
@@ -464,6 +548,48 @@
 			};
 			name = Release;
 		};
+		3C23C2F329BB1E6B00802CEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PakHyo.K-MarketTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/K-Market.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/K-Market";
+			};
+			name = Debug;
+		};
+		3C23C2F429BB1E6B00802CEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.PakHyo.K-MarketTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/K-Market.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/K-Market";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -481,6 +607,15 @@
 			buildConfigurations = (
 				3C13A7F229B9A74500E2FB03 /* Debug */,
 				3C13A7F329B9A74500E2FB03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C23C2F229BB1E6B00802CEC /* Build configuration list for PBXNativeTarget "K-MarketTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C23C2F329BB1E6B00802CEC /* Debug */,
+				3C23C2F429BB1E6B00802CEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
