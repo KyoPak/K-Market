@@ -22,6 +22,7 @@
 		3C13A80C29B9CC9A00E2FB03 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A80B29B9CC9A00E2FB03 /* NetworkError.swift */; };
 		3C23C2E129BB027B00802CEC /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E029BB027B00802CEC /* NetworkRepository.swift */; };
 		3C23C2E529BB10A300802CEC /* URLComponents+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E429BB10A300802CEC /* URLComponents+Extension.swift */; };
+		3C23C2E729BB12C700802CEC /* DefaultNetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		3C13A80B29B9CC9A00E2FB03 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		3C23C2E029BB027B00802CEC /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 		3C23C2E429BB10A300802CEC /* URLComponents+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Extension.swift"; sourceTree = "<group>"; };
+		3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 		3C23C2DF29BB020D00802CEC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				3C23C2E529BB10A300802CEC /* URLComponents+Extension.swift in Sources */,
 				3C13A7F929B9B1B600E2FB03 /* Product.swift in Sources */,
 				3C13A7E129B9A74300E2FB03 /* AppDelegate.swift in Sources */,
+				3C23C2E729BB12C700802CEC /* DefaultNetworkRepository.swift in Sources */,
 				3C13A80429B9CAE800E2FB03 /* RequestByUseCase.swift in Sources */,
 				3C13A80C29B9CC9A00E2FB03 /* NetworkError.swift in Sources */,
 				3C13A7E329B9A74300E2FB03 /* SceneDelegate.swift in Sources */,
