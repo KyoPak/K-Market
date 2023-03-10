@@ -21,7 +21,7 @@ extension NetworkRequest {
     }
     
     var url : URL? {
-        return URLComponents.createURL(path: baseURL ?? "", queryItem: query)
+        return URLComponents.createURL(baseURL: baseURL, path: path, queryItem: query)
     }
     
     func createRequest() -> URLRequest? {

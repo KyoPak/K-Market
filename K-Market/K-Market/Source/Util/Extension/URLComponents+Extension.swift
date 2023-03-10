@@ -8,8 +8,10 @@
 import Foundation
 
 extension URLComponents {
-    static func createURL(path: String, queryItem: [URLQueryItem]?) -> URL? {
-        var host = URLComponents(string: path)
+    static func createURL(baseURL:String?, path: String?, queryItem: [URLQueryItem]?) -> URL? {
+        guard let base = baseURL, let path = path else { return nil }
+        var host = URLComponents(string: base)
+        
         host?.path = path
         host?.queryItems = queryItem
         
