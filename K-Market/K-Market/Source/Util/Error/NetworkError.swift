@@ -14,6 +14,7 @@ enum NetworkError: Error {
     case data
     case networking
     case last
+    case fireBase
     
     public var description: String {
         switch self {
@@ -29,6 +30,8 @@ enum NetworkError: Error {
             return "Networking Error"
         case .last:
             return "Last Data"
+        case .fireBase:
+            return "FireBase Error"
         }
     }
 }

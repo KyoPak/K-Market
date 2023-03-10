@@ -27,6 +27,7 @@
 		3C23C2F829BB25BF00802CEC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C23C2F729BB25BF00802CEC /* FirebaseFirestore */; };
 		3C23C2FA29BB25BF00802CEC /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C23C2F929BB25BF00802CEC /* FirebaseFirestoreSwift */; };
 		3C23C2FC29BB26F600802CEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C23C2FB29BB26F500802CEC /* GoogleService-Info.plist */; };
+		3C23C2FF29BB290700802CEC /* FireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2FE29BB290700802CEC /* FireBaseService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		3C23C2EC29BB1E6B00802CEC /* K-MarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "K-MarketTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C23C2EE29BB1E6B00802CEC /* NetworkRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepositoryTest.swift; sourceTree = "<group>"; };
 		3C23C2FB29BB26F500802CEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3C23C2FE29BB290700802CEC /* FireBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			children = (
 				3C23C2DF29BB020D00802CEC /* Repository */,
 				3C13A80529B9CB7800E2FB03 /* Network */,
+				3C23C2FD29BB28EF00802CEC /* FireBase */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -236,6 +239,14 @@
 				3C23C2EE29BB1E6B00802CEC /* NetworkRepositoryTest.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		3C23C2FD29BB28EF00802CEC /* FireBase */ = {
+			isa = PBXGroup;
+			children = (
+				3C23C2FE29BB290700802CEC /* FireBaseService.swift */,
+			);
+			path = FireBase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,6 +360,7 @@
 				3C23C2E129BB027B00802CEC /* NetworkRepository.swift in Sources */,
 				3C13A80729B9CBE200E2FB03 /* NetworkService.swift in Sources */,
 				3C13A80029B9BAA900E2FB03 /* CustomRequest.swift in Sources */,
+				3C23C2FF29BB290700802CEC /* FireBaseService.swift in Sources */,
 				3C13A7FD29B9B6BC00E2FB03 /* LocationData.swift in Sources */,
 				3C13A7FB29B9B3AB00E2FB03 /* ProductPage.swift in Sources */,
 				3C13A7E529B9A74300E2FB03 /* ViewController.swift in Sources */,
