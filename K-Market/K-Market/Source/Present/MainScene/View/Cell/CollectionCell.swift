@@ -93,6 +93,10 @@ class CollectionCell: UICollectionViewCell {
                 }
             }
         })
+        
+        viewModel?.bindLocationData(completion: { [weak self] subLocale in
+            self?.locationLabel.text = subLocale
+        })
     }
     
     override func prepareForReuse() {
@@ -104,6 +108,5 @@ class CollectionCell: UICollectionViewCell {
         locationLabel.text = nil
         salePriceLabel.text = nil
         stockLabel.text = nil
-        // viewModel = nil
     }
 }
