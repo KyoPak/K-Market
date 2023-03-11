@@ -16,10 +16,10 @@ protocol FetchProductDataUseCase {
 }
 
 final class DefaultFetchProductDataUseCase {
-    private let networkRepository: NetworkRepository
+    private let productRepository: ProductRepository
     
-    init(networkRepository: NetworkRepository) {
-        self.networkRepository = networkRepository
+    init(productRepository: ProductRepository) {
+        self.productRepository = productRepository
     }
     
     func fetchData(
@@ -28,7 +28,7 @@ final class DefaultFetchProductDataUseCase {
         completion: @escaping (Result<[Product], NetworkError>) -> Void
     ) {
         let request = ListFetchRequest(pageNo: pageNo, itemsPerPage: itemsPerPage)
-        networkRepository.request(customRequest: request) { result in
+        productRepository.request(customRequest: request) { result in
             switch result {
             case .success(let data):
                 do {

@@ -1,5 +1,5 @@
 //
-//  DefualtFireBaseRepository.swift
+//  DefualtLocationRepository.swift
 //  K-Market
 //
 //  Created by parkhyo on 2023/03/11.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefualtFireBaseRepository {
+final class DefualtLocationRepository {
     private let service: FireBaseService
     
     init(service: FireBaseService) {

@@ -20,16 +20,16 @@
 		3C13A80429B9CAE800E2FB03 /* RequestByUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A80329B9CAE800E2FB03 /* RequestByUseCase.swift */; };
 		3C13A80729B9CBE200E2FB03 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A80629B9CBE200E2FB03 /* NetworkService.swift */; };
 		3C13A80C29B9CC9A00E2FB03 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A80B29B9CC9A00E2FB03 /* NetworkError.swift */; };
-		3C23C2E129BB027B00802CEC /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E029BB027B00802CEC /* NetworkRepository.swift */; };
+		3C23C2E129BB027B00802CEC /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E029BB027B00802CEC /* ProductRepository.swift */; };
 		3C23C2E529BB10A300802CEC /* URLComponents+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E429BB10A300802CEC /* URLComponents+Extension.swift */; };
-		3C23C2E729BB12C700802CEC /* DefaultNetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */; };
+		3C23C2E729BB12C700802CEC /* DefaultProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2E629BB12C700802CEC /* DefaultProductRepository.swift */; };
 		3C23C2EF29BB1E6B00802CEC /* NetworkRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2EE29BB1E6B00802CEC /* NetworkRepositoryTest.swift */; };
 		3C23C2F829BB25BF00802CEC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3C23C2F729BB25BF00802CEC /* FirebaseFirestore */; };
 		3C23C2FA29BB25BF00802CEC /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3C23C2F929BB25BF00802CEC /* FirebaseFirestoreSwift */; };
 		3C23C2FC29BB26F600802CEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C23C2FB29BB26F500802CEC /* GoogleService-Info.plist */; };
 		3C23C2FF29BB290700802CEC /* FireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2FE29BB290700802CEC /* FireBaseService.swift */; };
-		3C23C30129BB2F7A00802CEC /* FireBaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30029BB2F7A00802CEC /* FireBaseRepository.swift */; };
-		3C23C30529BC13E100802CEC /* DefualtFireBaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30429BC13E100802CEC /* DefualtFireBaseRepository.swift */; };
+		3C23C30129BB2F7A00802CEC /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30029BB2F7A00802CEC /* LocationRepository.swift */; };
+		3C23C30529BC13E100802CEC /* DefualtLocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30429BC13E100802CEC /* DefualtLocationRepository.swift */; };
 		3C23C30829BC1D1000802CEC /* FetchProductDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30729BC1D1000802CEC /* FetchProductDataUseCase.swift */; };
 		3C23C30E29BC1EE000802CEC /* DecodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30D29BC1EE000802CEC /* DecodeManager.swift */; };
 		3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */; };
@@ -62,15 +62,15 @@
 		3C13A80329B9CAE800E2FB03 /* RequestByUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestByUseCase.swift; sourceTree = "<group>"; };
 		3C13A80629B9CBE200E2FB03 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3C13A80B29B9CC9A00E2FB03 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		3C23C2E029BB027B00802CEC /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
+		3C23C2E029BB027B00802CEC /* ProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
 		3C23C2E429BB10A300802CEC /* URLComponents+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Extension.swift"; sourceTree = "<group>"; };
-		3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkRepository.swift; sourceTree = "<group>"; };
+		3C23C2E629BB12C700802CEC /* DefaultProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProductRepository.swift; sourceTree = "<group>"; };
 		3C23C2EC29BB1E6B00802CEC /* K-MarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "K-MarketTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C23C2EE29BB1E6B00802CEC /* NetworkRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepositoryTest.swift; sourceTree = "<group>"; };
 		3C23C2FB29BB26F500802CEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3C23C2FE29BB290700802CEC /* FireBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseService.swift; sourceTree = "<group>"; };
-		3C23C30029BB2F7A00802CEC /* FireBaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseRepository.swift; sourceTree = "<group>"; };
-		3C23C30429BC13E100802CEC /* DefualtFireBaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefualtFireBaseRepository.swift; sourceTree = "<group>"; };
+		3C23C30029BB2F7A00802CEC /* LocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepository.swift; sourceTree = "<group>"; };
+		3C23C30429BC13E100802CEC /* DefualtLocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefualtLocationRepository.swift; sourceTree = "<group>"; };
 		3C23C30729BC1D1000802CEC /* FetchProductDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProductDataUseCase.swift; sourceTree = "<group>"; };
 		3C23C30D29BC1EE000802CEC /* DecodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeManager.swift; sourceTree = "<group>"; };
 		3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
@@ -171,21 +171,19 @@
 			isa = PBXGroup;
 			children = (
 				3C23C2DF29BB020D00802CEC /* Repository */,
-				3C13A80529B9CB7800E2FB03 /* Network */,
-				3C23C2FD29BB28EF00802CEC /* FireBase */,
+				3C13A80529B9CB7800E2FB03 /* ProductStorage */,
+				3C23C2FD29BB28EF00802CEC /* LocationStorage */,
 			);
 			path = Data;
 			sourceTree = "<group>";
 		};
-		3C13A80529B9CB7800E2FB03 /* Network */ = {
+		3C13A80529B9CB7800E2FB03 /* ProductStorage */ = {
 			isa = PBXGroup;
 			children = (
-				3C13A7FF29B9BAA900E2FB03 /* CustomRequest.swift */,
-				3C13A80129B9C85600E2FB03 /* HTTPMethod.swift */,
-				3C13A80329B9CAE800E2FB03 /* RequestByUseCase.swift */,
+				3CB7C82629BC4387001E7992 /* Infra */,
 				3C13A80629B9CBE200E2FB03 /* NetworkService.swift */,
 			);
-			path = Network;
+			path = ProductStorage;
 			sourceTree = "<group>";
 		};
 		3C13A80829B9CC6500E2FB03 /* Util */ = {
@@ -218,8 +216,8 @@
 		3C23C2DE29BB01FC00802CEC /* RepositoryInterface */ = {
 			isa = PBXGroup;
 			children = (
-				3C23C2E029BB027B00802CEC /* NetworkRepository.swift */,
-				3C23C30029BB2F7A00802CEC /* FireBaseRepository.swift */,
+				3C23C2E029BB027B00802CEC /* ProductRepository.swift */,
+				3C23C30029BB2F7A00802CEC /* LocationRepository.swift */,
 			);
 			path = RepositoryInterface;
 			sourceTree = "<group>";
@@ -227,8 +225,8 @@
 		3C23C2DF29BB020D00802CEC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				3C23C2E629BB12C700802CEC /* DefaultNetworkRepository.swift */,
-				3C23C30429BC13E100802CEC /* DefualtFireBaseRepository.swift */,
+				3C23C2E629BB12C700802CEC /* DefaultProductRepository.swift */,
+				3C23C30429BC13E100802CEC /* DefualtLocationRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -258,12 +256,12 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		3C23C2FD29BB28EF00802CEC /* FireBase */ = {
+		3C23C2FD29BB28EF00802CEC /* LocationStorage */ = {
 			isa = PBXGroup;
 			children = (
 				3C23C2FE29BB290700802CEC /* FireBaseService.swift */,
 			);
-			path = FireBase;
+			path = LocationStorage;
 			sourceTree = "<group>";
 		};
 		3C23C30629BC1CD700802CEC /* UseCase */ = {
@@ -313,6 +311,16 @@
 				3CB7C82429BC31F4001E7992 /* ListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3CB7C82629BC4387001E7992 /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				3C13A7FF29B9BAA900E2FB03 /* CustomRequest.swift */,
+				3C13A80129B9C85600E2FB03 /* HTTPMethod.swift */,
+				3C13A80329B9CAE800E2FB03 /* RequestByUseCase.swift */,
+			);
+			path = Infra;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,13 +432,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */,
-				3C23C2E129BB027B00802CEC /* NetworkRepository.swift in Sources */,
+				3C23C2E129BB027B00802CEC /* ProductRepository.swift in Sources */,
 				3CB7C82529BC31F4001E7992 /* ListViewModel.swift in Sources */,
 				3C13A80729B9CBE200E2FB03 /* NetworkService.swift in Sources */,
 				3C23C30E29BC1EE000802CEC /* DecodeManager.swift in Sources */,
 				3C13A80029B9BAA900E2FB03 /* CustomRequest.swift in Sources */,
 				3C23C2FF29BB290700802CEC /* FireBaseService.swift in Sources */,
-				3C23C30129BB2F7A00802CEC /* FireBaseRepository.swift in Sources */,
+				3C23C30129BB2F7A00802CEC /* LocationRepository.swift in Sources */,
 				3C13A7FD29B9B6BC00E2FB03 /* LocationData.swift in Sources */,
 				3C13A7FB29B9B3AB00E2FB03 /* ProductPage.swift in Sources */,
 				3C13A7E529B9A74300E2FB03 /* ListViewController.swift in Sources */,
@@ -439,8 +447,8 @@
 				3C23C30829BC1D1000802CEC /* FetchProductDataUseCase.swift in Sources */,
 				3C13A7F929B9B1B600E2FB03 /* Product.swift in Sources */,
 				3C13A7E129B9A74300E2FB03 /* AppDelegate.swift in Sources */,
-				3C23C30529BC13E100802CEC /* DefualtFireBaseRepository.swift in Sources */,
-				3C23C2E729BB12C700802CEC /* DefaultNetworkRepository.swift in Sources */,
+				3C23C30529BC13E100802CEC /* DefualtLocationRepository.swift in Sources */,
+				3C23C2E729BB12C700802CEC /* DefaultProductRepository.swift in Sources */,
 				3C13A80429B9CAE800E2FB03 /* RequestByUseCase.swift in Sources */,
 				3C13A80C29B9CC9A00E2FB03 /* NetworkError.swift in Sources */,
 				3C13A7E329B9A74300E2FB03 /* SceneDelegate.swift in Sources */,
