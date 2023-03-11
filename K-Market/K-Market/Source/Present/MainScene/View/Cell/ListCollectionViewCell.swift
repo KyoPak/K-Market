@@ -63,7 +63,9 @@ extension ListCollectionViewCell {
         [stockLabel, detailButton].forEach(stockButtonStackView.addArrangedSubview(_:))
         [nameLabel, stockButtonStackView].forEach(topLabelStackView.addArrangedSubview(_:))
         
-        [indicatorView, imageView, topLabelStackView, priceStackView].forEach(contentView.addSubview(_:))
+        [indicatorView, imageView, topLabelStackView, locationLabel, priceStackView].forEach(
+            contentView.addSubview(_:)
+        )
         
         setupIndicatorConstraints()
     }
@@ -79,8 +81,11 @@ extension ListCollectionViewCell {
             topLabelStackView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
             topLabelStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             
-            priceStackView.topAnchor.constraint(equalTo: topLabelStackView.bottomAnchor, constant: 2),
-            priceStackView.leadingAnchor.constraint(equalTo: topLabelStackView.leadingAnchor)
+            locationLabel.topAnchor.constraint(equalTo: topLabelStackView.bottomAnchor, constant: 2),
+            locationLabel.leadingAnchor.constraint(equalTo: topLabelStackView.leadingAnchor),
+            
+            priceStackView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 2),
+            priceStackView.leadingAnchor.constraint(equalTo: locationLabel.leadingAnchor)
         ])
     }
     
