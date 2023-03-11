@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefualtLocationRepository {
+final class DefualtLocationRepository: LocationRepository {
     private let service: FireBaseService
     
     init(service: FireBaseService) {

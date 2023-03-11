@@ -22,6 +22,20 @@ final class DefaultFetchProductDataUseCase {
         self.productRepository = productRepository
     }
     
+    private func convert(data: Data) throws -> [Product] {
+        let decodeManager = DecodeManager<ProductPage>()
+        let products = decodeManager.decode(data)
+        
+        switch products {
+        case .success(let productList):
+            return productList.pages
+        case .failure(let error):
+            throw error
+        }
+    }
+}
+
+extension DefaultFetchProductDataUseCase: FetchProductDataUseCase {
     func fetchData(
         pageNo: Int,
         itemsPerPage: Int,
@@ -41,18 +55,6 @@ final class DefaultFetchProductDataUseCase {
             case .failure(let error):
                 completion(.failure(error))
             }
-        }
-    }
-    
-    private func convert(data: Data) throws -> [Product] {
-        let decodeManager = DecodeManager<ProductPage>()
-        let products = decodeManager.decode(data)
-        
-        switch products {
-        case .success(let productList):
-            return productList.pages
-        case .failure(let error):
-            throw error
         }
     }
 }
