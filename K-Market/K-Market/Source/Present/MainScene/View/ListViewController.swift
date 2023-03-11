@@ -30,6 +30,8 @@ final class ListViewController: UIViewController {
     
     private let locationLabel: UILabel = {
         let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title2)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -59,6 +61,19 @@ final class ListViewController: UIViewController {
 extension ListViewController {
     @objc private func addButtonTapped() {
         
+    }
+}
+
+// MARK: - Bind
+extension ListViewController {
+    func bindData() {
+        viewModel.bindDataList { datas in
+            print(datas)
+        }
+        
+        viewModel.bindSubLocale { [weak self] subLocale in
+            self?.locationLabel.text = subLocale
+        }
     }
 }
 
