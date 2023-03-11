@@ -9,6 +9,7 @@ import Foundation
 
 protocol ProductListCellViewModel {
     func bindData(completion: @escaping (Product) -> Void)
+    func bindLocationData(completion: @escaping (String) -> Void)
     func loadImage(completion: @escaping (Data?) -> Void)
     func customStockText(_ stock: Int) -> String
     func customPriceText(_ price: Double) -> String
@@ -18,19 +19,32 @@ final class DefaultProductListCellViewModel {
     private let product: Product
     private let locationData: LocationData?
     private let loadImageUseCase: LoadImageUseCase
+    private let fetchLocationDataUseCase: FetchLocationDataUseCase
     
     init(
         product: Product,
         locationData: LocationData,
-        useCase: LoadImageUseCase
+        loadImageUseCase: LoadImageUseCase,
+        fetchLocationDataUseCase: FetchLocationDataUseCase
     ) {
         self.product = product
         self.locationData = locationData
-        self.loadImageUseCase = useCase
+        self.loadImageUseCase = loadImageUseCase
+        self.fetchLocationDataUseCase = fetchLocationDataUseCase
     }
     
     func bindData(completion: @escaping (Product) -> Void) {
         completion(product)
+    }
+    
+    func bindLocationData(completion: @escaping (String) -> Void) {
+        fetchLocationDataUseCase.fetch(id: product.id) { data in
+            if let subLocale = data?.subLocality {
+                completion(subLocale)
+            } else {
+                completion("미등록")
+            }
+        }
     }
     
     func loadImage(completion: @escaping (Data?) -> Void) {
