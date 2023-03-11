@@ -14,9 +14,13 @@ final class DefualtLocationRepository: LocationRepository {
         self.service = service
     }
     
-    func load(completion: @escaping ([LocationData]) -> Void) {
-        service.load { datas in
-            completion(datas)
+    func load(_ id: Int, completion: @escaping (LocationData?) -> Void) {
+        service.load(id) { datas in
+            if datas.count == .zero {
+                completion(nil)
+            } else {
+                completion(datas.first)
+            }
         }
     }
     

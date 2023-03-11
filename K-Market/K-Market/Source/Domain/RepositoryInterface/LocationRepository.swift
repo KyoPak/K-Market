@@ -8,7 +8,7 @@
 import Foundation
 
 protocol LocationRepository {
-    func load(completion: @escaping ([LocationData]) -> Void)
+    func load(_ id: Int, completion: @escaping (LocationData?) -> Void)
     func add(data: LocationData)
     func update(data: LocationData)
     func delete(data: LocationData)

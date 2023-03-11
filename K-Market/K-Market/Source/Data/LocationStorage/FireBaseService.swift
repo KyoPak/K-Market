@@ -9,7 +9,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 protocol FireBaseService {
-    func load(completion: @escaping ([LocationData]) -> Void)
+    func load(_ id: Int, completion: @escaping ([LocationData]) -> Void)
     func add(data: LocationData)
     func update(data: LocationData)
     func delete(id: Int)
@@ -25,8 +25,9 @@ final class DefaultFireBaseService: FireBaseService {
     
     private let fireStoreDB = Firestore.firestore().collection(Attribute.collection)
     
-    func load(completion: @escaping ([LocationData]) -> Void) {
+    func load(_ id: Int, completion: @escaping ([LocationData]) -> Void) {
         fireStoreDB
+            .whereField(Attribute.id, isEqualTo: id)
             .getDocuments { querySnapshot, error in
             var locationData: [LocationData] = []
             
