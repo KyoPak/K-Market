@@ -8,6 +8,8 @@
 import UIKit
 
 class CollectionCell: UICollectionViewCell {
+    var viewModel: ProductListCellViewModel?
+    
     let indicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.hidesWhenStopped = true
@@ -17,6 +19,7 @@ class CollectionCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.tintColor = .systemBackground
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -69,8 +72,27 @@ class CollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupData(_ data: Product) {
+    func setupViewModel(_ viewModel: ProductListCellViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    func setupBind() {
+        viewModel?.bindData(completion: { [weak self] data in
+            self?.nameLabel.text = data.name
+            self?.priceLabel.text = self?.viewModel?.customPriceText(data.price)
+            self?.stockLabel.text = self?.viewModel?.customStockText(data.stock)
+            self?.salePriceLabel.text = self?.viewModel?.customPriceText(data.bargainPrice)
+        })
         
+        viewModel?.loadImage(completion: { [weak self] data in
+            DispatchQueue.main.async {
+                if let data = data {
+                    self?.imageView.image = UIImage(data: data)
+                } else {
+                    self?.imageView.image = UIImage(named: "photo")
+                }
+            }
+        })
     }
     
     override func prepareForReuse() {
@@ -82,5 +104,6 @@ class CollectionCell: UICollectionViewCell {
         locationLabel.text = nil
         salePriceLabel.text = nil
         stockLabel.text = nil
+        // viewModel = nil
     }
 }

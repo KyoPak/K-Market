@@ -10,6 +10,8 @@ import Foundation
 protocol ProductListCellViewModel {
     func bindData(completion: @escaping (Product) -> Void)
     func loadImage(completion: @escaping (Data?) -> Void)
+    func customStockText(_ stock: Int) -> String
+    func customPriceText(_ price: Double) -> String
 }
 
 final class DefaultProductListCellViewModel {
@@ -41,5 +43,23 @@ final class DefaultProductListCellViewModel {
                 completion(nil)
             }
         }
+    }
+    
+    func customStockText(_ stock: Int) -> String {
+        if product.stock == Int.zero {
+            return String(format: "품절")
+        } else {
+            if product.stock > 1000 {
+                return String(format: "수량 : %@", String(product.stock / 1000))
+            }
+            return String(format: "수량 : %@", String(product.stock))
+        }
+    }
+    
+    func customPriceText(_ price: Double) -> String {
+        if price > 1000 {
+            return String(format: "%@ %@K", product.currency.rawValue, String(price / 1000))
+        }
+        return String(format: "%@ %@", product.currency.rawValue, String(price))
     }
 }
