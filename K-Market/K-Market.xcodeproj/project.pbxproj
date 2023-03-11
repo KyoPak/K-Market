@@ -30,6 +30,9 @@
 		3C23C2FF29BB290700802CEC /* FireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2FE29BB290700802CEC /* FireBaseService.swift */; };
 		3C23C30129BB2F7A00802CEC /* FireBaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30029BB2F7A00802CEC /* FireBaseRepository.swift */; };
 		3C23C30529BC13E100802CEC /* DefualtFireBaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30429BC13E100802CEC /* DefualtFireBaseRepository.swift */; };
+		3C23C30829BC1D1000802CEC /* FetchProductDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30729BC1D1000802CEC /* FetchProductDataUseCase.swift */; };
+		3C23C30E29BC1EE000802CEC /* DecodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30D29BC1EE000802CEC /* DecodeManager.swift */; };
+		3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,9 @@
 		3C23C2FE29BB290700802CEC /* FireBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseService.swift; sourceTree = "<group>"; };
 		3C23C30029BB2F7A00802CEC /* FireBaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseRepository.swift; sourceTree = "<group>"; };
 		3C23C30429BC13E100802CEC /* DefualtFireBaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefualtFireBaseRepository.swift; sourceTree = "<group>"; };
+		3C23C30729BC1D1000802CEC /* FetchProductDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProductDataUseCase.swift; sourceTree = "<group>"; };
+		3C23C30D29BC1EE000802CEC /* DecodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeManager.swift; sourceTree = "<group>"; };
+		3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,8 @@
 		3C13A7F729B9B15B00E2FB03 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				3C23C30C29BC1EC300802CEC /* Translator */,
+				3C23C30629BC1CD700802CEC /* UseCase */,
 				3C23C2DE29BB01FC00802CEC /* RepositoryInterface */,
 				3C23C2DD29BB01D000802CEC /* Entity */,
 			);
@@ -227,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				3C23C2E429BB10A300802CEC /* URLComponents+Extension.swift */,
+				3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -253,6 +262,22 @@
 				3C23C2FE29BB290700802CEC /* FireBaseService.swift */,
 			);
 			path = FireBase;
+			sourceTree = "<group>";
+		};
+		3C23C30629BC1CD700802CEC /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				3C23C30729BC1D1000802CEC /* FetchProductDataUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		3C23C30C29BC1EC300802CEC /* Translator */ = {
+			isa = PBXGroup;
+			children = (
+				3C23C30D29BC1EE000802CEC /* DecodeManager.swift */,
+			);
+			path = Translator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,8 +388,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */,
 				3C23C2E129BB027B00802CEC /* NetworkRepository.swift in Sources */,
 				3C13A80729B9CBE200E2FB03 /* NetworkService.swift in Sources */,
+				3C23C30E29BC1EE000802CEC /* DecodeManager.swift in Sources */,
 				3C13A80029B9BAA900E2FB03 /* CustomRequest.swift in Sources */,
 				3C23C2FF29BB290700802CEC /* FireBaseService.swift in Sources */,
 				3C23C30129BB2F7A00802CEC /* FireBaseRepository.swift in Sources */,
@@ -373,6 +400,7 @@
 				3C13A7E529B9A74300E2FB03 /* ViewController.swift in Sources */,
 				3C13A80229B9C85600E2FB03 /* HTTPMethod.swift in Sources */,
 				3C23C2E529BB10A300802CEC /* URLComponents+Extension.swift in Sources */,
+				3C23C30829BC1D1000802CEC /* FetchProductDataUseCase.swift in Sources */,
 				3C13A7F929B9B1B600E2FB03 /* Product.swift in Sources */,
 				3C13A7E129B9A74300E2FB03 /* AppDelegate.swift in Sources */,
 				3C23C30529BC13E100802CEC /* DefualtFireBaseRepository.swift in Sources */,
