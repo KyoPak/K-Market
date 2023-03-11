@@ -30,7 +30,7 @@ final class ListViewController: UIViewController {
     
     private let locationLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = .preferredFont(forTextStyle: .title3)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -41,6 +41,7 @@ final class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindData()
         setupNavigation()
         setupView()
         setupConstraint()
@@ -128,8 +129,8 @@ extension ListViewController: CLLocationManagerDelegate {
             ) { [weak self] placeMarks, error in
                 
                 if let address: [CLPlacemark] = placeMarks,
-                    let locale = address.last?.locality,
-                    let subLocale: String = address.last?.subLocality {
+                   let locale = address.last?.locality,
+                   let subLocale: String = address.last?.subLocality {
                     
                     self?.viewModel.setUserLocation(locale: locale, subLocale: subLocale)
                 }
@@ -163,6 +164,7 @@ extension ListViewController {
     private func setupView() {
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
+        view.addSubview(locationLabel)
     }
     
     private func setupConstraint() {
@@ -170,7 +172,10 @@ extension ListViewController {
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalTo: safeArea.topAnchor),
             segmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
+            segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            
+            locationLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5),
+            locationLabel.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor, constant: 5)
         ])
     }
 }

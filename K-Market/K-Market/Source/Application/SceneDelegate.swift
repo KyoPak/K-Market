@@ -18,7 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let navigationController = UINavigationController(rootViewController: ListViewController())
+        
+        let viewModel = DefaultListViewModel(fetchUseCase: DefaultFetchProductDataUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())))
+        
+        let navigationController = UINavigationController(rootViewController: ListViewController(viewModel: viewModel))
         
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
