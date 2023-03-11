@@ -9,7 +9,7 @@ import Foundation
 
 protocol ListViewModel {
     func bindDataList(completion: @escaping ([Product]) -> Void)
-    func fetchProductList()
+    func fetchProductList(pageNo: Int, itemsPerPage: Int)
 }
 
 final class DefaultListViewModel {
@@ -26,7 +26,9 @@ final class DefaultListViewModel {
     init(fetchUseCase: FetchProductDataUseCase) {
         self.fetchUseCase = fetchUseCase
     }
-    
+}
+
+extension DefaultListViewModel: ListViewModel {
     func bindDataList(completion: @escaping ([Product]) -> Void) {
         dataListHandler = completion
     }
