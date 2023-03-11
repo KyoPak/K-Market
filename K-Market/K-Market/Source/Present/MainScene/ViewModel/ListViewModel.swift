@@ -31,9 +31,9 @@ final class DefaultListViewModel {
     private var dataListHandler: (([Product]) -> Void)?
     private var subLocaleHandler: ((String) -> Void)?
     
-    private let fetchUseCase: FetchProductDataUseCase
+    private let fetchUseCase: FetchProductUseCase
     
-    init(fetchUseCase: FetchProductDataUseCase) {
+    init(fetchUseCase: FetchProductUseCase) {
         self.fetchUseCase = fetchUseCase
     }
 }
