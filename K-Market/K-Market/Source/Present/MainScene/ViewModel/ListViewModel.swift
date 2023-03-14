@@ -8,6 +8,9 @@
 import Foundation
 
 protocol ListViewModel {
+    var layoutStatus: CollectionType { get }
+    var userLocale: String { get }
+    var userSubLocale: String { get }
     func bindDataList(completion: @escaping ([Product]) -> Void)
     func bindSubLocale(completion: @escaping ((String)) -> Void)
     func fetchProductList(pageNo: Int, itemsPerPage: Int)
@@ -16,15 +19,15 @@ protocol ListViewModel {
     func bindLayoutStatus(completion: @escaping ((CollectionType)) -> Void)
 }
 
-final class DefaultListViewModel {
+final class DefaultListViewModel: ListViewModel {
     private var productList: [Product] = [] {
         didSet {
             dataListHandler?(productList)
         }
     }
     
-    private var userLocale = ""
-    private var userSubLocale = "" {
+    private(set) var userLocale = ""
+    private(set) var userSubLocale = "" {
         didSet {
             subLocaleHandler?(userSubLocale)
         }
@@ -33,6 +36,7 @@ final class DefaultListViewModel {
     private(set) var layoutStatus: CollectionType = .list {
         didSet {
             layoutHandler?(layoutStatus)
+            dataListHandler?(productList)
         }
     }
     
@@ -44,10 +48,9 @@ final class DefaultListViewModel {
     
     init(fetchUseCase: FetchProductUseCase) {
         self.fetchUseCase = fetchUseCase
+        fetchProductList(pageNo: 1, itemsPerPage: 15)
     }
-}
-
-extension DefaultListViewModel: ListViewModel {
+    
     func bindDataList(completion: @escaping ([Product]) -> Void) {
         dataListHandler = completion
     }

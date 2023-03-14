@@ -14,6 +14,16 @@ enum CollectionType: Int {
 }
 
 final class ListViewController: UIViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, Product>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Product>
+    
+    enum Section {
+        case main
+    }
+    
+    private lazy var dataSource = configureDataSource()
+    
+    
     // MARK: - UI Properties
     private let segmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["LIST", "GRID"])
@@ -87,8 +97,10 @@ extension ListViewController {
 // MARK: - Bind
 extension ListViewController {
     func bindData() {
-        viewModel.bindDataList { datas in
-            print(datas)
+        viewModel.bindDataList { [weak self] datas in
+            DispatchQueue.main.async {
+                self?.applySnapshot(data: datas)
+            }
         }
         
         viewModel.bindSubLocale { [weak self] subLocale in
@@ -101,6 +113,71 @@ extension ListViewController {
         }
     }
 }
+
+// MARK: - DataSource and SnapShot
+extension ListViewController {
+    private func configureDataSource() -> DataSource {
+        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, data in
+
+            var cell: CollectionCell
+            
+            switch self.viewModel.layoutStatus {
+            case .list:
+                guard let listCell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: ListCollectionViewCell.identifier,
+                    for: indexPath) as? ListCollectionViewCell
+                else {
+                    let errorCell = UICollectionViewCell()
+                    return errorCell
+                }
+                cell = listCell
+            case .grid:
+                guard let gridCell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: GridCollectionViewCell.identifier,
+                    for: indexPath) as? GridCollectionViewCell
+                else {
+                    let errorCell = UICollectionViewCell()
+                    return errorCell
+                }
+                cell = gridCell
+            }
+            
+            let cellViewModel = DefaultProductListCellViewModel(
+                product: data,
+                locationData: LocationData(
+                    id: data.id,
+                    locality: self.viewModel.userLocale,
+                    subLocality: self.viewModel.userSubLocale
+                ),
+                loadImageUseCase: DefaultLoadImageUseCase(
+                    productRepository: DefaultProductRepository(
+                        networkService: DefaultNetworkSevice()
+                    )
+                ),
+                fetchLocationDataUseCase: DefaultFetchLocationDataUseCase(
+                    locationRepository: DefualtLocationRepository(
+                        service: DefaultFireBaseService()
+                    )
+                )
+            )
+            
+            cell.setupViewModel(cellViewModel)
+            cell.setupBind()
+            
+            return cell
+        }
+        
+        return dataSource
+    }
+    
+    private func applySnapshot(data: [Product], animatingDifferences: Bool = true) {
+        var snapshot = SnapShot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(data)
+        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+}
+
 
 // MARK: - Location Alert
 extension ListViewController {
@@ -140,7 +217,7 @@ extension ListViewController: CLLocationManagerDelegate {
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.startUpdatingLocation()
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
             let geocoder = CLGeocoder()
@@ -196,7 +273,7 @@ extension ListViewController {
             
             let section = NSCollectionLayoutSection(group: group)
             let layout = UICollectionViewCompositionalLayout(section: section)
-
+            
             return layout
         case .grid:
             let groupSize = NSCollectionLayoutSize(
@@ -238,8 +315,7 @@ extension ListViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        view.addSubview(segmentedControl)
-        view.addSubview(locationLabel)
+        [segmentedControl, locationLabel, collectionView].forEach(view.addSubview(_:))
         
         segmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
     }
@@ -252,7 +328,12 @@ extension ListViewController {
             segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             
             locationLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5),
-            locationLabel.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor, constant: 5)
+            locationLabel.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor, constant: 5),
+            
+            collectionView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 10),
+            collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
+            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 10)
         ])
     }
 }

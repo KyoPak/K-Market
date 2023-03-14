@@ -15,7 +15,7 @@ protocol ProductListCellViewModel {
     func customPriceText(_ price: Double) -> String
 }
 
-final class DefaultProductListCellViewModel {
+final class DefaultProductListCellViewModel: ProductListCellViewModel {
     private let product: Product
     private let locationData: LocationData?
     private let loadImageUseCase: LoadImageUseCase
