@@ -58,6 +58,7 @@ final class ListViewController: UIViewController {
         bindData()
         setupNavigation()
         setupView()
+        registerCell()
         setupConstraint()
         setupCoreLocationAuthority()
     }
@@ -164,32 +165,17 @@ extension ListViewController: CLLocationManagerDelegate {
     }
 }
 
-// MARK: - UI SetUp
+// MARK: - CollectionView SetUp
 extension ListViewController {
-    private func setupNavigation() {
-        title = "K-Market"
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .systemBackground
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
-        let addBarButtonItem = UIBarButtonItem(
-            title: "+",
-            style: .plain,
-            target: self,
-            action: #selector(addButtonTapped)
+    private func registerCell() {
+        collectionView.register(
+            ListCollectionViewCell.self,
+            forCellWithReuseIdentifier: ListCollectionViewCell.identifier
         )
-        
-        addBarButtonItem.tintColor = .label
-        navigationItem.rightBarButtonItem = addBarButtonItem
-    }
-    
-    private func setupView() {
-        view.backgroundColor = .systemBackground
-        view.addSubview(segmentedControl)
-        view.addSubview(locationLabel)
-        
-        segmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
+        collectionView.register(
+            GridCollectionViewCell.self,
+            forCellWithReuseIdentifier: GridCollectionViewCell.identifier
+        )
     }
     
     private func collectionViewLayoutChange(type: CollectionType) -> UICollectionViewLayout {
@@ -227,6 +213,35 @@ extension ListViewController {
             let layout = UICollectionViewCompositionalLayout(section: section)
             return layout
         }
+    }
+}
+
+// MARK: - UI SetUp
+extension ListViewController {
+    private func setupNavigation() {
+        title = "K-Market"
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .systemBackground
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        let addBarButtonItem = UIBarButtonItem(
+            title: "+",
+            style: .plain,
+            target: self,
+            action: #selector(addButtonTapped)
+        )
+        
+        addBarButtonItem.tintColor = .label
+        navigationItem.rightBarButtonItem = addBarButtonItem
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .systemBackground
+        view.addSubview(segmentedControl)
+        view.addSubview(locationLabel)
+        
+        segmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
     }
     
     private func setupConstraint() {
