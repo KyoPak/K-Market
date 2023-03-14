@@ -278,7 +278,7 @@ extension ListViewController {
         case .grid:
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1 / 3)
+                heightDimension: .fractionalHeight(1 / 2.5)
             )
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
             let spacing = CGFloat(10)

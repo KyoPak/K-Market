@@ -72,6 +72,17 @@ class CollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
+        nameLabel.text = nil
+        priceLabel.text = nil
+        locationLabel.text = nil
+        salePriceLabel.text = nil
+        stockLabel.text = nil
+    }
+    
     func setupViewModel(_ viewModel: ProductListCellViewModel) {
         self.viewModel = viewModel
     }
@@ -82,6 +93,8 @@ class CollectionCell: UICollectionViewCell {
             self?.priceLabel.text = self?.viewModel?.customPriceText(data.price)
             self?.stockLabel.text = self?.viewModel?.customStockText(data.stock)
             self?.salePriceLabel.text = self?.viewModel?.customPriceText(data.bargainPrice)
+            
+            data.discountedPrice == .zero ? self?.salePriceLabel.isHidden = true : self?.changePriceLabel()
         })
         
         viewModel?.loadImage(completion: { [weak self] data in
@@ -99,14 +112,14 @@ class CollectionCell: UICollectionViewCell {
         })
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        imageView.image = nil
-        nameLabel.text = nil
-        priceLabel.text = nil
-        locationLabel.text = nil
-        salePriceLabel.text = nil
-        stockLabel.text = nil
+    func changePriceLabel() {
+        priceLabel.textColor = .red
+        priceLabel.applyStrikeThroughStyle()
+    }
+    
+    func clearPriceLabel() {
+        salePriceLabel.isHidden = false
+        priceLabel.textColor = .gray
+        priceLabel.attributedText = .none
     }
 }
