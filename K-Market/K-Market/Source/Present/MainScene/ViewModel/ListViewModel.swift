@@ -12,6 +12,8 @@ protocol ListViewModel {
     func bindSubLocale(completion: @escaping ((String)) -> Void)
     func fetchProductList(pageNo: Int, itemsPerPage: Int)
     func setUserLocation(locale: String, subLocale: String)
+    func setLayoutType(layoutIndex: Int)
+    func bindLayoutStatus(completion: @escaping ((CollectionType)) -> Void)
 }
 
 final class DefaultListViewModel {
@@ -28,8 +30,15 @@ final class DefaultListViewModel {
         }
     }
     
+    private(set) var layoutStatus: CollectionType = .list {
+        didSet {
+            layoutHandler?(layoutStatus)
+        }
+    }
+    
     private var dataListHandler: (([Product]) -> Void)?
     private var subLocaleHandler: ((String) -> Void)?
+    private var layoutHandler: ((CollectionType) -> Void)?
     
     private let fetchUseCase: FetchProductUseCase
     
@@ -47,6 +56,10 @@ extension DefaultListViewModel: ListViewModel {
         subLocaleHandler = completion
     }
     
+    func bindLayoutStatus(completion: @escaping ((CollectionType)) -> Void) {
+        layoutHandler = completion
+    }
+    
     func fetchProductList(pageNo: Int, itemsPerPage: Int) {
         fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: itemsPerPage) { [weak self] result in
             switch result {
@@ -62,5 +75,9 @@ extension DefaultListViewModel: ListViewModel {
     func setUserLocation(locale: String, subLocale: String) {
         userLocale = locale
         userSubLocale = subLocale
+    }
+    
+    func setLayoutType(layoutIndex: Int) {
+        layoutStatus = CollectionType(rawValue: layoutIndex) ?? .list
     }
 }

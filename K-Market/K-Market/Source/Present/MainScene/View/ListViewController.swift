@@ -8,6 +8,11 @@
 import UIKit
 import CoreLocation
 
+enum CollectionType: Int {
+    case list
+    case grid
+}
+
 final class ListViewController: UIViewController {
     // MARK: - UI Properties
     private let segmentedControl: UISegmentedControl = {
@@ -33,6 +38,15 @@ final class ListViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .title3)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: collectionViewLayoutChange(type: .list)
+        )
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
     }()
     
     // MARK: - ETC
@@ -63,6 +77,10 @@ extension ListViewController {
     @objc private func addButtonTapped() {
         
     }
+    
+    @objc private func segmentedControlTapped(sender: UISegmentedControl) {
+        viewModel.setLayoutType(layoutIndex: sender.selectedSegmentIndex)
+    }
 }
 
 // MARK: - Bind
@@ -74,6 +92,11 @@ extension ListViewController {
         
         viewModel.bindSubLocale { [weak self] subLocale in
             self?.locationLabel.text = subLocale
+        }
+        
+        viewModel.bindLayoutStatus { [weak self] collectionType in
+            guard let self = self else { return }
+            self.collectionView.collectionViewLayout = self.collectionViewLayoutChange(type: collectionType)
         }
     }
 }
@@ -165,6 +188,45 @@ extension ListViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(segmentedControl)
         view.addSubview(locationLabel)
+        
+        segmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
+    }
+    
+    private func collectionViewLayoutChange(type: CollectionType) -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        switch type {
+        case .list:
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1 / 8)
+            )
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            let layout = UICollectionViewCompositionalLayout(section: section)
+
+            return layout
+        case .grid:
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1 / 3)
+            )
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+            let spacing = CGFloat(10)
+            group.interItemSpacing = .fixed(spacing)
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.interGroupSpacing = 10
+            
+            let layout = UICollectionViewCompositionalLayout(section: section)
+            return layout
+        }
     }
     
     private func setupConstraint() {
