@@ -19,7 +19,7 @@ class CollectionCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = .systemBackground
+        imageView.tintColor = .label
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -27,7 +27,7 @@ class CollectionCell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemBackground
+        label.textColor = .label
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -35,7 +35,7 @@ class CollectionCell: UICollectionViewCell {
     
     let priceLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemBackground
+        label.textColor = .label
         label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -51,7 +51,7 @@ class CollectionCell: UICollectionViewCell {
     
     let salePriceLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemBackground
+        label.textColor = .label
         label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -59,7 +59,7 @@ class CollectionCell: UICollectionViewCell {
     
     let stockLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemGray
+        label.textColor = .label
         label.font = UIFont.preferredFont(forTextStyle: .body)
         return label
     }()
