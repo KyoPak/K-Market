@@ -36,7 +36,6 @@ final class DefaultListViewModel: ListViewModel {
     private(set) var layoutStatus: CollectionType = .list {
         didSet {
             layoutHandler?(layoutStatus)
-            dataListHandler?(productList)
         }
     }
     
