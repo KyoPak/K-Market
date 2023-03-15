@@ -1,5 +1,5 @@
 //
-//  FetchProductDataUseCase.swift
+//  FetchProductUseCase.swift
 //  K-Market
 //
 //  Created by parkhyo on 2023/03/11.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FetchProductDataUseCase {
+protocol FetchProductUseCase {
     func fetchData(
         pageNo: Int,
         itemsPerPage: Int,
@@ -15,20 +15,34 @@ protocol FetchProductDataUseCase {
     )
 }
 
-final class DefaultFetchProductDataUseCase {
-    private let networkRepository: NetworkRepository
+final class DefaultFetchProductUseCase {
+    private let productRepository: ProductRepository
     
-    init(networkRepository: NetworkRepository) {
-        self.networkRepository = networkRepository
+    init(productRepository: ProductRepository) {
+        self.productRepository = productRepository
     }
     
+    private func convert(data: Data) throws -> [Product] {
+        let decodeManager = DecodeManager<ProductPage>()
+        let products = decodeManager.decode(data)
+        
+        switch products {
+        case .success(let productList):
+            return productList.pages
+        case .failure(let error):
+            throw error
+        }
+    }
+}
+
+extension DefaultFetchProductUseCase: FetchProductUseCase {
     func fetchData(
         pageNo: Int,
         itemsPerPage: Int,
         completion: @escaping (Result<[Product], NetworkError>) -> Void
     ) {
         let request = ListFetchRequest(pageNo: pageNo, itemsPerPage: itemsPerPage)
-        networkRepository.request(customRequest: request) { result in
+        productRepository.request(customRequest: request) { result in
             switch result {
             case .success(let data):
                 do {
@@ -41,18 +55,6 @@ final class DefaultFetchProductDataUseCase {
             case .failure(let error):
                 completion(.failure(error))
             }
-        }
-    }
-    
-    private func convert(data: Data) throws -> [Product] {
-        let decodeManager = DecodeManager<ProductPage>()
-        let products = decodeManager.decode(data)
-        
-        switch products {
-        case .success(let productList):
-            return productList.pages
-        case .failure(let error):
-            throw error
         }
     }
 }

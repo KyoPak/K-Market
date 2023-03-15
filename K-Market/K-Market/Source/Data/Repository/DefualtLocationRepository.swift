@@ -1,5 +1,5 @@
 //
-//  DefualtFireBaseRepository.swift
+//  DefualtLocationRepository.swift
 //  K-Market
 //
 //  Created by parkhyo on 2023/03/11.
@@ -7,16 +7,20 @@
 
 import Foundation
 
-final class DefualtFireBaseRepository {
+final class DefualtLocationRepository: LocationRepository {
     private let service: FireBaseService
     
     init(service: FireBaseService) {
         self.service = service
     }
     
-    func load(completion: @escaping ([LocationData]) -> Void) {
-        service.load { datas in
-            completion(datas)
+    func load(_ id: Int, completion: @escaping (LocationData?) -> Void) {
+        service.load(id) { datas in
+            if datas.count == .zero {
+                completion(nil)
+            } else {
+                completion(datas.first)
+            }
         }
     }
     

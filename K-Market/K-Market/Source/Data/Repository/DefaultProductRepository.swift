@@ -1,5 +1,5 @@
 //
-//  DefaultNetworkRepository.swift
+//  DefaultProductRepository.swift
 //  K-Market
 //
 //  Created by parkhyo on 2023/03/10.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultNetworkRepository: NetworkRepository {
+final class DefaultProductRepository: ProductRepository {
     private let networkService: NetworkSevice
 
     init(networkService: NetworkSevice) {
