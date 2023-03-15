@@ -22,34 +22,6 @@ final class ListViewController: UIViewController {
     }
     
     private lazy var dataSource = configureDataSource()
-    
-    
-    // MARK: - UI Properties
-    private let segmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["LIST", "GRID"])
-        control.selectedSegmentIndex = .zero
-        control.layer.borderWidth = 1
-        control.layer.borderColor = UIColor.systemBackground.cgColor
-        control.setTitleTextAttributes(
-            [NSAttributedString.Key.foregroundColor: UIColor.label],
-            for: UIControl.State.normal
-        )
-        control.setTitleTextAttributes(
-            [NSAttributedString.Key.foregroundColor: UIColor.systemBackground],
-            for: UIControl.State.selected
-        )
-        control.selectedSegmentTintColor = .secondaryLabel
-        control.translatesAutoresizingMaskIntoConstraints = false
-        return control
-    }()
-    
-    private let locationLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
@@ -59,7 +31,7 @@ final class ListViewController: UIViewController {
         return collectionView
     }()
     
-    // MARK: - ETC
+    private let headerView: HeaderView
     private let viewModel: ListViewModel
     private var locationManager: CLLocationManager?
     
@@ -75,6 +47,7 @@ final class ListViewController: UIViewController {
     
     init(viewModel: ListViewModel) {
         self.viewModel = viewModel
+        headerView = HeaderView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -88,10 +61,6 @@ extension ListViewController {
     @objc private func addButtonTapped() {
         
     }
-    
-    @objc private func segmentedControlTapped(sender: UISegmentedControl) {
-        viewModel.setLayoutType(layoutIndex: sender.selectedSegmentIndex)
-    }
 }
 
 // MARK: - Bind
@@ -101,10 +70,6 @@ extension ListViewController {
             DispatchQueue.main.async {
                 self?.applySnapshot(data: datas)
             }
-        }
-        
-        viewModel.bindSubLocale { [weak self] subLocale in
-            self?.locationLabel.text = subLocale
         }
         
         viewModel.bindLayoutStatus { [weak self] collectionType in
@@ -315,22 +280,18 @@ extension ListViewController {
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        [segmentedControl, locationLabel, collectionView].forEach(view.addSubview(_:))
-        
-        segmentedControl.addTarget(self, action: #selector(segmentedControlTapped), for: .valueChanged)
+        [headerView, collectionView].forEach(view.addSubview(_:))
     }
     
     private func setupConstraint() {
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            segmentedControl.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            segmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            
-            locationLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5),
-            locationLabel.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor, constant: 5),
-            
-            collectionView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 10),
+
+            headerView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            headerView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.1),
+            collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 10)
