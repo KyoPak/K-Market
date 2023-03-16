@@ -77,7 +77,7 @@ extension ListCollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             
-            topLabelStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -10),
+            topLabelStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             topLabelStackView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
             topLabelStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             

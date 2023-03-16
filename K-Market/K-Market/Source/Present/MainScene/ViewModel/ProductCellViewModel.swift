@@ -15,7 +15,7 @@ protocol ProductCellViewModelOutput {
     var imageData: Observable<Data?> { get }
     
     func customStockText() -> String
-    func customPriceText() -> String
+    func customPriceText(_ price: Double) -> String
 }
 
 protocol ProductCellViewModel: ProductCellViewModelInput, ProductCellViewModelOutput { }
@@ -73,10 +73,10 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
         }
     }
     
-    func customPriceText() -> String {
-        if product.price > 1000 {
-            return String(format: "%@ %@K", product.currency.rawValue, String(product.price / 1000))
+    func customPriceText(_ price: Double) -> String {
+        if price > 1000 {
+            return String(format: "%@ %@K", product.currency.rawValue, String(price / 1000))
         }
-        return String(format: "%@ %@", product.currency.rawValue, String(product.price))
+        return String(format: "%@ %@", product.currency.rawValue, String(price))
     }
 }

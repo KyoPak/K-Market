@@ -74,6 +74,7 @@ class CollectionCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        clearPriceLabel()
         
         imageView.image = nil
         nameLabel.text = nil
@@ -89,10 +90,9 @@ class CollectionCell: UICollectionViewCell {
     
     func setupBind() {
         nameLabel.text = viewModel?.product.name
-        priceLabel.text = viewModel?.customPriceText()
         stockLabel.text = viewModel?.customStockText()
-        salePriceLabel.text = viewModel?.customPriceText()
-        
+        priceLabel.text = viewModel?.customPriceText(viewModel?.product.price ?? .zero)
+        salePriceLabel.text = viewModel?.customPriceText(viewModel?.product.bargainPrice ?? .zero)
         viewModel?.product.discountedPrice == .zero ? salePriceLabel.isHidden = true : changePriceLabel()
         
         viewModel?.imageData.bind({ [weak self] data in
@@ -106,29 +106,19 @@ class CollectionCell: UICollectionViewCell {
             }
         })
         
-//        viewModel?.loadImage(completion: { [weak self] data in
-//            DispatchQueue.main.async {
-//                if let data = data {
-//                    self?.imageView.image = UIImage(data: data)
-//                } else {
-//                    self?.imageView.image = UIImage(named: "photo")
-//                }
-//            }
-//        })
-        
         viewModel?.productLocale.bind({ [weak self] locale in
             self?.locationLabel.text = locale
         })
     }
     
     func changePriceLabel() {
-        priceLabel.textColor = .red
+        priceLabel.textColor = .systemRed
         priceLabel.applyStrikeThroughStyle()
     }
     
     func clearPriceLabel() {
         salePriceLabel.isHidden = false
-        priceLabel.textColor = .gray
+        priceLabel.textColor = .label
         priceLabel.attributedText = .none
     }
 }
