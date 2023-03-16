@@ -34,6 +34,7 @@
 		3C23C30E29BC1EE000802CEC /* DecodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30D29BC1EE000802CEC /* DecodeManager.swift */; };
 		3C28EF1829C0B86D00F60F2D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C28EF1729C0B86D00F60F2D /* UILabel+Extension.swift */; };
 		3C40159829C1AD23007448A8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C40159729C1AD23007448A8 /* HeaderView.swift */; };
+		3C40159B29C2E92C007448A8 /* Observabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C40159A29C2E92C007448A8 /* Observabel.swift */; };
 		3CA9B6FA29BCA22200C3B28D /* FetchLocationDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9B6F929BCA22200C3B28D /* FetchLocationDataUseCase.swift */; };
 		3CA9B6FD29BCAB2700C3B28D /* UseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9B6FC29BCAB2700C3B28D /* UseIdentifiable.swift */; };
 		3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */; };
@@ -42,7 +43,7 @@
 		3CB7C83129BC88B6001E7992 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83029BC88B6001E7992 /* CollectionCell.swift */; };
 		3CB7C83329BC8986001E7992 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83229BC8986001E7992 /* ListCollectionViewCell.swift */; };
 		3CB7C83529BC8993001E7992 /* GridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83429BC8993001E7992 /* GridCollectionViewCell.swift */; };
-		3CB7C83729BC8C57001E7992 /* ProductListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83629BC8C57001E7992 /* ProductListCellViewModel.swift */; };
+		3CB7C83729BC8C57001E7992 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83629BC8C57001E7992 /* ProductCellViewModel.swift */; };
 		3CB7C83929BC8E5E001E7992 /* LoadImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83829BC8E5E001E7992 /* LoadImageUseCase.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		3C23C30D29BC1EE000802CEC /* DecodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeManager.swift; sourceTree = "<group>"; };
 		3C28EF1729C0B86D00F60F2D /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		3C40159729C1AD23007448A8 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		3C40159A29C2E92C007448A8 /* Observabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observabel.swift; sourceTree = "<group>"; };
 		3CA9B6F929BCA22200C3B28D /* FetchLocationDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLocationDataUseCase.swift; sourceTree = "<group>"; };
 		3CA9B6FC29BCAB2700C3B28D /* UseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseIdentifiable.swift; sourceTree = "<group>"; };
 		3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 		3CB7C83029BC88B6001E7992 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		3CB7C83229BC8986001E7992 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		3CB7C83429BC8993001E7992 /* GridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCell.swift; sourceTree = "<group>"; };
-		3CB7C83629BC8C57001E7992 /* ProductListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCellViewModel.swift; sourceTree = "<group>"; };
+		3CB7C83629BC8C57001E7992 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
 		3CB7C83829BC8E5E001E7992 /* LoadImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,6 +211,7 @@
 		3C13A80829B9CC6500E2FB03 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3C40159929C2E91A007448A8 /* Type */,
 				3CA9B6FB29BCAB1300C3B28D /* Protocol */,
 				3C23C2E329BB109100802CEC /* Extension */,
 				3C13A80929B9CC7E00E2FB03 /* Error */,
@@ -304,6 +307,14 @@
 			path = Translator;
 			sourceTree = "<group>";
 		};
+		3C40159929C2E91A007448A8 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				3C40159A29C2E92C007448A8 /* Observabel.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
 		3CA9B6FB29BCAB1300C3B28D /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,7 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				3CB7C82429BC31F4001E7992 /* ListViewModel.swift */,
-				3CB7C83629BC8C57001E7992 /* ProductListCellViewModel.swift */,
+				3CB7C83629BC8C57001E7992 /* ProductCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -493,6 +504,7 @@
 				3C13A7FD29B9B6BC00E2FB03 /* LocationData.swift in Sources */,
 				3C13A7FB29B9B3AB00E2FB03 /* ProductPage.swift in Sources */,
 				3C13A7E529B9A74300E2FB03 /* ListViewController.swift in Sources */,
+				3C40159B29C2E92C007448A8 /* Observabel.swift in Sources */,
 				3C13A80229B9C85600E2FB03 /* HTTPMethod.swift in Sources */,
 				3C23C2E529BB10A300802CEC /* URLComponents+Extension.swift in Sources */,
 				3C23C30829BC1D1000802CEC /* FetchProductDataUseCase.swift in Sources */,
@@ -502,7 +514,7 @@
 				3C13A7E129B9A74300E2FB03 /* AppDelegate.swift in Sources */,
 				3CB7C83329BC8986001E7992 /* ListCollectionViewCell.swift in Sources */,
 				3CB7C83529BC8993001E7992 /* GridCollectionViewCell.swift in Sources */,
-				3CB7C83729BC8C57001E7992 /* ProductListCellViewModel.swift in Sources */,
+				3CB7C83729BC8C57001E7992 /* ProductCellViewModel.swift in Sources */,
 				3C23C30529BC13E100802CEC /* DefualtLocationRepository.swift in Sources */,
 				3C23C2E729BB12C700802CEC /* DefaultProductRepository.swift in Sources */,
 				3C13A80429B9CAE800E2FB03 /* RequestByUseCase.swift in Sources */,

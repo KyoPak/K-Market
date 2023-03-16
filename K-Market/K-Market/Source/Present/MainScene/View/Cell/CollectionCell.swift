@@ -8,7 +8,7 @@
 import UIKit
 
 class CollectionCell: UICollectionViewCell {
-    var viewModel: ProductListCellViewModel?
+    var viewModel: ProductCellViewModel?
     
     let indicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
@@ -74,6 +74,7 @@ class CollectionCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        clearPriceLabel()
         
         imageView.image = nil
         nameLabel.text = nil
@@ -83,43 +84,41 @@ class CollectionCell: UICollectionViewCell {
         stockLabel.text = nil
     }
     
-    func setupViewModel(_ viewModel: ProductListCellViewModel) {
+    func setupViewModel(_ viewModel: ProductCellViewModel) {
         self.viewModel = viewModel
     }
     
     func setupBind() {
-        viewModel?.bindData(completion: { [weak self] data in
-            self?.nameLabel.text = data.name
-            self?.priceLabel.text = self?.viewModel?.customPriceText(data.price)
-            self?.stockLabel.text = self?.viewModel?.customStockText(data.stock)
-            self?.salePriceLabel.text = self?.viewModel?.customPriceText(data.bargainPrice)
-            
-            data.discountedPrice == .zero ? self?.salePriceLabel.isHidden = true : self?.changePriceLabel()
-        })
+        nameLabel.text = viewModel?.product.name
+        stockLabel.text = viewModel?.customStockText()
+        priceLabel.text = viewModel?.customPriceText(viewModel?.product.price ?? .zero)
+        salePriceLabel.text = viewModel?.customPriceText(viewModel?.product.bargainPrice ?? .zero)
+        viewModel?.product.discountedPrice == .zero ? salePriceLabel.isHidden = true : changePriceLabel()
         
-        viewModel?.loadImage(completion: { [weak self] data in
+        viewModel?.imageData.bind({ [weak self] data in
             DispatchQueue.main.async {
-                if let data = data {
-                    self?.imageView.image = UIImage(data: data)
-                } else {
+                guard let data = data else {
                     self?.imageView.image = UIImage(named: "photo")
+                    return
                 }
+                
+                self?.imageView.image = UIImage(data: data)
             }
         })
         
-        viewModel?.bindLocationData(completion: { [weak self] subLocale in
-            self?.locationLabel.text = subLocale
+        viewModel?.productLocale.bind({ [weak self] locale in
+            self?.locationLabel.text = locale
         })
     }
     
     func changePriceLabel() {
-        priceLabel.textColor = .red
+        priceLabel.textColor = .systemRed
         priceLabel.applyStrikeThroughStyle()
     }
     
     func clearPriceLabel() {
         salePriceLabel.isHidden = false
-        priceLabel.textColor = .gray
+        priceLabel.textColor = .label
         priceLabel.attributedText = .none
     }
 }

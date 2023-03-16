@@ -66,15 +66,16 @@ extension ListViewController {
 // MARK: - Bind
 extension ListViewController {
     func bindData() {
-        viewModel.bindDataList { [weak self] datas in
+        viewModel.productList.bind { [weak self] datas in
             DispatchQueue.main.async {
                 self?.applySnapshot(data: datas)
             }
         }
-        
-        viewModel.bindLayoutStatus { [weak self] collectionType in
+
+        viewModel.layoutStatus.bind { [weak self] collectionType in
             guard let self = self else { return }
             self.collectionView.collectionViewLayout = self.collectionViewLayoutChange(type: collectionType)
+            self.collectionView.reloadData()
         }
     }
 }
@@ -86,11 +87,12 @@ extension ListViewController {
 
             var cell: CollectionCell
             
-            switch self.viewModel.layoutStatus {
+            switch self.viewModel.fetchLayoutStatus() {
             case .list:
                 guard let listCell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: ListCollectionViewCell.identifier,
-                    for: indexPath) as? ListCollectionViewCell
+                    for: indexPath
+                ) as? ListCollectionViewCell
                 else {
                     let errorCell = UICollectionViewCell()
                     return errorCell
@@ -99,7 +101,8 @@ extension ListViewController {
             case .grid:
                 guard let gridCell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: GridCollectionViewCell.identifier,
-                    for: indexPath) as? GridCollectionViewCell
+                    for: indexPath
+                ) as? GridCollectionViewCell
                 else {
                     let errorCell = UICollectionViewCell()
                     return errorCell
@@ -107,13 +110,8 @@ extension ListViewController {
                 cell = gridCell
             }
             
-            let cellViewModel = DefaultProductListCellViewModel(
+            let cellViewModel = DefaultProductCellViewModel(
                 product: data,
-                locationData: LocationData(
-                    id: data.id,
-                    locality: self.viewModel.userLocale,
-                    subLocality: self.viewModel.userSubLocale
-                ),
                 loadImageUseCase: DefaultLoadImageUseCase(
                     productRepository: DefaultProductRepository(
                         networkService: DefaultNetworkSevice()
@@ -139,10 +137,18 @@ extension ListViewController {
         var snapshot = SnapShot()
         snapshot.appendSections([.main])
         snapshot.appendItems(data)
+        snapshot.reloadSections([.main])
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
+    
+    private func reloadSnapshot(data: [Product]) {
+        var snapshot = SnapShot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(data)
+        snapshot.reloadSections([.main])
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
 }
-
 
 // MARK: - Location Alert
 extension ListViewController {

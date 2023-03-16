@@ -11,7 +11,7 @@ final class GridCollectionViewCell: CollectionCell {
     private var labelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 2
+        stackView.spacing = 3
         stackView.alignment = .center
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,7 +23,7 @@ final class GridCollectionViewCell: CollectionCell {
         stackView.axis = .vertical
         stackView.spacing = 5
         stackView.alignment = .center
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
