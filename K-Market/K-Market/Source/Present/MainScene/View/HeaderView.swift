@@ -53,7 +53,7 @@ final class HeaderView: UIView {
 // MARK: - Bind
 extension HeaderView {
     func bindData() {
-        viewModel.bindSubLocale { [weak self] subLocale in
+        viewModel.userSubLocale.bind { [weak self] subLocale in
             self?.locationLabel.text = subLocale
         }
     }

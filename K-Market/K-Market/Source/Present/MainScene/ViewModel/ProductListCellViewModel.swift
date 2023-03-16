@@ -17,18 +17,15 @@ protocol ProductListCellViewModel {
 
 final class DefaultProductListCellViewModel: ProductListCellViewModel {
     private let product: Product
-    private let locationData: LocationData?
     private let loadImageUseCase: LoadImageUseCase
     private let fetchLocationDataUseCase: FetchLocationDataUseCase
     
     init(
         product: Product,
-        locationData: LocationData,
         loadImageUseCase: LoadImageUseCase,
         fetchLocationDataUseCase: FetchLocationDataUseCase
     ) {
         self.product = product
-        self.locationData = locationData
         self.loadImageUseCase = loadImageUseCase
         self.fetchLocationDataUseCase = fetchLocationDataUseCase
     }

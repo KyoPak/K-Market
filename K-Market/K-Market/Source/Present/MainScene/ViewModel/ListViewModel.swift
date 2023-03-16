@@ -7,66 +7,41 @@
 
 import Foundation
 
-protocol ListViewModel {
-    var layoutStatus: CollectionType { get }
-    var userLocale: String { get }
-    var userSubLocale: String { get }
-    func bindDataList(completion: @escaping ([Product]) -> Void)
-    func bindSubLocale(completion: @escaping ((String)) -> Void)
+protocol ListViewModelInput {
     func fetchProductList(pageNo: Int, itemsPerPage: Int)
     func setUserLocation(locale: String, subLocale: String)
     func setLayoutType(layoutIndex: Int)
-    func bindLayoutStatus(completion: @escaping ((CollectionType)) -> Void)
 }
 
+protocol ListViewModelOutput {
+    var productList: Observable<[Product]> { get }
+    var userSubLocale: Observable<String> { get }
+    var userLocale: String { get }
+    var layoutStatus: Observable<CollectionType> { get }
+    
+    func fetchLayoutStatus() -> CollectionType
+}
+
+protocol ListViewModel: ListViewModelInput, ListViewModelOutput  { }
+
 final class DefaultListViewModel: ListViewModel {
-    private var productList: [Product] = [] {
-        didSet {
-            dataListHandler?(productList)
-        }
-    }
-    
     private(set) var userLocale = ""
-    private(set) var userSubLocale = "" {
-        didSet {
-            subLocaleHandler?(userSubLocale)
-        }
-    }
-    
-    private(set) var layoutStatus: CollectionType = .list {
-        didSet {
-            layoutHandler?(layoutStatus)
-        }
-    }
-    
-    private var dataListHandler: (([Product]) -> Void)?
-    private var subLocaleHandler: ((String) -> Void)?
-    private var layoutHandler: ((CollectionType) -> Void)?
-    
     private let fetchUseCase: FetchProductUseCase
+    
+    var productList = Observable<[Product]>([])
+    var userSubLocale = Observable<String>("")
+    var layoutStatus = Observable<CollectionType>(.list)
     
     init(fetchUseCase: FetchProductUseCase) {
         self.fetchUseCase = fetchUseCase
         fetchProductList(pageNo: 1, itemsPerPage: 15)
     }
-    
-    func bindDataList(completion: @escaping ([Product]) -> Void) {
-        dataListHandler = completion
-    }
-    
-    func bindSubLocale(completion: @escaping ((String)) -> Void) {
-        subLocaleHandler = completion
-    }
-    
-    func bindLayoutStatus(completion: @escaping ((CollectionType)) -> Void) {
-        layoutHandler = completion
-    }
-    
+        
     func fetchProductList(pageNo: Int, itemsPerPage: Int) {
         fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: itemsPerPage) { [weak self] result in
             switch result {
             case .success(let datas):
-                self?.productList += datas
+                self?.productList.value += datas
             case .failure(let error):
                 //TODO: Delegate Alert
                 print(error)
@@ -76,10 +51,14 @@ final class DefaultListViewModel: ListViewModel {
     
     func setUserLocation(locale: String, subLocale: String) {
         userLocale = locale
-        userSubLocale = subLocale
+        userSubLocale.value = subLocale
     }
     
     func setLayoutType(layoutIndex: Int) {
-        layoutStatus = CollectionType(rawValue: layoutIndex) ?? .list
+        layoutStatus.value = CollectionType(rawValue: layoutIndex) ?? .list
+    }
+    
+    func fetchLayoutStatus() -> CollectionType {
+        return layoutStatus.value
     }
 }

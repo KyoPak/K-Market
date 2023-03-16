@@ -66,13 +66,13 @@ extension ListViewController {
 // MARK: - Bind
 extension ListViewController {
     func bindData() {
-        viewModel.bindDataList { [weak self] datas in
+        viewModel.productList.bind { [weak self] datas in
             DispatchQueue.main.async {
                 self?.applySnapshot(data: datas)
             }
         }
-        
-        viewModel.bindLayoutStatus { [weak self] collectionType in
+
+        viewModel.layoutStatus.bind { [weak self] collectionType in
             guard let self = self else { return }
             self.collectionView.collectionViewLayout = self.collectionViewLayoutChange(type: collectionType)
             self.collectionView.reloadData()
@@ -87,7 +87,7 @@ extension ListViewController {
 
             var cell: CollectionCell
             
-            switch self.viewModel.layoutStatus {
+            switch self.viewModel.fetchLayoutStatus() {
             case .list:
                 guard let listCell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: ListCollectionViewCell.identifier,
@@ -112,11 +112,6 @@ extension ListViewController {
             
             let cellViewModel = DefaultProductListCellViewModel(
                 product: data,
-                locationData: LocationData(
-                    id: data.id,
-                    locality: self.viewModel.userLocale,
-                    subLocality: self.viewModel.userSubLocale
-                ),
                 loadImageUseCase: DefaultLoadImageUseCase(
                     productRepository: DefaultProductRepository(
                         networkService: DefaultNetworkSevice()
