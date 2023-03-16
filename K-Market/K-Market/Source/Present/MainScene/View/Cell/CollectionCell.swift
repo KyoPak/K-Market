@@ -8,7 +8,7 @@
 import UIKit
 
 class CollectionCell: UICollectionViewCell {
-    var viewModel: ProductListCellViewModel?
+    var viewModel: ProductCellViewModel?
     
     let indicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
@@ -83,7 +83,7 @@ class CollectionCell: UICollectionViewCell {
         stockLabel.text = nil
     }
     
-    func setupViewModel(_ viewModel: ProductListCellViewModel) {
+    func setupViewModel(_ viewModel: ProductCellViewModel) {
         self.viewModel = viewModel
     }
     

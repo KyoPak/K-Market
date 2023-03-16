@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProductListCellViewModel {
+protocol ProductCellViewModel {
     func bindData(completion: @escaping (Product) -> Void)
     func bindLocationData(completion: @escaping (String) -> Void)
     func loadImage(completion: @escaping (Data?) -> Void)
@@ -15,7 +15,7 @@ protocol ProductListCellViewModel {
     func customPriceText(_ price: Double) -> String
 }
 
-final class DefaultProductListCellViewModel: ProductListCellViewModel {
+final class DefaultProductCellViewModel: ProductCellViewModel {
     private let product: Product
     private let loadImageUseCase: LoadImageUseCase
     private let fetchLocationDataUseCase: FetchLocationDataUseCase

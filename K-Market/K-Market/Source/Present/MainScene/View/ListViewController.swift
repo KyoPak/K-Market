@@ -110,7 +110,7 @@ extension ListViewController {
                 cell = gridCell
             }
             
-            let cellViewModel = DefaultProductListCellViewModel(
+            let cellViewModel = DefaultProductCellViewModel(
                 product: data,
                 loadImageUseCase: DefaultLoadImageUseCase(
                     productRepository: DefaultProductRepository(
