@@ -7,16 +7,24 @@
 
 import Foundation
 
-protocol ProductCellViewModel {
-    func bindData(completion: @escaping (Product) -> Void)
-    func bindLocationData(completion: @escaping (String) -> Void)
-    func loadImage(completion: @escaping (Data?) -> Void)
-    func customStockText(_ stock: Int) -> String
-    func customPriceText(_ price: Double) -> String
+protocol ProductCellViewModelInput { }
+
+protocol ProductCellViewModelOutput {
+    var product: Product { get }
+    var productLocale: Observable<String> { get }
+    var imageData: Observable<Data?> { get }
+    
+    func customStockText() -> String
+    func customPriceText() -> String
 }
 
+protocol ProductCellViewModel: ProductCellViewModelInput, ProductCellViewModelOutput { }
+
 final class DefaultProductCellViewModel: ProductCellViewModel {
-    private let product: Product
+    private(set) var product: Product
+    var productLocale: Observable<String> = Observable("")
+    var imageData: Observable<Data?> = Observable(nil)
+    
     private let loadImageUseCase: LoadImageUseCase
     private let fetchLocationDataUseCase: FetchLocationDataUseCase
     
@@ -28,49 +36,47 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
         self.product = product
         self.loadImageUseCase = loadImageUseCase
         self.fetchLocationDataUseCase = fetchLocationDataUseCase
+        
+        loadImage()
+        fetchLocationData()
     }
     
-    func bindData(completion: @escaping (Product) -> Void) {
-        completion(product)
-    }
-    
-    func bindLocationData(completion: @escaping (String) -> Void) {
-        fetchLocationDataUseCase.fetch(id: product.id) { data in
+    private func fetchLocationData() {
+        fetchLocationDataUseCase.fetch(id: product.id) { [weak self] data in
             if let subLocale = data?.subLocality {
-                completion(subLocale)
+                self?.productLocale.value = subLocale
             } else {
-                completion("미등록")
+                self?.productLocale.value = "미등록"
             }
         }
     }
     
-    func loadImage(completion: @escaping (Data?) -> Void) {
+    private func loadImage() {
         loadImageUseCase.loadImage(thumbnail: product.thumbnail) { result in
             switch result {
             case .success(let data):
-                completion(data)
+                self.imageData.value = data
             case .failure(let error):
                 print("Error : " ,error)
-                completion(nil)
             }
         }
     }
     
-    func customStockText(_ stock: Int) -> String {
+    func customStockText() -> String {
         if product.stock == Int.zero {
             return String(format: "품절")
         } else {
             if product.stock > 1000 {
-                return String(format: "수량 : %@", String(product.stock / 1000))
+                return String(format: "수량 : %@K", String(product.stock / 1000))
             }
             return String(format: "수량 : %@", String(product.stock))
         }
     }
     
-    func customPriceText(_ price: Double) -> String {
-        if price > 1000 {
-            return String(format: "%@ %@K", product.currency.rawValue, String(price / 1000))
+    func customPriceText() -> String {
+        if product.price > 1000 {
+            return String(format: "%@ %@K", product.currency.rawValue, String(product.price / 1000))
         }
-        return String(format: "%@ %@", product.currency.rawValue, String(price))
+        return String(format: "%@ %@", product.currency.rawValue, String(product.price))
     }
 }

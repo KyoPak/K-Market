@@ -88,27 +88,36 @@ class CollectionCell: UICollectionViewCell {
     }
     
     func setupBind() {
-        viewModel?.bindData(completion: { [weak self] data in
-            self?.nameLabel.text = data.name
-            self?.priceLabel.text = self?.viewModel?.customPriceText(data.price)
-            self?.stockLabel.text = self?.viewModel?.customStockText(data.stock)
-            self?.salePriceLabel.text = self?.viewModel?.customPriceText(data.bargainPrice)
-            
-            data.discountedPrice == .zero ? self?.salePriceLabel.isHidden = true : self?.changePriceLabel()
-        })
+        nameLabel.text = viewModel?.product.name
+        priceLabel.text = viewModel?.customPriceText()
+        stockLabel.text = viewModel?.customStockText()
+        salePriceLabel.text = viewModel?.customPriceText()
         
-        viewModel?.loadImage(completion: { [weak self] data in
+        viewModel?.product.discountedPrice == .zero ? salePriceLabel.isHidden = true : changePriceLabel()
+        
+        viewModel?.imageData.bind({ [weak self] data in
             DispatchQueue.main.async {
-                if let data = data {
-                    self?.imageView.image = UIImage(data: data)
-                } else {
+                guard let data = data else {
                     self?.imageView.image = UIImage(named: "photo")
+                    return
                 }
+                
+                self?.imageView.image = UIImage(data: data)
             }
         })
         
-        viewModel?.bindLocationData(completion: { [weak self] subLocale in
-            self?.locationLabel.text = subLocale
+//        viewModel?.loadImage(completion: { [weak self] data in
+//            DispatchQueue.main.async {
+//                if let data = data {
+//                    self?.imageView.image = UIImage(data: data)
+//                } else {
+//                    self?.imageView.image = UIImage(named: "photo")
+//                }
+//            }
+//        })
+        
+        viewModel?.productLocale.bind({ [weak self] locale in
+            self?.locationLabel.text = locale
         })
     }
     
