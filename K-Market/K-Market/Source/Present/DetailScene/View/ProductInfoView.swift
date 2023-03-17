@@ -95,12 +95,15 @@ extension ProductInfoView {
 // MARK: - UIConstraint
 extension ProductInfoView {
     private func setupView() {
+        backgroundColor = .systemBackground
+        
         [priceLabel, salePriceLabel].forEach(priceStackView.addArrangedSubview(_:))
         [nameLabel,stockLabel, priceStackView].forEach(mainInfoStackView.addArrangedSubview(_:))
         [locationLabel, dateLabel].forEach(subInfoStackView.addArrangedSubview(_:))
         [mainInfoStackView, subInfoStackView].forEach(infoStackView.addArrangedSubview(_:))
         
-        addSubview(infoStackView)
+        [infoStackView, separatorLine, descriptionView].forEach(addSubview(_:))
+        
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -110,6 +113,7 @@ extension ProductInfoView {
             infoStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
             infoStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             infoStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            infoStackView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.3),
             
             separatorLine.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 3),
             separatorLine.heightAnchor.constraint(equalToConstant: 1),

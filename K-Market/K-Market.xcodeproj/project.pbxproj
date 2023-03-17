@@ -305,8 +305,8 @@
 		3C23C30629BC1CD700802CEC /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				3C23C30729BC1D1000802CEC /* FetchProductDataUseCase.swift */,
 				3CB7C83829BC8E5E001E7992 /* LoadImageUseCase.swift */,
+				3C23C30729BC1D1000802CEC /* FetchProductDataUseCase.swift */,
 				3CA9B6F929BCA22200C3B28D /* FetchLocationDataUseCase.swift */,
 				3C4015AA29C44775007448A8 /* FetchProductDetailUseCase.swift */,
 			);

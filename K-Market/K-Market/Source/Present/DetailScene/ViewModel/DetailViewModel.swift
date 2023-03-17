@@ -42,7 +42,9 @@ final class DefaultDetailViewModel: DetailViewModel {
         fetchProductDetailUseCase.fetchData(id: id) { result in
             switch result {
             case .success(let product):
-                self.product = Observable(product)
+                DispatchQueue.main.async {
+                    self.product.value = product
+                }
             case .failure(let error):
                 //TODO: - Alert
                 print(error)

@@ -31,7 +31,7 @@ final class DefaultFetchProductDetailUseCase {
     }
 }
 
-extension DefaultFetchProductDetailUseCase {
+extension DefaultFetchProductDetailUseCase: FetchProductDetailUseCase {
     func fetchData(id: Int, completion: @escaping (Result<Product, NetworkError>) -> Void) {
         let request = DetailFetchRequest(id: id)
         productRepository.request(customRequest: request) { result in

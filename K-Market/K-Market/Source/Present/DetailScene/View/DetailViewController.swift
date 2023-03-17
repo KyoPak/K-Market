@@ -53,6 +53,7 @@ final class DetailViewController: UIViewController {
 // MARK: - UIConstraint
 extension DetailViewController {
     private func setupView() {
+        view.backgroundColor = .systemBackground
         [collectionView, productInfoView].forEach(view.addSubview(_:))
     }
     
