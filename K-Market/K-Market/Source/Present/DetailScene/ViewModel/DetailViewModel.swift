@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol DetailViewModelInput {
-    
-}
+protocol DetailViewModelInput { }
 
 protocol DetailViewModelOutput {
     var product: Observable<Product> { get }
     var productLocale:  Observable<String> { get }
     
     func customDate() -> String
+    func customStockText() -> String
+    func customPriceText(_ price: Double) -> String
 }
 
 protocol DetailViewModel: DetailViewModelInput, DetailViewModelOutput { }
@@ -25,13 +25,35 @@ final class DefaultDetailViewModel: DetailViewModel {
     var productLocale: Observable<String> = Observable("")
     
     private let fetchLocationDataUseCase: FetchLocationDataUseCase
+    private let fetchProductDetailUseCase: FetchProductDetailUseCase
     
-    init(product: Product,
-         fetchLocationDataUseCase: FetchLocationDataUseCase
+    init(id: Int,
+         fetchLocationDataUseCase: FetchLocationDataUseCase,
+         fetchProductDetailUseCase: FetchProductDetailUseCase
     ) {
-        self.product = Observable(product)
         self.fetchLocationDataUseCase = fetchLocationDataUseCase
-        fetchLocation()
+        self.fetchProductDetailUseCase = fetchProductDetailUseCase
+        
+        fetchLocation(id: id)
+        fetchProductDetailInfo(id: id)
+    }
+    
+    private func fetchProductDetailInfo(id: Int) {
+        fetchProductDetailUseCase.fetchData(id: id) { result in
+            switch result {
+            case .success(let product):
+                self.product = Observable(product)
+            case .failure(let error):
+                //TODO: - Alert
+                print(error)
+            }
+        }
+    }
+    
+    private func fetchLocation(id: Int) {
+        fetchLocationDataUseCase.fetch(id: id) { location in
+            self.productLocale.value = location?.subLocality ?? "미등록"
+        }
     }
     
     func customDate() -> String {
@@ -60,9 +82,21 @@ final class DefaultDetailViewModel: DetailViewModel {
         }
     }
     
-    private func fetchLocation() {
-        fetchLocationDataUseCase.fetch(id: product.value.id) { location in
-            self.productLocale.value = location?.subLocality ?? "미등록"
+    func customStockText() -> String {
+        if product.value.stock == Int.zero {
+            return String(format: "품절")
+        } else {
+            if product.value.stock > 1000 {
+                return String(format: "수량 : %@K", String(product.value.stock / 1000))
+            }
+            return String(format: "수량 : %@", String(product.value.stock))
         }
+    }
+    
+    func customPriceText(_ price: Double) -> String {
+        if price > 1000 {
+            return String(format: "%@ %@K", product.value.currency.rawValue, String(price / 1000))
+        }
+        return String(format: "%@ %@", product.value.currency.rawValue, String(price))
     }
 }
