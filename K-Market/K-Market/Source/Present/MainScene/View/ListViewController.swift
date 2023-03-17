@@ -49,12 +49,27 @@ final class ListViewController: UIViewController {
         self.viewModel = viewModel
         headerView = HeaderView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
+        collectionView.delegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+extension ListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailView = DetailViewController(viewModel: DefaultDetailViewModel(
+            id: viewModel.productList.value[indexPath.item].id,
+            fetchLocationDataUseCase: DefaultFetchLocationDataUseCase(locationRepository: DefualtLocationRepository(service: DefaultFireBaseService())),
+            fetchProductDetailUseCase: DefaultFetchProductDetailUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
+            loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())))
+        )
+        
+        navigationController?.pushViewController(detailView, animated: true)
+    }
+}
+
 
 // MARK: - Action
 extension ListViewController {
