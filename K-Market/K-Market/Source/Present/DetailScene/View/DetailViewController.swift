@@ -11,10 +11,10 @@ final class DetailViewController: UIViewController {
     private let viewModel: DetailViewModel
     private let productInfoView: ProductInfoView
     
-    private lazy var collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = .zero
         layout.minimumInteritemSpacing = .zero
         
         let collectionView = UICollectionView(
@@ -27,6 +27,8 @@ final class DetailViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
+    
+    private let pageLabel = UILabel(font: .preferredFont(forTextStyle: .caption1))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,9 +56,24 @@ extension DetailViewController {
             self?.collectionView.reloadData()
         }
     }
+    
+    private func changePageLabel(page: Int, totalPage: Int) {
+        pageLabel.text = "\(page)/\(totalPage)"
+    }
 }
 
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let productImagesCount = viewModel.fetchProductImageCount()
+        
+        for cell in collectionView.visibleCells {
+            let indexPath = collectionView.indexPath(for: cell)
+            guard let currentIndex = indexPath?.item else { return }
+            print(currentIndex)
+            changePageLabel(page: currentIndex + 1, totalPage: productImagesCount)
+        }
+    }
+    
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -93,7 +110,9 @@ extension DetailViewController: UICollectionViewDelegate {
 
 extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.fetchProductImageCount()
+        let imageCount = viewModel.fetchProductImageCount()
+        changePageLabel(page: 1, totalPage: imageCount)
+        return imageCount
     }
     
     func collectionView(
@@ -129,7 +148,7 @@ extension DetailViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         view.backgroundColor = .systemBackground
-        [collectionView, productInfoView].forEach(view.addSubview(_:))
+        [collectionView, pageLabel, productInfoView].forEach(view.addSubview(_:))
     }
     
     private func registerCell() {
@@ -147,7 +166,10 @@ extension DetailViewController {
             collectionView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.4),
             collectionView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
                 
-            productInfoView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            pageLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 2),
+            pageLabel.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            
+            productInfoView.topAnchor.constraint(equalTo: pageLabel.bottomAnchor),
             productInfoView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             productInfoView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             productInfoView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 10)
