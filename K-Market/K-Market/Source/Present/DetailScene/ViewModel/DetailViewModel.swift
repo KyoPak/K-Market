@@ -16,14 +16,13 @@ protocol DetailViewModelOutput {
     var productLocale:  Observable<String> { get }
     
     func customDate() -> String
-    func customLocation()
 }
 
 protocol DetailViewModel: DetailViewModelInput, DetailViewModelOutput { }
 
 final class DefaultDetailViewModel: DetailViewModel {
     var product: Observable<Product>
-    var productLocale =  Observable<String>("")
+    var productLocale: Observable<String> = Observable("")
     
     private let fetchLocationDataUseCase: FetchLocationDataUseCase
     
@@ -32,6 +31,7 @@ final class DefaultDetailViewModel: DetailViewModel {
     ) {
         self.product = Observable(product)
         self.fetchLocationDataUseCase = fetchLocationDataUseCase
+        fetchLocation()
     }
     
     func customDate() -> String {
@@ -60,7 +60,7 @@ final class DefaultDetailViewModel: DetailViewModel {
         }
     }
     
-    func customLocation() {
+    private func fetchLocation() {
         fetchLocationDataUseCase.fetch(id: product.value.id) { location in
             self.productLocale.value = location?.subLocality ?? "미등록"
         }
