@@ -69,7 +69,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         for cell in collectionView.visibleCells {
             let indexPath = collectionView.indexPath(for: cell)
             guard let currentIndex = indexPath?.item else { return }
-            print(currentIndex)
+
             changePageLabel(page: currentIndex + 1, totalPage: productImagesCount)
         }
     }
