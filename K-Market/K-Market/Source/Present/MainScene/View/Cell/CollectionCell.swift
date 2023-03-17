@@ -25,44 +25,11 @@ class CollectionCell: UICollectionViewCell {
         return imageView
     }()
     
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let priceLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let locationLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .systemGray
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let salePriceLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let stockLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = UIFont.preferredFont(forTextStyle: .body)
-        return label
-    }()
+    let nameLabel = UILabel(font: .preferredFont(forTextStyle: .body))
+    let priceLabel = UILabel(font: .systemFont(ofSize: 15))
+    let locationLabel = UILabel(textColor: .systemGray, font: .systemFont(ofSize: 15))
+    let salePriceLabel = UILabel(font: .systemFont(ofSize: 15))
+    let stockLabel = UILabel(font: .systemFont(ofSize: 15))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
