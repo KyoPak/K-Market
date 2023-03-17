@@ -8,25 +8,20 @@
 import UIKit
 
 final class GridCollectionViewCell: CollectionCell {
-    private var labelStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 3
-        stackView.alignment = .center
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
     
-    private var productStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 5
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    private let labelStackView = UIStackView(
+        axis: .vertical,
+        spacing: 3,
+        alignment: .center,
+        distribution: .fillProportionally
+    )
+    
+    private let productStackView = UIStackView(
+        axis: .vertical,
+        spacing: 5,
+        alignment: .center,
+        distribution: .fill
+    )
     
     private func setupUIComponent() {
         imageView.contentMode = .scaleAspectFill

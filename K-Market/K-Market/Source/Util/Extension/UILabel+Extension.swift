@@ -8,6 +8,14 @@
 import UIKit
 
 extension UILabel {
+    convenience init(textColor: UIColor = .label, font: UIFont, line: Int = 1) {
+        self.init(frame: .zero)
+        self.textColor = textColor
+        self.font = font
+        self.numberOfLines = line
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     func applyStrikeThroughStyle() {
         let attributeString = NSMutableAttributedString(string: self.text ?? "")
         

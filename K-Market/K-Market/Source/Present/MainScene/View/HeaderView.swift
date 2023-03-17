@@ -30,13 +30,8 @@ final class HeaderView: UIView {
         return control
     }()
     
-    private let locationLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
+    private let locationLabel = UILabel(font: .preferredFont(forTextStyle: .title3))
+
     init(viewModel: ListViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
