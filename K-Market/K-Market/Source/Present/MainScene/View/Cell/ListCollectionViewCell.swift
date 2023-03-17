@@ -15,35 +15,26 @@ final class ListCollectionViewCell: CollectionCell {
         return button
     }()
     
-    private var priceStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 2
-        stackView.alignment = .leading
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    private let priceStackView = UIStackView(
+        axis: .horizontal,
+        spacing: 2,
+        alignment: .leading,
+        distribution: .fill
+    )
     
-    private var stockButtonStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 2
-        stackView.alignment = .leading
-        stackView.distribution = .fillProportionally
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    private let stockButtonStackView = UIStackView(
+        axis: .horizontal,
+        spacing: 2,
+        alignment: .leading,
+        distribution: .fillProportionally
+    )
     
-    private var topLabelStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 2
-        stackView.alignment = .leading
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    private let topLabelStackView = UIStackView(
+        axis: .horizontal,
+        spacing: 2,
+        alignment: .leading,
+        distribution: .fill
+    )
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -37,6 +37,7 @@
 		3C40159B29C2E92C007448A8 /* Observabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C40159A29C2E92C007448A8 /* Observabel.swift */; };
 		3C40159E29C41769007448A8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C40159D29C41769007448A8 /* DetailViewController.swift */; };
 		3C4015A229C41794007448A8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015A129C41794007448A8 /* DetailViewModel.swift */; };
+		3C4015A429C41C51007448A8 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015A329C41C51007448A8 /* UIStackView+Extension.swift */; };
 		3CA9B6FA29BCA22200C3B28D /* FetchLocationDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9B6F929BCA22200C3B28D /* FetchLocationDataUseCase.swift */; };
 		3CA9B6FD29BCAB2700C3B28D /* UseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9B6FC29BCAB2700C3B28D /* UseIdentifiable.swift */; };
 		3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */; };
@@ -91,6 +92,7 @@
 		3C40159A29C2E92C007448A8 /* Observabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observabel.swift; sourceTree = "<group>"; };
 		3C40159D29C41769007448A8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3C4015A129C41794007448A8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		3C4015A329C41C51007448A8 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		3CA9B6F929BCA22200C3B28D /* FetchLocationDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLocationDataUseCase.swift; sourceTree = "<group>"; };
 		3CA9B6FC29BCAB2700C3B28D /* UseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseIdentifiable.swift; sourceTree = "<group>"; };
 		3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				3C23C2E429BB10A300802CEC /* URLComponents+Extension.swift */,
 				3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */,
 				3C28EF1729C0B86D00F60F2D /* UILabel+Extension.swift */,
+				3C4015A329C41C51007448A8 /* UIStackView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				3CB7C82E29BC72B3001E7992 /* LocationCollectionViewCell.swift in Sources */,
 				3CB7C82529BC31F4001E7992 /* ListViewModel.swift in Sources */,
 				3CA9B6FD29BCAB2700C3B28D /* UseIdentifiable.swift in Sources */,
+				3C4015A429C41C51007448A8 /* UIStackView+Extension.swift in Sources */,
 				3C13A80729B9CBE200E2FB03 /* NetworkService.swift in Sources */,
 				3C23C30E29BC1EE000802CEC /* DecodeManager.swift in Sources */,
 				3CA9B6FA29BCA22200C3B28D /* FetchLocationDataUseCase.swift in Sources */,
