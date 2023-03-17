@@ -87,6 +87,7 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupConstraint()
+        registerCell()
     }
     
     init(viewModel: DetailViewModel) {
@@ -107,6 +108,13 @@ extension DetailViewController {
         [locationLabel, dateLabel].forEach(subInfoStackView.addArrangedSubview(_:))
         [mainInfoStackView, subInfoStackView].forEach(infoStackView.addArrangedSubview(_:))
         view.addSubview(infoStackView)
+    }
+    
+    private func registerCell() {
+        collectionView.register(
+            ImageCollectionViewCell.self,
+            forCellWithReuseIdentifier: ImageCollectionViewCell.identifier
+        )
     }
     
     private func setupConstraint() {
