@@ -40,6 +40,7 @@
 		3C4015A429C41C51007448A8 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015A329C41C51007448A8 /* UIStackView+Extension.swift */; };
 		3C4015A729C43D7A007448A8 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015A629C43D7A007448A8 /* ImageCollectionViewCell.swift */; };
 		3C4015AB29C44775007448A8 /* FetchProductDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015AA29C44775007448A8 /* FetchProductDetailUseCase.swift */; };
+		3C4015AD29C4492F007448A8 /* ProductInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015AC29C4492F007448A8 /* ProductInfoView.swift */; };
 		3CA9B6FA29BCA22200C3B28D /* FetchLocationDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9B6F929BCA22200C3B28D /* FetchLocationDataUseCase.swift */; };
 		3CA9B6FD29BCAB2700C3B28D /* UseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9B6FC29BCAB2700C3B28D /* UseIdentifiable.swift */; };
 		3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */; };
@@ -97,6 +98,7 @@
 		3C4015A329C41C51007448A8 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		3C4015A629C43D7A007448A8 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C4015AA29C44775007448A8 /* FetchProductDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProductDetailUseCase.swift; sourceTree = "<group>"; };
+		3C4015AC29C4492F007448A8 /* ProductInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoView.swift; sourceTree = "<group>"; };
 		3CA9B6F929BCA22200C3B28D /* FetchLocationDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLocationDataUseCase.swift; sourceTree = "<group>"; };
 		3CA9B6FC29BCAB2700C3B28D /* UseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseIdentifiable.swift; sourceTree = "<group>"; };
 		3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 			children = (
 				3C4015A529C43D5C007448A8 /* Cell */,
 				3C40159D29C41769007448A8 /* DetailViewController.swift */,
+				3C4015AC29C4492F007448A8 /* ProductInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				3CB7C83129BC88B6001E7992 /* CollectionCell.swift in Sources */,
 				3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */,
 				3C28EF1829C0B86D00F60F2D /* UILabel+Extension.swift in Sources */,
+				3C4015AD29C4492F007448A8 /* ProductInfoView.swift in Sources */,
 				3C23C2E129BB027B00802CEC /* ProductRepository.swift in Sources */,
 				3CB7C82E29BC72B3001E7992 /* LocationCollectionViewCell.swift in Sources */,
 				3C4015A729C43D7A007448A8 /* ImageCollectionViewCell.swift in Sources */,

@@ -10,18 +10,18 @@ import Foundation
 protocol DetailViewModelInput { }
 
 protocol DetailViewModelOutput {
-    var product: Observable<Product> { get }
+    var product: Observable<Product?> { get }
     var productLocale:  Observable<String> { get }
     
     func customDate() -> String
     func customStockText() -> String
-    func customPriceText(_ price: Double) -> String
+    func customPriceText(_ price: Double?) -> String
 }
 
 protocol DetailViewModel: DetailViewModelInput, DetailViewModelOutput { }
 
 final class DefaultDetailViewModel: DetailViewModel {
-    var product: Observable<Product>
+    var product: Observable<Product?> = Observable(nil)
     var productLocale: Observable<String> = Observable("")
     
     private let fetchLocationDataUseCase: FetchLocationDataUseCase
@@ -58,7 +58,7 @@ final class DefaultDetailViewModel: DetailViewModel {
     
     func customDate() -> String {
         let currentDate = Date()
-        let date = product.value.createdAt
+        guard let date = product.value?.createdAt else { return "" }
         let calendar = Calendar.current
         
         let month = calendar.dateComponents([.month], from: date, to: currentDate).month
@@ -83,20 +83,24 @@ final class DefaultDetailViewModel: DetailViewModel {
     }
     
     func customStockText() -> String {
-        if product.value.stock == Int.zero {
+        guard let stock = product.value?.stock else { return "" }
+        
+        if stock == Int.zero {
             return String(format: "품절")
         } else {
-            if product.value.stock > 1000 {
-                return String(format: "수량 : %@K", String(product.value.stock / 1000))
+            if stock > 1000 {
+                return String(format: "수량 : %@K", String(stock / 1000))
             }
-            return String(format: "수량 : %@", String(product.value.stock))
+            return String(format: "수량 : %@", String(stock))
         }
     }
     
-    func customPriceText(_ price: Double) -> String {
+    func customPriceText(_ price: Double?) -> String {
+        guard let currency = product.value?.currency, let price = price else { return "" }
+        
         if price > 1000 {
-            return String(format: "%@ %@K", product.value.currency.rawValue, String(price / 1000))
+            return String(format: "%@ %@K", currency.rawValue, String(price / 1000))
         }
-        return String(format: "%@ %@", product.value.currency.rawValue, String(price))
+        return String(format: "%@ %@", currency.rawValue, String(price))
     }
 }
