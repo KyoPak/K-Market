@@ -89,6 +89,10 @@ extension ProductInfoView {
             self?.priceLabel.text = self?.viewModel.customPriceText(data?.price)
             self?.salePriceLabel.text = self?.viewModel.customPriceText(data?.bargainPrice)
         }
+        
+        viewModel.productLocale.bind { [weak self] locale  in
+            self?.locationLabel.text = locale
+        }
     }
 }
 
