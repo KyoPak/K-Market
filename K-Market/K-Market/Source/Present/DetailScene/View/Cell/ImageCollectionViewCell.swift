@@ -10,14 +10,10 @@ import UIKit
 final class ImageCollectionViewCell: UICollectionViewCell {
     let productImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    func uploadImage(_ image: UIImage) {
-        productImageView.image = image
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,6 +23,11 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func uploadImage(_ data: Data?) {
+        guard let data = data else { return }
+        productImageView.image = UIImage(data: data)
     }
 }
 

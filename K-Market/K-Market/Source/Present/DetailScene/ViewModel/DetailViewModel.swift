@@ -7,12 +7,16 @@
 
 import Foundation
 
-protocol DetailViewModelInput { }
+protocol DetailViewModelInput {
+    func fetchImageData(index: Int, completion: @escaping (Data) -> Void)
+}
 
 protocol DetailViewModelOutput {
     var product: Observable<Product?> { get }
     var productLocale:  Observable<String> { get }
+    var imageDatas: Observable<[ProductImage]?> { get }
     
+    func fetchProductImageCount() -> Int
     func customDate() -> String
     func customStockText() -> String
     func customPriceText(_ price: Double?) -> String
@@ -22,17 +26,21 @@ protocol DetailViewModel: DetailViewModelInput, DetailViewModelOutput { }
 
 final class DefaultDetailViewModel: DetailViewModel {
     var product: Observable<Product?> = Observable(nil)
+    var imageDatas: Observable<[ProductImage]?> = Observable([])
     var productLocale: Observable<String> = Observable("")
     
     private let fetchLocationDataUseCase: FetchLocationDataUseCase
     private let fetchProductDetailUseCase: FetchProductDetailUseCase
+    private let loadImageUseCase: LoadImageUseCase
     
     init(id: Int,
          fetchLocationDataUseCase: FetchLocationDataUseCase,
-         fetchProductDetailUseCase: FetchProductDetailUseCase
+         fetchProductDetailUseCase: FetchProductDetailUseCase,
+         loadImageUseCase: LoadImageUseCase
     ) {
         self.fetchLocationDataUseCase = fetchLocationDataUseCase
         self.fetchProductDetailUseCase = fetchProductDetailUseCase
+        self.loadImageUseCase = loadImageUseCase
         
         fetchLocation(id: id)
         fetchProductDetailInfo(id: id)
@@ -44,6 +52,7 @@ final class DefaultDetailViewModel: DetailViewModel {
             case .success(let product):
                 DispatchQueue.main.async {
                     self.product.value = product
+                    self.imageDatas.value = product.images
                 }
             case .failure(let error):
                 //TODO: - Alert
@@ -54,7 +63,24 @@ final class DefaultDetailViewModel: DetailViewModel {
     
     private func fetchLocation(id: Int) {
         fetchLocationDataUseCase.fetch(id: id) { location in
-            self.productLocale.value = location?.subLocality ?? "미등록"
+            self.productLocale.value = location?.subLocality ?? "위치 미등록"
+        }
+    }
+    
+    func fetchProductImageCount() -> Int {
+        return imageDatas.value?.count ?? .zero
+    }
+    
+    func fetchImageData(index: Int, completion: @escaping (Data) -> Void) {
+        guard let url = imageDatas.value?[index].url else { return }
+        
+        loadImageUseCase.loadImage(thumbnail: url) { result in
+            switch result {
+            case .success(let data):
+                completion(data)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     

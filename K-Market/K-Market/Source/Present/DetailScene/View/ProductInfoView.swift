@@ -141,7 +141,7 @@ extension ProductInfoView {
             infoStackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
             infoStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 20),
             infoStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20),
-            infoStackView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.15),
+            infoStackView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.2),
             
             topSeparatorLine.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 5),
             topSeparatorLine.heightAnchor.constraint(equalToConstant: 1),
