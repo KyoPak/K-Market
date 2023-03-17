@@ -46,7 +46,7 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
             if let subLocale = data?.subLocality {
                 self?.productLocale.value = subLocale
             } else {
-                self?.productLocale.value = "미등록"
+                self?.productLocale.value = "위치 미등록"
             }
         }
     }
