@@ -8,6 +8,15 @@
 import UIKit
 
 final class DetailViewController: UIViewController {
+    private let viewModel: DetailViewModel
+    
+    private let separatorLine: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .systemGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
@@ -37,14 +46,11 @@ final class DetailViewController: UIViewController {
     private let priceLabel = UILabel(font: .systemFont(ofSize: 15))
     private let salePriceLabel = UILabel(font: .systemFont(ofSize: 15))
     
-    private let descriptionTextView: UITextView = {
+    private let descriptionView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
         textView.isScrollEnabled = true
-        textView.layer.borderWidth = 1
-        textView.layer.cornerRadius = 10
         textView.font = UIFont.systemFont(ofSize: 20)
-        textView.layer.borderColor = UIColor.systemGray4.cgColor
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -79,7 +85,17 @@ final class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupView()
+        setupConstraint()
+    }
+    
+    init(viewModel: DetailViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -91,5 +107,29 @@ extension DetailViewController {
         [locationLabel, dateLabel].forEach(subInfoStackView.addArrangedSubview(_:))
         [mainInfoStackView, subInfoStackView].forEach(infoStackView.addArrangedSubview(_:))
         view.addSubview(infoStackView)
+    }
+    
+    private func setupConstraint() {
+        let safeArea = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.widthAnchor.constraint(equalTo: safeArea.widthAnchor),
+            collectionView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.4),
+            collectionView.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+                
+            infoStackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 10),
+            infoStackView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            infoStackView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            
+            separatorLine.topAnchor.constraint(equalTo: infoStackView.bottomAnchor, constant: 3),
+            separatorLine.heightAnchor.constraint(equalToConstant: 1),
+            separatorLine.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.8),
+            separatorLine.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            
+            descriptionView.topAnchor.constraint(equalTo: separatorLine.bottomAnchor, constant: 10),
+            descriptionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
+            descriptionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
+            descriptionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -10),
+        ])
     }
 }
