@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AddViewModelInput {
-    func addImageData(_ data: Data)
+    func addImageData(_ data: Data?)
     func postProduct(completion: @escaping (Bool) -> Void)
     func setupProduct(
         name: String?,
@@ -22,13 +22,16 @@ protocol AddViewModelInput {
 
 protocol AddViewModelOutput {
     var userSubLocale: String { get }
+    var imageDatas: Observable<[Data]> { get }
+    
+    func fetchImageData(index: Int) -> Data
 }
 
 protocol AddViewModel: AddViewModelInput, AddViewModelOutput { }
 
 final class DefaultAddViewModel: AddViewModel {
-    private var imageData: [Data] = []
     private var product: PostProduct?
+    private(set) var imageDatas: Observable<[Data]> = Observable([])
     private(set) var userSubLocale: String
     
     private let fetchProductDetailUseCase: FetchProductDetailUseCase
@@ -47,8 +50,13 @@ final class DefaultAddViewModel: AddViewModel {
         self.loadImageUseCase = loadImageUseCase
     }
     
-    func addImageData(_ data: Data) {
-        imageData.append(data)
+    func addImageData(_ data: Data?) {
+        guard let data = data else { return }
+        imageDatas.value.append(data)
+    }
+    
+    func fetchImageData(index: Int) -> Data {
+        return imageDatas.value[index]
     }
     
     func setupProduct(
@@ -75,7 +83,7 @@ final class DefaultAddViewModel: AddViewModel {
     func postProduct(completion: @escaping (Bool) -> Void) {
         guard let product = product else { return }
         
-        postProductUseCase.postData(postData: product, imageDatas: imageData) { result in
+        postProductUseCase.postData(postData: product, imageDatas: imageDatas.value) { result in
             switch result {
             case .success(let check):
                 if !check {

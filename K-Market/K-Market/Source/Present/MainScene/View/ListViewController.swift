@@ -61,7 +61,7 @@ extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailView = DetailViewController(viewModel: DefaultDetailViewModel(
             id: viewModel.productList.value[indexPath.item].id,
-            fetchLocationDataUseCase: DefaultFetchLocationDataUseCase(locationRepository: DefualtLocationRepository(service: DefaultFireBaseService())),
+            fetchLocationUseCase: DefaultFetchLocationDataUseCase(locationRepository: DefualtLocationRepository(service: DefaultFireBaseService())),
             fetchProductDetailUseCase: DefaultFetchProductDetailUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
             loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())))
         )
@@ -74,7 +74,12 @@ extension ListViewController: UICollectionViewDelegate {
 // MARK: - Action
 extension ListViewController {
     @objc private func addButtonTapped() {
+        let addViewModel = DefaultAddViewModel(userSubLocale: viewModel.userSubLocale.value,fetchProductDetailUseCase: DefaultFetchProductDetailUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())), postProductUseCase: DefaultPostProductUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())), loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())))
         
+        let addViewController = AddViewController(viewModel: addViewModel)
+        
+        addViewController.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(addViewController, animated: true)
     }
 }
 
@@ -132,7 +137,7 @@ extension ListViewController {
                         networkService: DefaultNetworkSevice()
                     )
                 ),
-                fetchLocationDataUseCase: DefaultFetchLocationDataUseCase(
+                fetchLocationUseCase: DefaultFetchLocationDataUseCase(
                     locationRepository: DefualtLocationRepository(
                         service: DefaultFireBaseService()
                     )

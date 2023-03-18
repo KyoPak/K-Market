@@ -19,7 +19,7 @@ final class AddView: UIView {
     private let viewModel: AddViewModel
     private var currency = Product.CurrencyUnit.KRW
     
-    private let collectionView: UICollectionView = {
+    private(set) var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
@@ -105,6 +105,13 @@ final class AddView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MARK: - Action, Method
+extension AddView {
+    @objc private func segmentedControlTapped(sender: UISegmentedControl) {
+        currency = sender.selectedSegmentIndex == .zero ? .KRW : .USD
+    }
     
     func packageData() {
         viewModel.setupProduct(
@@ -115,12 +122,6 @@ final class AddView: UIView {
             description: descriptionTextView.text,
             currencyIndex: currencySegmentedControl.selectedSegmentIndex
         )
-    }
-}
-
-extension AddView {
-    @objc private func segmentedControlTapped(sender: UISegmentedControl) {
-        currency = sender.selectedSegmentIndex == .zero ? .KRW : .USD
     }
 }
 
@@ -207,4 +208,3 @@ extension AddView {
         ])
     }
 }
-

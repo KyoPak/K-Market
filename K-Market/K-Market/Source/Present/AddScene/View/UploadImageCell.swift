@@ -14,30 +14,15 @@ protocol UploadImageCellDelegate: AnyObject {
 final class UploadImageCell: UICollectionViewCell {
     weak var buttonDelegate: UploadImageCellDelegate?
 
-    private let stackView = UIStackView(
+    private let imageStackView = UIStackView(
         axis: .horizontal,
         spacing: 10,
         alignment: .fill,
         distribution: .fillEqually
     )
     
-    func createButton() -> UIButton {
-        let button = UIButton()
-        button.tintColor = .label
-        button.backgroundColor = .systemGray5
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.addTarget(self, action: #selector(addImageButtonTapped), for: .touchUpInside)
-        return button
-    }
-    
-    func createImageView() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
-        return imageView
-    }
-
     override func prepareForReuse() {
-        self.stackView.arrangedSubviews.forEach { view in
+        self.imageStackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
     }
@@ -53,9 +38,29 @@ final class UploadImageCell: UICollectionViewCell {
     }
 }
 
+// MARK: - Create View
+extension UploadImageCell {
+    func createButton() {
+        let button = UIButton()
+        button.tintColor = .label
+        button.backgroundColor = .systemGray5
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        
+        imageStackView.addArrangedSubview(button)
+    }
+    
+    func createImageView(data: Data) {
+        let imageView = UIImageView(image: UIImage(data: data))
+        imageView.contentMode = .scaleToFill
+    
+        imageStackView.addArrangedSubview(imageView)
+    }
+}
+
 // MARK: - Action
 extension UploadImageCell {
-    @objc func addImageButtonTapped() {
+    @objc func addButtonTapped() {
         buttonDelegate?.uploadImageCell(true)
     }
 }
@@ -63,15 +68,15 @@ extension UploadImageCell {
 // MARK: - Constraints
 extension UploadImageCell {
     private func setupView() {
-        contentView.addSubview(stackView)
+        contentView.addSubview(imageStackView)
     }
     
     private func setupStackViewConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            imageStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            imageStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
 }
