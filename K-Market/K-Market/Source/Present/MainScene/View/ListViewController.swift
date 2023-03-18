@@ -45,6 +45,12 @@ final class ListViewController: UIViewController {
         setupCoreLocationAuthority()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.clear()
+        viewModel.fetchProductList(pageNo: 1, itemsPerPage: 15)
+    }
+    
     init(viewModel: ListViewModel) {
         self.viewModel = viewModel
         headerView = HeaderView(viewModel: viewModel)
