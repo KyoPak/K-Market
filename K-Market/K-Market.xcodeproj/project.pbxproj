@@ -28,7 +28,7 @@
 		3C23C2FC29BB26F600802CEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C23C2FB29BB26F500802CEC /* GoogleService-Info.plist */; };
 		3C23C2FF29BB290700802CEC /* FireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C2FE29BB290700802CEC /* FireBaseService.swift */; };
 		3C23C30129BB2F7A00802CEC /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30029BB2F7A00802CEC /* LocationRepository.swift */; };
-		3C23C30529BC13E100802CEC /* DefualtLocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30429BC13E100802CEC /* DefualtLocationRepository.swift */; };
+		3C23C30529BC13E100802CEC /* DefaultLocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30429BC13E100802CEC /* DefaultLocationRepository.swift */; };
 		3C23C30829BC1D1000802CEC /* FetchProductListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30729BC1D1000802CEC /* FetchProductListUseCase.swift */; };
 		3C23C30E29BC1EE000802CEC /* DecodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30D29BC1EE000802CEC /* DecodeManager.swift */; };
 		3C28EF1829C0B86D00F60F2D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C28EF1729C0B86D00F60F2D /* UILabel+Extension.swift */; };
@@ -98,7 +98,7 @@
 		3C23C2FB29BB26F500802CEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3C23C2FE29BB290700802CEC /* FireBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseService.swift; sourceTree = "<group>"; };
 		3C23C30029BB2F7A00802CEC /* LocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepository.swift; sourceTree = "<group>"; };
-		3C23C30429BC13E100802CEC /* DefualtLocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefualtLocationRepository.swift; sourceTree = "<group>"; };
+		3C23C30429BC13E100802CEC /* DefaultLocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationRepository.swift; sourceTree = "<group>"; };
 		3C23C30729BC1D1000802CEC /* FetchProductListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProductListUseCase.swift; sourceTree = "<group>"; };
 		3C23C30D29BC1EE000802CEC /* DecodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeManager.swift; sourceTree = "<group>"; };
 		3C28EF1729C0B86D00F60F2D /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -287,7 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				3C23C2E629BB12C700802CEC /* DefaultProductRepository.swift */,
-				3C23C30429BC13E100802CEC /* DefualtLocationRepository.swift */,
+				3C23C30429BC13E100802CEC /* DefaultLocationRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -656,7 +656,7 @@
 				3CB7C83329BC8986001E7992 /* ListCollectionViewCell.swift in Sources */,
 				3CB7C83529BC8993001E7992 /* GridCollectionViewCell.swift in Sources */,
 				3CB7C83729BC8C57001E7992 /* ProductCellViewModel.swift in Sources */,
-				3C23C30529BC13E100802CEC /* DefualtLocationRepository.swift in Sources */,
+				3C23C30529BC13E100802CEC /* DefaultLocationRepository.swift in Sources */,
 				3CFA1E0929C576B80024BA3C /* UITextField+Extension.swift in Sources */,
 				3CFA1E0729C5667A0024BA3C /* AddView.swift in Sources */,
 				3C23C2E729BB12C700802CEC /* DefaultProductRepository.swift in Sources */,

@@ -21,6 +21,7 @@ protocol AddViewModelInput {
 }
 
 protocol AddViewModelOutput {
+    var userLocale: String { get }
     var userSubLocale: String { get }
     var imageDatas: Observable<[Data]> { get }
     
@@ -31,22 +32,28 @@ protocol AddViewModel: AddViewModelInput, AddViewModelOutput { }
 
 final class DefaultAddViewModel: AddViewModel {
     private var product: PostProduct?
-    private(set) var imageDatas: Observable<[Data]> = Observable([])
+    private(set) var userLocale: String
     private(set) var userSubLocale: String
+    private(set) var imageDatas: Observable<[Data]> = Observable([])
     
     private let fetchProductDetailUseCase: FetchProductDetailUseCase
     private let postProductUseCase: PostProductUseCase
+    private let postLocationUseCase: PostLocationUseCase
     private let loadImageUseCase: LoadImageUseCase
     
     init(
-        userSubLocale: String,
+        locale: String,
+        subLocale: String,
         fetchProductDetailUseCase: FetchProductDetailUseCase,
         postProductUseCase: PostProductUseCase,
+        postLocationUseCase: PostLocationUseCase,
         loadImageUseCase: LoadImageUseCase
     ) {
-        self.userSubLocale = userSubLocale
+        self.userLocale = locale
+        self.userSubLocale = subLocale
         self.fetchProductDetailUseCase = fetchProductDetailUseCase
         self.postProductUseCase = postProductUseCase
+        self.postLocationUseCase = postLocationUseCase
         self.loadImageUseCase = loadImageUseCase
     }
     
