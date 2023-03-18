@@ -64,7 +64,7 @@ final class DefualtAddViewModel: AddViewModel {
     func postProduct(completion: @escaping (Bool) -> Void) {
         guard let product = product else { return }
         
-        postProductUseCase.postData(productData: product, imageDatas: imageData) { result in
+        postProductUseCase.postData(postData: product, imageDatas: imageData) { result in
             switch result {
             case .success(let check):
                 if !check {
