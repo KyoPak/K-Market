@@ -45,14 +45,18 @@ struct PostDataRequest: CustomRequest {
     var path: String?
     var query: [URLQueryItem]?
     var httpMethod: HTTPMethod = .POST
+    private let postData: PostProduct
+    private let imageDatas: [Data]
     
-    init() {
+    init(postData: PostProduct, imagesDatas: [Data]) {
         self.path = "/api/products"
+        self.postData = postData
+        self.imageDatas = imagesDatas
     }
     
-    func createRequest(data: PostProduct, imageDatas: [Data]) -> URLRequest? {
+    func createRequest() -> URLRequest? {
         let encoder = JSONEncoder()
-        guard let data = try? encoder.encode(data) else { return nil }
+        guard let data = try? encoder.encode(postData) else { return nil }
         
         guard let url = url else { return nil }
         
