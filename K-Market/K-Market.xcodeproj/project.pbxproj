@@ -53,6 +53,8 @@
 		3CB7C83529BC8993001E7992 /* GridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83429BC8993001E7992 /* GridCollectionViewCell.swift */; };
 		3CB7C83729BC8C57001E7992 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83629BC8C57001E7992 /* ProductCellViewModel.swift */; };
 		3CB7C83929BC8E5E001E7992 /* LoadImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83829BC8E5E001E7992 /* LoadImageUseCase.swift */; };
+		3CFA1E0729C5667A0024BA3C /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0629C5667A0024BA3C /* AddView.swift */; };
+		3CFA1E0929C576B80024BA3C /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,8 @@
 		3CB7C83429BC8993001E7992 /* GridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCollectionViewCell.swift; sourceTree = "<group>"; };
 		3CB7C83629BC8C57001E7992 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
 		3CB7C83829BC8E5E001E7992 /* LoadImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageUseCase.swift; sourceTree = "<group>"; };
+		3CFA1E0629C5667A0024BA3C /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +282,7 @@
 				3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */,
 				3C28EF1729C0B86D00F60F2D /* UILabel+Extension.swift */,
 				3C4015A329C41C51007448A8 /* UIStackView+Extension.swift */,
+				3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				3C4015B129C4AF4B007448A8 /* AddViewController.swift */,
+				3CFA1E0629C5667A0024BA3C /* AddView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -603,6 +609,8 @@
 				3CB7C83529BC8993001E7992 /* GridCollectionViewCell.swift in Sources */,
 				3CB7C83729BC8C57001E7992 /* ProductCellViewModel.swift in Sources */,
 				3C23C30529BC13E100802CEC /* DefualtLocationRepository.swift in Sources */,
+				3CFA1E0929C576B80024BA3C /* UITextField+Extension.swift in Sources */,
+				3CFA1E0729C5667A0024BA3C /* AddView.swift in Sources */,
 				3C23C2E729BB12C700802CEC /* DefaultProductRepository.swift in Sources */,
 				3C13A80429B9CAE800E2FB03 /* RequestByUseCase.swift in Sources */,
 				3C13A80C29B9CC9A00E2FB03 /* NetworkError.swift in Sources */,
