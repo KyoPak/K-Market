@@ -35,7 +35,11 @@ extension AddViewController {
     }
     
     @objc func doneButtonTapped() {
-        //TODO: -
+        addView.packageData()
+        viewModel.postProduct { check in
+            // Alert
+            print(check)
+        }
     }
 }
 

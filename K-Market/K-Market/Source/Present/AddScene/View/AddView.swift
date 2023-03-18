@@ -105,6 +105,17 @@ final class AddView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func packageData() {
+        viewModel.setupProduct(
+            name: nameTextField.text,
+            price: priceTextField.text,
+            salePrice: salePriceTextField.text,
+            stock: stockTextField.text,
+            description: descriptionTextView.text,
+            currencyIndex: currencySegmentedControl.selectedSegmentIndex
+        )
+    }
 }
 
 extension AddView {
