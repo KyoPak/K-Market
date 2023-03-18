@@ -70,27 +70,19 @@ struct PostDataRequest: CustomRequest {
         var httpBody = Data()
         httpBody.append(convertDataForm(named: "params", value: data, boundary: boundary))
         
-        request.httpBody = createBody(&httpBody, boundary: boundary, imageDatas: imageDatas)
+        for data in imageDatas {
+            httpBody.append(convertFileDataForm(fieldName: "images",
+                                                fileName: "imagesName",
+                                                mimeType: "multipart/form-data",
+                                                fileData: data,
+                                                boundary: boundary))
+        }
+        
+        httpBody.appendStringData("--\(boundary)--")
+        request.httpBody = httpBody
         
         return request
     }
-    
-    private func createBody(_ body: inout Data, boundary: String, imageDatas: [Data]) -> Data {
-        for imageData in imageDatas {
-            body.append(convertFileDataForm(
-                fieldName: "images",
-                fileName: "imagesName",
-                mimeType: "multipart/form-data",
-                fileData: imageData,
-                boundary: boundary)
-            )
-        }
-        
-        body.appendStringData("--\(boundary)--")
-        
-        return body
-    }
-    
     
     private func setupIdentifier(request: inout URLRequest) -> URLRequest {
         request.setValue(
