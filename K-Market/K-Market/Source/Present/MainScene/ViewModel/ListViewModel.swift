@@ -26,13 +26,13 @@ protocol ListViewModel: ListViewModelInput, ListViewModelOutput  { }
 
 final class DefaultListViewModel: ListViewModel {
     private(set) var userLocale = ""
-    private let fetchUseCase: FetchProductUseCase
+    private let fetchUseCase: FetchProductListUseCase
     
     var productList = Observable<[Product]>([])
     var userSubLocale = Observable<String>("")
     var layoutStatus = Observable<CollectionType>(.list)
     
-    init(fetchUseCase: FetchProductUseCase) {
+    init(fetchUseCase: FetchProductListUseCase) {
         self.fetchUseCase = fetchUseCase
         fetchProductList(pageNo: 1, itemsPerPage: 15)
     }

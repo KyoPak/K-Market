@@ -1,5 +1,5 @@
 //
-//  FetchLocationDataUseCase.swift
+//  FetchLocationUseCase.swift
 //  K-Market
 //
 //  Created by parkhyo on 2023/03/11.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FetchLocationDataUseCase {
+protocol FetchLocationUseCase {
     func fetch(id: Int, completion: @escaping (LocationData?) -> Void)
 }
 
@@ -19,7 +19,7 @@ final class DefaultFetchLocationDataUseCase {
     }
 }
 
-extension DefaultFetchLocationDataUseCase: FetchLocationDataUseCase {
+extension DefaultFetchLocationDataUseCase: FetchLocationUseCase {
     func fetch(id: Int, completion: @escaping (LocationData?) -> Void) {
         locationRepository.load(id) { data in
             completion(data)

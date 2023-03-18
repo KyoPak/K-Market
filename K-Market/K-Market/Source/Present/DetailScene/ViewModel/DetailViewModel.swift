@@ -29,16 +29,16 @@ final class DefaultDetailViewModel: DetailViewModel {
     var imageDatas: Observable<[ProductImage]?> = Observable([])
     var productLocale: Observable<String> = Observable("")
     
-    private let fetchLocationDataUseCase: FetchLocationDataUseCase
+    private let fetchLocationUseCase: FetchLocationUseCase
     private let fetchProductDetailUseCase: FetchProductDetailUseCase
     private let loadImageUseCase: LoadImageUseCase
     
     init(id: Int,
-         fetchLocationDataUseCase: FetchLocationDataUseCase,
+         fetchLocationUseCase: FetchLocationUseCase,
          fetchProductDetailUseCase: FetchProductDetailUseCase,
          loadImageUseCase: LoadImageUseCase
     ) {
-        self.fetchLocationDataUseCase = fetchLocationDataUseCase
+        self.fetchLocationUseCase = fetchLocationUseCase
         self.fetchProductDetailUseCase = fetchProductDetailUseCase
         self.loadImageUseCase = loadImageUseCase
         
@@ -62,7 +62,7 @@ final class DefaultDetailViewModel: DetailViewModel {
     }
     
     private func fetchLocation(id: Int) {
-        fetchLocationDataUseCase.fetch(id: id) { location in
+        fetchLocationUseCase.fetch(id: id) { location in
             self.productLocale.value = location?.subLocality ?? "위치 미등록"
         }
     }
