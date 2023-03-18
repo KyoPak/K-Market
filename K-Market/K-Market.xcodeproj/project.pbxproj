@@ -62,6 +62,7 @@
 		3CFA1E1B29C5FA3C0024BA3C /* DetailFetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E1A29C5FA3C0024BA3C /* DetailFetchRequest.swift */; };
 		3CFA1E1D29C5FA5D0024BA3C /* ImageLoadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E1C29C5FA5D0024BA3C /* ImageLoadRequest.swift */; };
 		3CFA1E1F29C5FA750024BA3C /* PostDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E1E29C5FA750024BA3C /* PostDataRequest.swift */; };
+		3CFA1E2A29C601C80024BA3C /* PostLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E2929C601C80024BA3C /* PostLocationUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		3CFA1E1A29C5FA3C0024BA3C /* DetailFetchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFetchRequest.swift; sourceTree = "<group>"; };
 		3CFA1E1C29C5FA5D0024BA3C /* ImageLoadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadRequest.swift; sourceTree = "<group>"; };
 		3CFA1E1E29C5FA750024BA3C /* PostDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataRequest.swift; sourceTree = "<group>"; };
+		3CFA1E2929C601C80024BA3C /* PostLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +337,7 @@
 				3CA9B6F929BCA22200C3B28D /* FetchLocationUseCase.swift */,
 				3C4015AA29C44775007448A8 /* FetchProductDetailUseCase.swift */,
 				3CFA1E1329C596650024BA3C /* PostProductUseCase.swift */,
+				3CFA1E2929C601C80024BA3C /* PostLocationUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				3C23C30E29BC1EE000802CEC /* DecodeManager.swift in Sources */,
 				3CA9B6FA29BCA22200C3B28D /* FetchLocationUseCase.swift in Sources */,
 				3C13A80029B9BAA900E2FB03 /* CustomRequest.swift in Sources */,
+				3CFA1E2A29C601C80024BA3C /* PostLocationUseCase.swift in Sources */,
 				3C23C2FF29BB290700802CEC /* FireBaseService.swift in Sources */,
 				3C23C30129BB2F7A00802CEC /* LocationRepository.swift in Sources */,
 				3C4015B429C4AF63007448A8 /* AddViewModel.swift in Sources */,
