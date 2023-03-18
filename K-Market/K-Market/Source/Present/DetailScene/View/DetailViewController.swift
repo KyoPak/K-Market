@@ -121,9 +121,9 @@ extension DetailViewController: UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: ImageCollectionViewCell.identifier,
+            withReuseIdentifier: DetailImageCell.identifier,
             for: indexPath
-        ) as? ImageCollectionViewCell else {
+        ) as? DetailImageCell else {
             let errorCell = UICollectionViewCell()
             return errorCell
         }
@@ -153,8 +153,8 @@ extension DetailViewController {
     
     private func registerCell() {
         collectionView.register(
-            ImageCollectionViewCell.self,
-            forCellWithReuseIdentifier: ImageCollectionViewCell.identifier
+            DetailImageCell.self,
+            forCellWithReuseIdentifier: DetailImageCell.identifier
         )
     }
     

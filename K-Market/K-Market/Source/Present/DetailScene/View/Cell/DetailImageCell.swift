@@ -1,5 +1,5 @@
 //
-//  ImageCollectionViewCell.swift
+//  DetailImageCell.swift
 //  K-Market
 //
 //  Created by parkhyo on 2023/03/17.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ImageCollectionViewCell: UICollectionViewCell {
+final class DetailImageCell: UICollectionViewCell {
     let productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -32,7 +32,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
 }
 
 // MARK: - UIConstraints
-extension ImageCollectionViewCell {
+extension DetailImageCell {
     private func setupView() {
         contentView.addSubview(productImageView)
     }
@@ -47,4 +47,4 @@ extension ImageCollectionViewCell {
     }
 }
 
-extension ImageCollectionViewCell: UseIdentifiable { }
+extension DetailImageCell: UseIdentifiable { }
