@@ -56,6 +56,7 @@
 		3CFA1E0729C5667A0024BA3C /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0629C5667A0024BA3C /* AddView.swift */; };
 		3CFA1E0929C576B80024BA3C /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */; };
 		3CFA1E0C29C57F560024BA3C /* UploadImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0B29C57F560024BA3C /* UploadImageCell.swift */; };
+		3CFA1E1229C58E5B0024BA3C /* PostProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E1129C58E5B0024BA3C /* PostProduct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		3CFA1E0629C5667A0024BA3C /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		3CFA1E0B29C57F560024BA3C /* UploadImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UploadImageCell.swift; path = "K-Market/Source/Present/AddScene/View/UploadImageCell.swift"; sourceTree = SOURCE_ROOT; };
+		3CFA1E1129C58E5B0024BA3C /* PostProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProduct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 				3C13A7F829B9B1B600E2FB03 /* Product.swift */,
 				3C13A7FA29B9B3AB00E2FB03 /* ProductPage.swift */,
 				3C13A7FC29B9B6BC00E2FB03 /* LocationData.swift */,
+				3CFA1E1129C58E5B0024BA3C /* PostProduct.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				3C40159E29C41769007448A8 /* DetailViewController.swift in Sources */,
 				3CB7C83129BC88B6001E7992 /* CollectionCell.swift in Sources */,
 				3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */,
+				3CFA1E1229C58E5B0024BA3C /* PostProduct.swift in Sources */,
 				3C28EF1829C0B86D00F60F2D /* UILabel+Extension.swift in Sources */,
 				3C4015AD29C4492F007448A8 /* ProductInfoView.swift in Sources */,
 				3C23C2E129BB027B00802CEC /* ProductRepository.swift in Sources */,
