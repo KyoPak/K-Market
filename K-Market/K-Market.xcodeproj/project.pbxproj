@@ -58,6 +58,7 @@
 		3CFA1E0C29C57F560024BA3C /* UploadImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0B29C57F560024BA3C /* UploadImageCell.swift */; };
 		3CFA1E1229C58E5B0024BA3C /* PostProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E1129C58E5B0024BA3C /* PostProduct.swift */; };
 		3CFA1E1429C596650024BA3C /* PostProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E1329C596650024BA3C /* PostProductUseCase.swift */; };
+		3CFA1E1629C5F25B0024BA3C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E1529C5F25B0024BA3C /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		3CFA1E0B29C57F560024BA3C /* UploadImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UploadImageCell.swift; path = "K-Market/Source/Present/AddScene/View/UploadImageCell.swift"; sourceTree = SOURCE_ROOT; };
 		3CFA1E1129C58E5B0024BA3C /* PostProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProduct.swift; sourceTree = "<group>"; };
 		3CFA1E1329C596650024BA3C /* PostProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProductUseCase.swift; sourceTree = "<group>"; };
+		3CFA1E1529C5F25B0024BA3C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +292,7 @@
 				3C28EF1729C0B86D00F60F2D /* UILabel+Extension.swift */,
 				3C4015A329C41C51007448A8 /* UIStackView+Extension.swift */,
 				3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */,
+				3CFA1E1529C5F25B0024BA3C /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				3C23C2E129BB027B00802CEC /* ProductRepository.swift in Sources */,
 				3CFA1E0C29C57F560024BA3C /* UploadImageCell.swift in Sources */,
 				3CB7C82E29BC72B3001E7992 /* LocationCollectionViewCell.swift in Sources */,
+				3CFA1E1629C5F25B0024BA3C /* UIImage+Extension.swift in Sources */,
 				3C4015A729C43D7A007448A8 /* DetailImageCell.swift in Sources */,
 				3CB7C82529BC31F4001E7992 /* ListViewModel.swift in Sources */,
 				3CA9B6FD29BCAB2700C3B28D /* UseIdentifiable.swift in Sources */,
