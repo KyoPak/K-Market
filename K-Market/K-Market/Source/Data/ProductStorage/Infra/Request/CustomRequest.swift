@@ -13,6 +13,7 @@ protocol CustomRequest {
     var query: [URLQueryItem]? { get }
     var httpMethod: HTTPMethod { get }
     var url: URL? { get }
+    
     func createRequest() -> URLRequest?
     func createRequest(data: PostProduct, imageDatas: [Data?]) -> URLRequest?
 }

@@ -1,45 +1,11 @@
 //
-//  RequestByUseCase.swift
+//  PostDataRequest.swift
 //  K-Market
 //
-//  Created by parkhyo on 2023/03/09.
+//  Created by parkhyo on 2023/03/18.
 //
 
 import Foundation
-
-struct ListFetchRequest: CustomRequest {
-    var path: String? = "/api/products"
-    var query: [URLQueryItem]?
-    var httpMethod: HTTPMethod = .GET
-    
-    init(pageNo: Int, itemsPerPage: Int) {
-        query = [
-            URLQueryItem(name: "page_no", value: String(pageNo)),
-            URLQueryItem(name: "items_per_page", value: String(itemsPerPage))
-        ]
-    }
-}
-
-struct DetailFetchRequest: CustomRequest {
-    var path: String?
-    var query: [URLQueryItem]?
-    var httpMethod: HTTPMethod = .GET
-    
-    init(id: Int) {
-        self.path = "/api/products/\(id)"
-    }
-}
-
-struct ImageLoadRequest: CustomRequest {
-    var path: String?
-    var query: [URLQueryItem]?
-    var httpMethod: HTTPMethod = .GET
-    var baseURL: String?
-    
-    init(thumbnail: String) {
-        baseURL = thumbnail
-    }
-}
 
 struct PostDataRequest: CustomRequest {
     var path: String?
@@ -71,11 +37,13 @@ struct PostDataRequest: CustomRequest {
         httpBody.append(convertDataForm(named: "params", value: data, boundary: boundary))
         
         for data in imageDatas {
-            httpBody.append(convertFileDataForm(fieldName: "images",
-                                                fileName: "imagesName",
-                                                mimeType: "multipart/form-data",
-                                                fileData: data,
-                                                boundary: boundary))
+            httpBody.append(convertFileDataForm(
+                fieldName: "images",
+                fileName: "imagesName",
+                mimeType: "multipart/form-data",
+                fileData: data,
+                boundary: boundary)
+            )
         }
         
         httpBody.appendStringData("--\(boundary)--")
@@ -111,7 +79,9 @@ struct PostDataRequest: CustomRequest {
     ) -> Data {
         var data = Data()
         data.appendStringData("--\(boundary)\r\n")
-        data.appendStringData("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
+        data.appendStringData(
+            "Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n"
+        )
         data.appendStringData("Content-Type: \(mimeType)\r\n\r\n")
         data.append(fileData)
         data.appendStringData("\r\n")
