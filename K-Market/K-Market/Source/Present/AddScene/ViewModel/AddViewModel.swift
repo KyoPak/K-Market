@@ -89,6 +89,7 @@ final class DefaultAddViewModel: AddViewModel {
                 if !check {
                     print(NetworkError.data)
                 }
+                completion(check)
             case .failure(let error):
                 print(error)
             }

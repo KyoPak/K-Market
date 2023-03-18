@@ -48,7 +48,11 @@ extension AddViewController {
     @objc func doneButtonTapped() {
         addView.packageData()
         viewModel.postProduct { check in
-            // Alert
+            if check {
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
             print(check)
         }
     }
@@ -87,10 +91,12 @@ extension AddViewController: UINavigationControllerDelegate, UIImagePickerContro
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
     ) {
         if let image = info[.editedImage] as? UIImage {
-            viewModel.addImageData(image.pngData())
+            let data = image.resize(expectedSizeInKb: 300)
+            viewModel.addImageData(data)
         } else {
             if let image = info[.originalImage] as? UIImage {
-                viewModel.addImageData(image.pngData())
+                let data = image.resize(expectedSizeInKb: 300)
+                viewModel.addImageData(data)
             }
         }
         
