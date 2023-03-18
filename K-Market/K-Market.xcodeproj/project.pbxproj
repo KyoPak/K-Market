@@ -38,7 +38,7 @@
 		3C40159E29C41769007448A8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C40159D29C41769007448A8 /* DetailViewController.swift */; };
 		3C4015A229C41794007448A8 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015A129C41794007448A8 /* DetailViewModel.swift */; };
 		3C4015A429C41C51007448A8 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015A329C41C51007448A8 /* UIStackView+Extension.swift */; };
-		3C4015A729C43D7A007448A8 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015A629C43D7A007448A8 /* ImageCollectionViewCell.swift */; };
+		3C4015A729C43D7A007448A8 /* DetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015A629C43D7A007448A8 /* DetailImageCell.swift */; };
 		3C4015AB29C44775007448A8 /* FetchProductDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015AA29C44775007448A8 /* FetchProductDetailUseCase.swift */; };
 		3C4015AD29C4492F007448A8 /* ProductInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015AC29C4492F007448A8 /* ProductInfoView.swift */; };
 		3C4015B229C4AF4B007448A8 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015B129C4AF4B007448A8 /* AddViewController.swift */; };
@@ -55,6 +55,7 @@
 		3CB7C83929BC8E5E001E7992 /* LoadImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83829BC8E5E001E7992 /* LoadImageUseCase.swift */; };
 		3CFA1E0729C5667A0024BA3C /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0629C5667A0024BA3C /* AddView.swift */; };
 		3CFA1E0929C576B80024BA3C /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */; };
+		3CFA1E0C29C57F560024BA3C /* UploadImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0B29C57F560024BA3C /* UploadImageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +101,7 @@
 		3C40159D29C41769007448A8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3C4015A129C41794007448A8 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		3C4015A329C41C51007448A8 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
-		3C4015A629C43D7A007448A8 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		3C4015A629C43D7A007448A8 /* DetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCell.swift; sourceTree = "<group>"; };
 		3C4015AA29C44775007448A8 /* FetchProductDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProductDetailUseCase.swift; sourceTree = "<group>"; };
 		3C4015AC29C4492F007448A8 /* ProductInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoView.swift; sourceTree = "<group>"; };
 		3C4015B129C4AF4B007448A8 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 		3CB7C83829BC8E5E001E7992 /* LoadImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageUseCase.swift; sourceTree = "<group>"; };
 		3CFA1E0629C5667A0024BA3C /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		3CFA1E0B29C57F560024BA3C /* UploadImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UploadImageCell.swift; path = "K-Market/Source/Present/AddScene/View/UploadImageCell.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,7 +370,7 @@
 		3C4015A529C43D5C007448A8 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				3C4015A629C43D7A007448A8 /* ImageCollectionViewCell.swift */,
+				3C4015A629C43D7A007448A8 /* DetailImageCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -385,6 +387,7 @@
 		3C4015AF29C4AF0B007448A8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3CFA1E0A29C57F380024BA3C /* Cell */,
 				3C4015B129C4AF4B007448A8 /* AddViewController.swift */,
 				3CFA1E0629C5667A0024BA3C /* AddView.swift */,
 			);
@@ -462,6 +465,14 @@
 				3CB7C83029BC88B6001E7992 /* CollectionCell.swift */,
 				3CB7C83229BC8986001E7992 /* ListCollectionViewCell.swift */,
 				3CB7C83429BC8993001E7992 /* GridCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3CFA1E0A29C57F380024BA3C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3CFA1E0B29C57F560024BA3C /* UploadImageCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -580,8 +591,9 @@
 				3C28EF1829C0B86D00F60F2D /* UILabel+Extension.swift in Sources */,
 				3C4015AD29C4492F007448A8 /* ProductInfoView.swift in Sources */,
 				3C23C2E129BB027B00802CEC /* ProductRepository.swift in Sources */,
+				3CFA1E0C29C57F560024BA3C /* UploadImageCell.swift in Sources */,
 				3CB7C82E29BC72B3001E7992 /* LocationCollectionViewCell.swift in Sources */,
-				3C4015A729C43D7A007448A8 /* ImageCollectionViewCell.swift in Sources */,
+				3C4015A729C43D7A007448A8 /* DetailImageCell.swift in Sources */,
 				3CB7C82529BC31F4001E7992 /* ListViewModel.swift in Sources */,
 				3CA9B6FD29BCAB2700C3B28D /* UseIdentifiable.swift in Sources */,
 				3C4015A429C41C51007448A8 /* UIStackView+Extension.swift in Sources */,

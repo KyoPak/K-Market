@@ -95,6 +95,7 @@ final class AddView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        registerCell()
         setupConstraints()
         registerTextFieldDelegate()
     }
@@ -167,6 +168,10 @@ extension AddView {
             .forEach(productStackView.addArrangedSubview(_:))
         
         [collectionView, productStackView, descriptionTextView].forEach(addSubview(_:))
+    }
+    
+    private func registerCell() {
+        collectionView.register(UploadImageCell.self, forCellWithReuseIdentifier: UploadImageCell.identifier)
     }
     
     private func setupConstraints() {
