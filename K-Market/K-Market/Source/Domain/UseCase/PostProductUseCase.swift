@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PostProductUseCase {
-    func postData(productData: Product, imageDatas: [Data], completion: @escaping (Result<Bool, NetworkError>) -> Void)
+    func postData(postData: PostProduct, imageDatas: [Data], completion: @escaping (Result<Bool, NetworkError>) -> Void)
 }
 
 final class DefaultPostProductUseCase {
@@ -32,8 +32,7 @@ final class DefaultPostProductUseCase {
 }
 
 extension DefaultPostProductUseCase: PostProductUseCase {
-    func postData(productData: Product, imageDatas: [Data], completion: @escaping (Result<Bool, NetworkError>) -> Void) {
-        guard let postData = try? convert(data: productData) else { return }
+    func postData(postData: PostProduct, imageDatas: [Data], completion: @escaping (Result<Bool, NetworkError>) -> Void) {
         
         let request = PostDataRequest(postData: postData, imagesDatas: imageDatas)
         

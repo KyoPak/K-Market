@@ -9,17 +9,26 @@ import Foundation
 
 protocol AddViewModelInput {
     func addImageData(_ data: Data)
-    func setupProduct(_ product: Product)
+    func setupProduct(
+        name: String,
+        price: String,
+        salePrice: String,
+        stock: String,
+        description: String,
+        currency: Product.CurrencyUnit
+    )
     func postProduct(completion: @escaping (Bool) -> Void)
 }
 
-protocol AddViewModelOutput { }
+protocol AddViewModelOutput {
+    
+}
 
 protocol AddViewModel: AddViewModelInput, AddViewModelOutput { }
 
 final class DefualtAddViewModel: AddViewModel {
     private var imageData: [Data] = []
-    private var product: Product?
+    private var product: PostProduct?
     
     private let fetchProductDetailUseCase: FetchProductDetailUseCase
     private let postProductUseCase: PostProductUseCase
@@ -39,8 +48,17 @@ final class DefualtAddViewModel: AddViewModel {
         imageData.append(data)
     }
     
-    func setupProduct(_ product: Product) {
-        self.product = product
+    func setupProduct(name: String, price: String, salePrice: String, stock: String, description: String, currency: Product.CurrencyUnit) {
+        
+        product = PostProduct(
+            name: name,
+            productID: nil,
+            description: description,
+            currency: currency == .KRW ? .KRW : .USD,
+            price: Double(price) ?? .zero,
+            discountedPrice: Double(salePrice) ?? .zero,
+            stock: Int(stock) ?? .zero
+        )
     }
     
     func postProduct(completion: @escaping (Bool) -> Void) {
