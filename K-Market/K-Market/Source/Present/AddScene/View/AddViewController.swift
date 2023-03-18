@@ -8,7 +8,7 @@
 import UIKit
 
 final class AddViewController: UIViewController {
-    private let addView = AddView()
+    private let addView: AddView
     private let viewModel: AddViewModel
     
     override func viewDidLoad() {
@@ -17,7 +17,10 @@ final class AddViewController: UIViewController {
     
     init(viewModel: AddViewModel) {
         self.viewModel = viewModel
+        addView = AddView(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
+        setupNavigation()
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -38,8 +41,9 @@ extension AddViewController {
 
 // MARK: - UI Constraints
 extension AddViewController {
-    func setupNavigation(title: String) {
-        self.title = title
+    func setupNavigation() {
+        title = "상품등록"
+        
         let cancelButtonItem = UIBarButtonItem(
             title: "Cancel",
             style: .plain,
@@ -62,17 +66,7 @@ extension AddViewController {
     }
     
     private func setupView() {
+        view = addView
         view.backgroundColor = .systemBackground
-        view.addSubview(addView)
-    }
-    
-    private func setupConstraint() {
-        let safeArea = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            addView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            addView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            addView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            addView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
-        ])
     }
 }

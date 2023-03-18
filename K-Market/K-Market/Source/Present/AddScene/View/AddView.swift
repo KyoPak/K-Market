@@ -15,7 +15,8 @@ final class AddView: UIView {
         static let stock = "수량"
         static let maxText = 1000
     }
-    
+        
+    private let viewModel: AddViewModel
     private var currency = Product.CurrencyUnit.KRW
     
     private let collectionView: UICollectionView = {
@@ -82,7 +83,7 @@ final class AddView: UIView {
         axis: .horizontal,
         spacing: 10,
         alignment: .fill,
-        distribution: .fill
+        distribution: .fillProportionally
     )
     
     private let productStackView = UIStackView(
@@ -92,8 +93,9 @@ final class AddView: UIView {
         distribution: .fill
     )
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: AddViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
         setupView()
         registerCell()
         setupConstraints()
@@ -155,6 +157,7 @@ extension AddView: UITextFieldDelegate, UITextViewDelegate {
 extension AddView {
     private func setupView() {
         backgroundColor = .systemBackground
+        locationLabel.text = viewModel.userSubLocale
         currencySegmentedControl.addTarget(
             self,
             action: #selector(segmentedControlTapped),

@@ -9,36 +9,39 @@ import Foundation
 
 protocol AddViewModelInput {
     func addImageData(_ data: Data)
-    func setupProduct(
-        name: String,
-        price: String,
-        salePrice: String,
-        stock: String,
-        description: String,
-        currency: Product.CurrencyUnit
-    )
     func postProduct(completion: @escaping (Bool) -> Void)
+    func setupProduct(
+        name: String?,
+        price: String?,
+        salePrice: String?,
+        stock: String?,
+        description: String?,
+        currencyIndex: Int
+    )
 }
 
 protocol AddViewModelOutput {
-    
+    var userSubLocale: String { get }
 }
 
 protocol AddViewModel: AddViewModelInput, AddViewModelOutput { }
 
-final class DefualtAddViewModel: AddViewModel {
+final class DefaultAddViewModel: AddViewModel {
     private var imageData: [Data] = []
     private var product: PostProduct?
+    private(set) var userSubLocale: String
     
     private let fetchProductDetailUseCase: FetchProductDetailUseCase
     private let postProductUseCase: PostProductUseCase
     private let loadImageUseCase: LoadImageUseCase
     
     init(
+        userSubLocale: String,
         fetchProductDetailUseCase: FetchProductDetailUseCase,
         postProductUseCase: PostProductUseCase,
         loadImageUseCase: LoadImageUseCase
     ) {
+        self.userSubLocale = userSubLocale
         self.fetchProductDetailUseCase = fetchProductDetailUseCase
         self.postProductUseCase = postProductUseCase
         self.loadImageUseCase = loadImageUseCase
@@ -48,16 +51,24 @@ final class DefualtAddViewModel: AddViewModel {
         imageData.append(data)
     }
     
-    func setupProduct(name: String, price: String, salePrice: String, stock: String, description: String, currency: Product.CurrencyUnit) {
+    func setupProduct(
+        name: String?,
+        price: String?,
+        salePrice: String?,
+        stock: String?,
+        description: String?,
+        currencyIndex: Int
+    ) {
+        guard let name = name, let price = price, let description = description else { return }
         
         product = PostProduct(
             name: name,
             productID: nil,
             description: description,
-            currency: currency == .KRW ? .KRW : .USD,
+            currency: currencyIndex == .zero ? .KRW : .USD,
             price: Double(price) ?? .zero,
-            discountedPrice: Double(salePrice) ?? .zero,
-            stock: Int(stock) ?? .zero
+            discountedPrice: Double(salePrice ?? ""),
+            stock: Int(stock ?? "")
         )
     }
     
