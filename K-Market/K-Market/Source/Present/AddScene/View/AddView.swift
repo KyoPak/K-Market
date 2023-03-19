@@ -100,12 +100,8 @@ final class AddView: UIView {
     }
 }
 
-// MARK: - Action, Method
+// MARK: - Method
 extension AddView {
-    @objc private func segmentedControlTapped(sender: UISegmentedControl) {
-        currency = sender.selectedSegmentIndex == .zero ? .KRW : .USD
-    }
-    
     func packageData() {
         viewModel.setupProduct(
             name: nameTextField.text,
@@ -163,11 +159,6 @@ extension AddView {
     private func setupView() {
         backgroundColor = .systemBackground
         locationLabel.text = viewModel.userSubLocale
-        currencySegmentedControl.addTarget(
-            self,
-            action: #selector(segmentedControlTapped),
-            for: .valueChanged
-        )
         
         [priceTextField, locationLabel].forEach(priceLocationStackView.addArrangedSubview(_:))
         [salePriceTextField,currencySegmentedControl]
