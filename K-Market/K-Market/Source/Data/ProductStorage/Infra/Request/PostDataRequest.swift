@@ -28,7 +28,7 @@ struct PostDataRequest: CustomRequest {
         
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue
-        request = setupIdentifier(request: &request)
+        request = .setupIdentifier(request: &request)
         
         let boundary = "Boundary-\(UUID().uuidString)"
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
@@ -49,14 +49,6 @@ struct PostDataRequest: CustomRequest {
         httpBody.appendStringData("--\(boundary)--")
         request.httpBody = httpBody
         
-        return request
-    }
-    
-    private func setupIdentifier(request: inout URLRequest) -> URLRequest {
-        request.setValue(
-            "0574c520-6942-11ed-a917-43299f97bee6",
-            forHTTPHeaderField: "identifier"
-        )
         return request
     }
     
@@ -86,12 +78,5 @@ struct PostDataRequest: CustomRequest {
         data.append(fileData)
         data.appendStringData("\r\n")
         return data
-    }
-}
-
-extension Data {
-    mutating func appendStringData(_ string: String) {
-        guard let data = string.data(using: .utf8) else { return }
-        self.append(data)
     }
 }
