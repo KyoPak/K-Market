@@ -39,6 +39,15 @@ final class DetailViewController: UIViewController {
         registerCell()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.setup()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        viewModel.clear()
+    }
+    
     init(viewModel: DetailViewModel) {
         self.viewModel = viewModel
         self.productInfoView = ProductInfoView(viewModel: viewModel)
@@ -129,9 +138,7 @@ extension DetailViewController: UICollectionViewDataSource {
         }
 
         viewModel.fetchImageData(index: indexPath.item) { data in
-            DispatchQueue.main.async {
-                cell.uploadImage(data)
-            }
+            cell.uploadImage(data)
         }
 
         return cell
@@ -142,6 +149,43 @@ extension DetailViewController: UICollectionViewDataSource {
 extension DetailViewController {
     private func setupNavigation() {
         navigationController?.navigationBar.tintColor = .label
+        
+        let appearance = UINavigationBarAppearance()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        let optionBarButton = UIBarButtonItem(
+            barButtonSystemItem: .edit,
+            target: self,
+            action: #selector(optionButtonTapped)
+        )
+        
+        self.navigationItem.rightBarButtonItem = optionBarButton
+    }
+    
+    @objc func optionButtonTapped() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let editAction = UIAlertAction(title: "수정", style: .default) { _ in
+            guard let product = self.viewModel.product.value else { return }
+            let viewModel = DefaultEditViewModel(
+                product: product,
+                imagesData: self.viewModel.imageDatas,
+                patchProductUseCase: DefaultPatchProductUseCase(
+                    productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice()))
+            )
+            let editViewController = EditViewController(viewModel: viewModel)
+            
+            self.navigationController?.pushViewController(editViewController, animated: true)
+        }
+        
+        let deleteAction = UIAlertAction(title: "삭제", style: .default) { _ in
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        [editAction, deleteAction, cancelAction].forEach(alert.addAction(_:))
+        present(alert, animated: true)
     }
     
     private func setupView() {
