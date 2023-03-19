@@ -21,28 +21,26 @@ protocol EditViewModelInput {
 
 protocol EditViewModelOutput {
     var product: Product { get }
+    var imageDatas: [Data] { get }
 }
 
 protocol EditViewModel: EditViewModelInput, EditViewModelOutput { }
 
 class DefaultEditViewModel: EditViewModel {
     private(set) var product: Product
+    private(set) var imageDatas: [Data] = []
     private var editProduct: PostProduct?
     
-    private let loadImageUseCase: LoadImageUseCase
     private let patchProductUseCase: PatchProductUseCase
-    private let fetchProductDetailUseCase: FetchProductDetailUseCase
     
     init(
         product: Product,
-        patchProductUseCase: PatchProductUseCase,
-        loadImageUseCase: LoadImageUseCase,
-        fetchProductDetailUseCase: FetchProductDetailUseCase
+        imagesData: [Data],
+        patchProductUseCase: PatchProductUseCase
     ) {
         self.product = product
+        self.imageDatas = imagesData
         self.patchProductUseCase = patchProductUseCase
-        self.fetchProductDetailUseCase = fetchProductDetailUseCase
-        self.loadImageUseCase = loadImageUseCase
     }
     
     func setupProduct(
@@ -69,6 +67,13 @@ class DefaultEditViewModel: EditViewModel {
     func patchProduct(completion: @escaping (NetworkError?) -> Void) {
         guard let editProduct = editProduct else { return }
         
-       // editProduct 넘기기
+        patchProductUseCase.patchData(id: product.id, editProduct) { result in
+            switch result {
+            case .success(_):
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
     }
 }
