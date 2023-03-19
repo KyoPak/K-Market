@@ -11,5 +11,5 @@ protocol LocationRepository {
     func load(_ id: Int, completion: @escaping (LocationData?) -> Void)
     func add(data: LocationData)
     func update(data: LocationData)
-    func delete(data: LocationData)
+    func delete(_ id: Int)
 }

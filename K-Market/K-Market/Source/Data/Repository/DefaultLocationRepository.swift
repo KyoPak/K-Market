@@ -32,7 +32,7 @@ final class DefaultLocationRepository: LocationRepository {
         service.update(data: data)
     }
     
-    func delete(data: LocationData) {
-        service.delete(id: data.id)
+    func delete(_ id: Int) {
+        service.delete(id: id)
     }
 }
