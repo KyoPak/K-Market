@@ -9,7 +9,7 @@ import Foundation
 
 protocol PostProductUseCase {
     func postData(
-        postData: PostProduct,
+        _ data: PostProduct,
         imageDatas: [Data],
         completion: @escaping (Result<PostResponse, NetworkError>) -> Void
     )
@@ -23,7 +23,6 @@ final class DefaultPostProductUseCase {
     }
     
     private func convert(data: Data) throws -> PostResponse {
-        let decoder = JSONDecoder()
         let decodeManager = DecodeManager<PostResponse>()
         let product = decodeManager.decode(data)
         
@@ -38,12 +37,12 @@ final class DefaultPostProductUseCase {
 
 extension DefaultPostProductUseCase: PostProductUseCase {
     func postData(
-        postData: PostProduct,
+        _ data: PostProduct,
         imageDatas: [Data],
         completion: @escaping (Result<PostResponse, NetworkError>) -> Void
     ) {
         
-        let request = PostDataRequest(postData: postData, imagesDatas: imageDatas)
+        let request = PostDataRequest(postData: data, imagesDatas: imageDatas)
         
         productRepository.request(customRequest: request) { result in
             switch result {

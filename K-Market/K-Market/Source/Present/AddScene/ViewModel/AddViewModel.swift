@@ -90,7 +90,7 @@ final class DefaultAddViewModel: AddViewModel {
     func postProduct(completion: @escaping (NetworkError?) -> Void) {
         guard let product = product else { return }
         
-        postProductUseCase.postData(postData: product, imageDatas: imageDatas.value) { result in
+        postProductUseCase.postData(product, imageDatas: imageDatas.value) { result in
             switch result {
             case .success(let data):
                 self.postLocation(id: data.id)
