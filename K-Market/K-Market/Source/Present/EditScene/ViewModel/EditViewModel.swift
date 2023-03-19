@@ -68,11 +68,13 @@ class DefaultEditViewModel: EditViewModel {
         guard let editProduct = editProduct else { return }
         
         patchProductUseCase.patchData(id: product.id, editProduct) { result in
-            switch result {
-            case .success(_):
-                completion(nil)
-            case .failure(let error):
-                completion(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    completion(nil)
+                case .failure(let error):
+                    completion(error)
+                }
             }
         }
     }
