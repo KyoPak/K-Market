@@ -52,6 +52,7 @@
 		3CB4B60B29C6A7E90012BBB1 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4B60A29C6A7E90012BBB1 /* Data+Extension.swift */; };
 		3CB4B60D29C6A9140012BBB1 /* PatchProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4B60C29C6A9140012BBB1 /* PatchProductUseCase.swift */; };
 		3CB4B60F29C6AE480012BBB1 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4B60E29C6AE480012BBB1 /* EditView.swift */; };
+		3CB4B61529C6CD1C0012BBB1 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4B61429C6CD1C0012BBB1 /* UploadView.swift */; };
 		3CB7C81F29BC2408001E7992 /* Formatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */; };
 		3CB7C82529BC31F4001E7992 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C82429BC31F4001E7992 /* ListViewModel.swift */; };
 		3CB7C82E29BC72B3001E7992 /* LocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C82D29BC72B3001E7992 /* LocationCollectionViewCell.swift */; };
@@ -130,6 +131,7 @@
 		3CB4B60A29C6A7E90012BBB1 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		3CB4B60C29C6A9140012BBB1 /* PatchProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchProductUseCase.swift; sourceTree = "<group>"; };
 		3CB4B60E29C6AE480012BBB1 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		3CB4B61429C6CD1C0012BBB1 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		3CB7C81E29BC2408001E7992 /* Formatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extension.swift"; sourceTree = "<group>"; };
 		3CB7C82429BC31F4001E7992 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		3CB7C82D29BC72B3001E7992 /* LocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -489,9 +491,18 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		3CB4B61329C6CCFB0012BBB1 /* CommonScene */ = {
+			isa = PBXGroup;
+			children = (
+				3CB4B61429C6CD1C0012BBB1 /* UploadView.swift */,
+			);
+			path = CommonScene;
+			sourceTree = "<group>";
+		};
 		3CB7C82029BC2CB5001E7992 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				3CB4B61329C6CCFB0012BBB1 /* CommonScene */,
 				3CB4B5FD29C6A1620012BBB1 /* EditScene */,
 				3CB7C82129BC2CCA001E7992 /* MainScene */,
 				3C40159C29C41747007448A8 /* DetailScene */,
@@ -689,6 +700,7 @@
 				3C23C2E129BB027B00802CEC /* ProductRepository.swift in Sources */,
 				3CFA1E0C29C57F560024BA3C /* UploadImageCell.swift in Sources */,
 				3CB7C82E29BC72B3001E7992 /* LocationCollectionViewCell.swift in Sources */,
+				3CB4B61529C6CD1C0012BBB1 /* UploadView.swift in Sources */,
 				3CFA1E1629C5F25B0024BA3C /* UIImage+Extension.swift in Sources */,
 				3C4015A729C43D7A007448A8 /* DetailImageCell.swift in Sources */,
 				3CB7C82529BC31F4001E7992 /* ListViewModel.swift in Sources */,
