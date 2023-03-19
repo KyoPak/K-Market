@@ -503,10 +503,10 @@
 			isa = PBXGroup;
 			children = (
 				3CB4B61329C6CCFB0012BBB1 /* CommonScene */,
-				3CB4B5FD29C6A1620012BBB1 /* EditScene */,
 				3CB7C82129BC2CCA001E7992 /* MainScene */,
 				3C40159C29C41747007448A8 /* DetailScene */,
 				3C4015AE29C4AEF7007448A8 /* AddScene */,
+				3CB4B5FD29C6A1620012BBB1 /* EditScene */,
 			);
 			path = Present;
 			sourceTree = "<group>";
