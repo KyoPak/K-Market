@@ -8,14 +8,6 @@
 import UIKit
 
 final class AddView: UIView {
-    private enum Constant {
-        static let name = "글 제목"
-        static let price = "가격"
-        static let salePrice = "할인 가격(선택 사항)"
-        static let stock = "수량"
-        static let maxText = 1000
-    }
-        
     private let viewModel: AddViewModel
     private var currency = Product.CurrencyUnit.KRW
     
@@ -61,13 +53,14 @@ final class AddView: UIView {
         let textView = UITextView()
         textView.keyboardType = UIKeyboardType.default
         textView.returnKeyType = .done
+        textView.font = .systemFont(ofSize: 15)
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
     
     private let currencySegmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["KRW", "USD"])
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentIndex = .zero
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentedControl
     }()
@@ -161,7 +154,7 @@ extension AddView: UITextFieldDelegate, UITextViewDelegate {
         shouldChangeTextIn range: NSRange,
         replacementText text: String
     ) -> Bool {
-        return descriptionTextView.text.count >= Constant.maxText && text != ""
+        return descriptionTextView.text.count <= Constant.maxText && text != ""
     }
 }
 
@@ -206,5 +199,15 @@ extension AddView {
             descriptionTextView.trailingAnchor.constraint(equalTo: productStackView.trailingAnchor),
             descriptionTextView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -10)
         ])
+    }
+}
+
+extension AddView {
+    private enum Constant {
+        static let name = "글 제목"
+        static let price = "가격"
+        static let salePrice = "할인 가격(선택 사항)"
+        static let stock = "수량"
+        static let maxText = 1000
     }
 }
