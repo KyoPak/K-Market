@@ -83,7 +83,6 @@ extension ListViewController {
         let addViewModel = DefaultAddViewModel(
             locale: viewModel.userLocale,
             subLocale: viewModel.userSubLocale.value,
-            fetchProductDetailUseCase: DefaultFetchProductDetailUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
             postProductUseCase: DefaultPostProductUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
             postLocationUseCase: DefaultPostLocationUseCase(locationRepository: DefaultLocationRepository(service: DefaultFireBaseService())),
             loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())))

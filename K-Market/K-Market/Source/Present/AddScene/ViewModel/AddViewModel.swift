@@ -36,7 +36,6 @@ final class DefaultAddViewModel: AddViewModel {
     private(set) var userSubLocale: String
     private(set) var imageDatas: Observable<[Data]> = Observable([])
     
-    private let fetchProductDetailUseCase: FetchProductDetailUseCase
     private let postProductUseCase: PostProductUseCase
     private let postLocationUseCase: PostLocationUseCase
     private let loadImageUseCase: LoadImageUseCase
@@ -44,14 +43,12 @@ final class DefaultAddViewModel: AddViewModel {
     init(
         locale: String,
         subLocale: String,
-        fetchProductDetailUseCase: FetchProductDetailUseCase,
         postProductUseCase: PostProductUseCase,
         postLocationUseCase: PostLocationUseCase,
         loadImageUseCase: LoadImageUseCase
     ) {
         self.userLocale = locale
         self.userSubLocale = subLocale
-        self.fetchProductDetailUseCase = fetchProductDetailUseCase
         self.postProductUseCase = postProductUseCase
         self.postLocationUseCase = postLocationUseCase
         self.loadImageUseCase = loadImageUseCase
