@@ -52,7 +52,7 @@ final class DetailViewController: UIViewController {
 
 extension DetailViewController {
     private func bindData() {
-        viewModel.imageDatas.bind { [weak self] datas in
+        viewModel.productImages.bind { [weak self] _ in
             self?.collectionView.reloadData()
         }
     }
