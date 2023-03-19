@@ -15,7 +15,7 @@ protocol DetailViewModelOutput {
     var product: Observable<Product?> { get }
     var productLocale:  Observable<String> { get }
     var productImages: Observable<[ProductImage]?> { get }
-    var imageDatas: [Data]? { get }
+    var imageDatas: [Data] { get }
     
     func fetchProductImageCount() -> Int
     func customDate() -> String
@@ -29,7 +29,7 @@ final class DefaultDetailViewModel: DetailViewModel {
     var product: Observable<Product?> = Observable(nil)
     var productImages: Observable<[ProductImage]?> = Observable([])
     var productLocale: Observable<String> = Observable("")
-    private(set) var imageDatas: [Data]? = []
+    private(set) var imageDatas: [Data] = []
     
     private let fetchLocationUseCase: FetchLocationUseCase
     private let fetchProductDetailUseCase: FetchProductDetailUseCase
@@ -79,7 +79,7 @@ final class DefaultDetailViewModel: DetailViewModel {
         loadImageUseCase.loadImage(thumbnail: url) { result in
             switch result {
             case .success(let data):
-                self.imageDatas?.append(data)
+                self.imageDatas.append(data)
                 completion(data)
             case .failure(let error):
                 print(error)
