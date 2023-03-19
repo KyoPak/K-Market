@@ -8,7 +8,11 @@
 import Foundation
 
 protocol PostProductUseCase {
-    func postData(postData: PostProduct, imageDatas: [Data], completion: @escaping (Result<Bool, NetworkError>) -> Void)
+    func postData(
+        postData: PostProduct,
+        imageDatas: [Data],
+        completion: @escaping (Result<PostResponse, NetworkError>) -> Void
+    )
 }
 
 final class DefaultPostProductUseCase {
@@ -18,28 +22,39 @@ final class DefaultPostProductUseCase {
         self.productRepository = productRepository
     }
     
-    private func convert(data: Product) throws -> PostProduct {
-        let postData = PostProduct(
-            name: data.name,
-            productID: nil,
-            description: data.description ?? "",
-            currency: data.currency == .KRW ? .KRW : .USD,
-            price: Double(data.price)
-        )
+    private func convert(data: Data) throws -> PostResponse {
+        let decoder = JSONDecoder()
+        let decodeManager = DecodeManager<PostResponse>()
+        let product = decodeManager.decode(data)
         
-        return postData
+        switch product {
+        case .success(let data):
+            return data
+        case .failure(let error):
+            throw error
+        }
     }
 }
 
 extension DefaultPostProductUseCase: PostProductUseCase {
-    func postData(postData: PostProduct, imageDatas: [Data], completion: @escaping (Result<Bool, NetworkError>) -> Void) {
+    func postData(
+        postData: PostProduct,
+        imageDatas: [Data],
+        completion: @escaping (Result<PostResponse, NetworkError>) -> Void
+    ) {
         
         let request = PostDataRequest(postData: postData, imagesDatas: imageDatas)
         
         productRepository.request(customRequest: request) { result in
             switch result {
-            case .success(_):
-                completion(.success(true))
+            case .success(let data):
+                do {
+                    let products = try self.convert(data: data)
+                    completion(.success(products))
+                } catch {
+                    guard let error = error as? NetworkError else { return }
+                    completion(.failure(error))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }

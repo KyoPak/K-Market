@@ -47,13 +47,12 @@ extension AddViewController {
     
     @objc func doneButtonTapped() {
         addView.packageData()
-        viewModel.postProduct { check in
-            if check {
-                DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
-                }
+        viewModel.postProduct { [weak self] error in
+            if error == nil {
+                self?.navigationController?.popViewController(animated: true)
+            } else {
+                //TODO: - Alert
             }
-            print(check)
         }
     }
 }

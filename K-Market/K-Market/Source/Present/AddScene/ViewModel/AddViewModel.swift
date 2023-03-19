@@ -9,7 +9,7 @@ import Foundation
 
 protocol AddViewModelInput {
     func addImageData(_ data: Data?)
-    func postProduct(completion: @escaping (Bool) -> Void)
+    func postProduct(completion: @escaping (NetworkError?) -> Void)
     func setupProduct(
         name: String?,
         price: String?,
@@ -87,19 +87,26 @@ final class DefaultAddViewModel: AddViewModel {
         )
     }
     
-    func postProduct(completion: @escaping (Bool) -> Void) {
+    func postProduct(completion: @escaping (NetworkError?) -> Void) {
         guard let product = product else { return }
         
         postProductUseCase.postData(postData: product, imageDatas: imageDatas.value) { result in
             switch result {
-            case .success(let check):
-                if !check {
-                    print(NetworkError.data)
+            case .success(let data):
+                self.postLocation(id: data.id)
+                DispatchQueue.main.async {
+                    completion(nil)
                 }
-                completion(check)
             case .failure(let error):
+                DispatchQueue.main.async {
+                    completion(error)
+                }
                 print(error)
             }
         }
+    }
+    
+    private func postLocation(id: Int) {
+        postLocationUseCase.add(id: id, locale: userLocale, subLocale: userSubLocale)
     }
 }
