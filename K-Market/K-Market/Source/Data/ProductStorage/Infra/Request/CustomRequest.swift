@@ -13,6 +13,9 @@ protocol CustomRequest {
     var query: [URLQueryItem]? { get }
     var httpMethod: HTTPMethod { get }
     var url: URL? { get }
+    
+    func createRequest() -> URLRequest?
+    func createRequest(data: PostProduct, imageDatas: [Data?]) -> URLRequest?
 }
 
 extension CustomRequest {
@@ -25,6 +28,14 @@ extension CustomRequest {
     }
     
     func createRequest() -> URLRequest? {
+        guard let url = url else { return nil }
+        var request = URLRequest(url: url)
+        request.httpMethod = httpMethod.rawValue
+        
+        return request
+    }
+    
+    func createRequest(data: PostProduct, imageDatas: [Data?]) -> URLRequest? {
         guard let url = url else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue

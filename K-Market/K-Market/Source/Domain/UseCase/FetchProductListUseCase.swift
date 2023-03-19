@@ -1,5 +1,5 @@
 //
-//  FetchProductUseCase.swift
+//  FetchProductListUseCase.swift
 //  K-Market
 //
 //  Created by parkhyo on 2023/03/11.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FetchProductUseCase {
+protocol FetchProductListUseCase {
     func fetchData(
         pageNo: Int,
         itemsPerPage: Int,
@@ -35,7 +35,7 @@ final class DefaultFetchProductUseCase {
     }
 }
 
-extension DefaultFetchProductUseCase: FetchProductUseCase {
+extension DefaultFetchProductUseCase: FetchProductListUseCase {
     func fetchData(
         pageNo: Int,
         itemsPerPage: Int,

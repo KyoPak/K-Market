@@ -26,23 +26,23 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
     var imageData: Observable<Data?> = Observable(nil)
     
     private let loadImageUseCase: LoadImageUseCase
-    private let fetchLocationDataUseCase: FetchLocationDataUseCase
+    private let fetchLocationUseCase: FetchLocationUseCase
     
     init(
         product: Product,
         loadImageUseCase: LoadImageUseCase,
-        fetchLocationDataUseCase: FetchLocationDataUseCase
+        fetchLocationUseCase: FetchLocationUseCase
     ) {
         self.product = product
         self.loadImageUseCase = loadImageUseCase
-        self.fetchLocationDataUseCase = fetchLocationDataUseCase
+        self.fetchLocationUseCase = fetchLocationUseCase
         
         loadImage()
         fetchLocationData()
     }
     
     private func fetchLocationData() {
-        fetchLocationDataUseCase.fetch(id: product.id) { [weak self] data in
+        fetchLocationUseCase.fetch(id: product.id) { [weak self] data in
             if let subLocale = data?.subLocality {
                 self?.productLocale.value = subLocale
             } else {

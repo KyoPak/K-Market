@@ -8,6 +8,7 @@
 import Foundation
 
 protocol ListViewModelInput {
+    func clear()
     func fetchProductList(pageNo: Int, itemsPerPage: Int)
     func setUserLocation(locale: String, subLocale: String)
     func setLayoutType(layoutIndex: Int)
@@ -26,17 +27,20 @@ protocol ListViewModel: ListViewModelInput, ListViewModelOutput  { }
 
 final class DefaultListViewModel: ListViewModel {
     private(set) var userLocale = ""
-    private let fetchUseCase: FetchProductUseCase
+    private let fetchUseCase: FetchProductListUseCase
     
     var productList = Observable<[Product]>([])
     var userSubLocale = Observable<String>("")
     var layoutStatus = Observable<CollectionType>(.list)
     
-    init(fetchUseCase: FetchProductUseCase) {
+    init(fetchUseCase: FetchProductListUseCase) {
         self.fetchUseCase = fetchUseCase
-        fetchProductList(pageNo: 1, itemsPerPage: 15)
     }
-        
+    
+    func clear() {
+        productList.value.removeAll()
+    }
+    
     func fetchProductList(pageNo: Int, itemsPerPage: Int) {
         fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: itemsPerPage) { [weak self] result in
             switch result {

@@ -1,5 +1,5 @@
 //
-//  DefualtLocationRepository.swift
+//  DefaultLocationRepository.swift
 //  K-Market
 //
 //  Created by parkhyo on 2023/03/11.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefualtLocationRepository: LocationRepository {
+final class DefaultLocationRepository: LocationRepository {
     private let service: FireBaseService
     
     init(service: FireBaseService) {

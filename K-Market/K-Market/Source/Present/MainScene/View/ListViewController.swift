@@ -45,6 +45,12 @@ final class ListViewController: UIViewController {
         setupCoreLocationAuthority()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.clear()
+        viewModel.fetchProductList(pageNo: 1, itemsPerPage: 15)
+    }
+    
     init(viewModel: ListViewModel) {
         self.viewModel = viewModel
         headerView = HeaderView(viewModel: viewModel)
@@ -61,7 +67,7 @@ extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailView = DetailViewController(viewModel: DefaultDetailViewModel(
             id: viewModel.productList.value[indexPath.item].id,
-            fetchLocationDataUseCase: DefaultFetchLocationDataUseCase(locationRepository: DefualtLocationRepository(service: DefaultFireBaseService())),
+            fetchLocationUseCase: DefaultFetchLocationDataUseCase(locationRepository: DefaultLocationRepository(service: DefaultFireBaseService())),
             fetchProductDetailUseCase: DefaultFetchProductDetailUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
             loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())))
         )
@@ -74,7 +80,17 @@ extension ListViewController: UICollectionViewDelegate {
 // MARK: - Action
 extension ListViewController {
     @objc private func addButtonTapped() {
+        let addViewModel = DefaultAddViewModel(
+            locale: viewModel.userLocale,
+            subLocale: viewModel.userSubLocale.value,
+            postProductUseCase: DefaultPostProductUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
+            postLocationUseCase: DefaultPostLocationUseCase(locationRepository: DefaultLocationRepository(service: DefaultFireBaseService())),
+            loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())))
         
+        let addViewController = AddViewController(viewModel: addViewModel)
+        
+        addViewController.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(addViewController, animated: true)
     }
 }
 
@@ -132,8 +148,8 @@ extension ListViewController {
                         networkService: DefaultNetworkSevice()
                     )
                 ),
-                fetchLocationDataUseCase: DefaultFetchLocationDataUseCase(
-                    locationRepository: DefualtLocationRepository(
+                fetchLocationUseCase: DefaultFetchLocationDataUseCase(
+                    locationRepository: DefaultLocationRepository(
                         service: DefaultFireBaseService()
                     )
                 )
@@ -169,12 +185,12 @@ extension ListViewController {
 extension ListViewController {
     private func presentLocationAlert() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let action = UIAlertAction(title: "허용", style: .default) { _ in
+        let action = UIAlertAction(title: Constant.allow, style: .default) { _ in
             guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
             UIApplication.shared.open(settingURL)
         }
         
-        let cancel = UIAlertAction(title: "거부", style: .cancel)
+        let cancel = UIAlertAction(title: Constant.reject, style: .cancel)
         
         alert.addAction(action)
         alert.addAction(cancel)
@@ -282,14 +298,14 @@ extension ListViewController {
 // MARK: - UI SetUp
 extension ListViewController {
     private func setupNavigation() {
-        title = "K-Market"
+        title = Constant.title
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .systemBackground
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         let addBarButtonItem = UIBarButtonItem(
-            title: "+",
+            title: Constant.add,
             style: .plain,
             target: self,
             action: #selector(addButtonTapped)
@@ -317,5 +333,14 @@ extension ListViewController {
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 10)
         ])
+    }
+}
+
+extension ListViewController {
+    private enum Constant {
+        static let title = "K-Market"
+        static let add = "+"
+        static let allow = "허용"
+        static let reject = "거부"
     }
 }
