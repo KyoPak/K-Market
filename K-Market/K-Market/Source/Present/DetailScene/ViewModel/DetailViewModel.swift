@@ -11,6 +11,7 @@ protocol DetailViewModelInput {
     func setup()
     func clear()
     func fetchImageData(index: Int, completion: @escaping (Data) -> Void)
+    func delete(completion: @escaping (NetworkError?) -> Void)
 }
 
 protocol DetailViewModelOutput {
@@ -34,19 +35,26 @@ final class DefaultDetailViewModel: DetailViewModel {
     private(set) var imageDatas: [Data] = []
     private var id: Int
     
-    private let fetchLocationUseCase: FetchLocationUseCase
     private let fetchProductDetailUseCase: FetchProductDetailUseCase
+    private let fetchLocationUseCase: FetchLocationUseCase
     private let loadImageUseCase: LoadImageUseCase
+    private let deleteProductUseCase: DeleteProductUseCase
+    private let deleteLocationUseCase: DeleteLocationUseCase
+    
     
     init(id: Int,
          fetchLocationUseCase: FetchLocationUseCase,
          fetchProductDetailUseCase: FetchProductDetailUseCase,
-         loadImageUseCase: LoadImageUseCase
+         loadImageUseCase: LoadImageUseCase,
+         deleteProductUseCase: DeleteProductUseCase,
+         deleteLocationUseCase: DeleteLocationUseCase
     ) {
         self.id = id
         self.fetchLocationUseCase = fetchLocationUseCase
         self.fetchProductDetailUseCase = fetchProductDetailUseCase
         self.loadImageUseCase = loadImageUseCase
+        self.deleteProductUseCase = deleteProductUseCase
+        self.deleteLocationUseCase = deleteLocationUseCase
     }
     
     private func fetchProductDetailInfo(id: Int) {
@@ -77,6 +85,21 @@ final class DefaultDetailViewModel: DetailViewModel {
     
     func clear() {
         imageDatas.removeAll()
+    }
+    
+    func delete(completion: @escaping (NetworkError?) -> Void) {
+        guard let id = product.value?.id else { return }
+        deleteLocationUseCase.delete(id: id)
+        deleteProductUseCase.deleteData(id: id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    completion(nil)
+                case .failure(let error):
+                    completion(error)
+                }
+            }
+        }
     }
     
     func fetchProductImageCount() -> Int {
