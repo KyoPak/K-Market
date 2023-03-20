@@ -17,6 +17,7 @@ struct DeleteURIRequest: CustomRequest {
     }
     
     func createRequest() -> URLRequest? {
+        guard let url = url else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue
         request = .setupIdentifier(request: &request)
