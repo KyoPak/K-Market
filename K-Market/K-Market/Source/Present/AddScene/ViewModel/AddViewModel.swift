@@ -31,15 +31,18 @@ protocol AddViewModelOutput {
 protocol AddViewModel: AddViewModelInput, AddViewModelOutput { }
 
 final class DefaultAddViewModel: AddViewModel {
-    private var product: PostProduct?
+    // MARK: - OUTPUT
     private(set) var userLocale: String
     private(set) var userSubLocale: String
     private(set) var imageDatas: Observable<[Data]> = Observable([])
+    
+    private var product: PostProduct?
     
     private let postProductUseCase: PostProductUseCase
     private let postLocationUseCase: PostLocationUseCase
     private let loadImageUseCase: LoadImageUseCase
     
+    // MARK: - Init
     init(
         locale: String,
         subLocale: String,
@@ -54,15 +57,12 @@ final class DefaultAddViewModel: AddViewModel {
         self.loadImageUseCase = loadImageUseCase
     }
     
+    // MARK: - INPUT
     func addImageData(_ data: Data?) {
         guard let data = data else { return }
         imageDatas.value.append(data)
     }
-    
-    func fetchImageData(index: Int) -> Data {
-        return imageDatas.value[index]
-    }
-    
+
     func setupProduct(
         name: String?,
         price: String?,
@@ -101,6 +101,11 @@ final class DefaultAddViewModel: AddViewModel {
                 print(error)
             }
         }
+    }
+    
+    // MARK: - OUTPUT Method
+    func fetchImageData(index: Int) -> Data {
+        return imageDatas.value[index]
     }
     
     private func postLocation(id: Int) {

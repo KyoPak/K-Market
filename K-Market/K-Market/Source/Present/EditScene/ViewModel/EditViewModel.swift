@@ -27,12 +27,14 @@ protocol EditViewModelOutput {
 protocol EditViewModel: EditViewModelInput, EditViewModelOutput { }
 
 class DefaultEditViewModel: EditViewModel {
+    // MARK: - OUTPUT
     private(set) var product: Product
     private(set) var imageDatas: [Data] = []
-    private var editProduct: PostProduct?
     
+    private var editProduct: PostProduct?
     private let patchProductUseCase: PatchProductUseCase
     
+    // MARK: - Init
     init(
         product: Product,
         imagesData: [Data],
@@ -43,6 +45,7 @@ class DefaultEditViewModel: EditViewModel {
         self.patchProductUseCase = patchProductUseCase
     }
     
+    // MARK: - INPUT
     func setupProduct(
         name: String?,
         price: String?,

@@ -29,9 +29,11 @@ protocol DetailViewModelOutput {
 protocol DetailViewModel: DetailViewModelInput, DetailViewModelOutput { }
 
 final class DefaultDetailViewModel: DetailViewModel {
+    // MARK: - OUTPUT
     var product: Observable<Product?> = Observable(nil)
-    var productImages: Observable<[ProductImage]?> = Observable([])
     var productLocale: Observable<String> = Observable("")
+    var productImages: Observable<[ProductImage]?> = Observable([])
+    
     private(set) var imageDatas: [Data] = []
     private var id: Int
     
@@ -41,7 +43,7 @@ final class DefaultDetailViewModel: DetailViewModel {
     private let deleteProductUseCase: DeleteProductUseCase
     private let deleteLocationUseCase: DeleteLocationUseCase
     
-    
+    // MARK: - Init
     init(id: Int,
          fetchLocationUseCase: FetchLocationUseCase,
          fetchProductDetailUseCase: FetchProductDetailUseCase,
@@ -78,6 +80,7 @@ final class DefaultDetailViewModel: DetailViewModel {
         }
     }
     
+    // MARK: - INPUT
     func setup() {
         fetchLocation(id: id)
         fetchProductDetailInfo(id: id)
@@ -102,10 +105,6 @@ final class DefaultDetailViewModel: DetailViewModel {
         }
     }
     
-    func fetchProductImageCount() -> Int {
-        return productImages.value?.count ?? .zero
-    }
-    
     func fetchImageData(index: Int, completion: @escaping (Data) -> Void) {
         guard let url = productImages.value?[index].url else { return }
         loadImageUseCase.loadImage(thumbnail: url) { result in
@@ -119,6 +118,11 @@ final class DefaultDetailViewModel: DetailViewModel {
                 }
             }
         }
+    }
+    
+    // MARK: - OUTPUT Method
+    func fetchProductImageCount() -> Int {
+        return productImages.value?.count ?? .zero
     }
     
     func customDate() -> String {

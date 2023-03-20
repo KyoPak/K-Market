@@ -103,7 +103,7 @@ extension ListViewController {
 
             var cell: CollectionCell
             
-            switch self.viewModel.fetchLayoutStatus() {
+            switch self.viewModel.layoutStatus.value {
             case .list:
                 guard let listCell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: ListCollectionViewCell.identifier,

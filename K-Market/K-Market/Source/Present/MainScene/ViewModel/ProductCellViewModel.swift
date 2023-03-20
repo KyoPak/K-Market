@@ -21,6 +21,7 @@ protocol ProductCellViewModelOutput {
 protocol ProductCellViewModel: ProductCellViewModelInput, ProductCellViewModelOutput { }
 
 final class DefaultProductCellViewModel: ProductCellViewModel {
+    // MARK: - OUTPUT
     private(set) var product: Product
     var productLocale: Observable<String> = Observable("")
     var imageData: Observable<Data?> = Observable(nil)
@@ -28,6 +29,7 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
     private let loadImageUseCase: LoadImageUseCase
     private let fetchLocationUseCase: FetchLocationUseCase
     
+    // MARK: - Init
     init(
         product: Product,
         loadImageUseCase: LoadImageUseCase,
@@ -62,6 +64,7 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
         }
     }
     
+    // MARK: - OUTPUT Method
     func customStockText() -> String {
         if product.stock == Int.zero {
             return String(format: "품절")
