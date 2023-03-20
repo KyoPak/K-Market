@@ -30,7 +30,7 @@ final class DefaultListViewModel: ListViewModel {
     private let fetchUseCase: FetchProductListUseCase
     
     var productList = Observable<[Product]>([])
-    var userSubLocale = Observable<String>("")
+    var userSubLocale = Observable<String>(Constant.reject)
     var layoutStatus = Observable<CollectionType>(.list)
     
     init(fetchUseCase: FetchProductListUseCase) {
@@ -64,5 +64,11 @@ final class DefaultListViewModel: ListViewModel {
     
     func fetchLayoutStatus() -> CollectionType {
         return layoutStatus.value
+    }
+}
+
+extension DefaultListViewModel {
+    private enum Constant {
+        static let reject = "위치 미등록"
     }
 }

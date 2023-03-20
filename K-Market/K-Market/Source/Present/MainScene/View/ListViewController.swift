@@ -69,7 +69,11 @@ extension ListViewController: UICollectionViewDelegate {
             id: viewModel.productList.value[indexPath.item].id,
             fetchLocationUseCase: DefaultFetchLocationDataUseCase(locationRepository: DefaultLocationRepository(service: DefaultFireBaseService())),
             fetchProductDetailUseCase: DefaultFetchProductDetailUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
-            loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())))
+            loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
+            deleteProductUseCase: DefaultDeleteProductUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
+            deleteLocationUseCase: DefaultDeleteLocationUseCase(locationRepository: DefaultLocationRepository(service: DefaultFireBaseService()))
+        )
+                                              
         )
         
         navigationController?.pushViewController(detailView, animated: true)

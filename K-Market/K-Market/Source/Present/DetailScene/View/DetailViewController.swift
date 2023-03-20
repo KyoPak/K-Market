@@ -179,7 +179,13 @@ extension DetailViewController {
         }
         
         let deleteAction = UIAlertAction(title: "삭제", style: .default) { _ in
-            
+            self.viewModel.delete { error in
+                if let error = error {
+                    print(error)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
         }
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
