@@ -30,6 +30,7 @@ final class ListViewController: UIViewController {
             collectionViewLayout: collectionViewLayoutChange(type: .list)
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         return collectionView
     }()
     
@@ -270,6 +271,7 @@ extension ListViewController {
             section.interGroupSpacing = 10
             
             let layout = UICollectionViewCompositionalLayout(section: section)
+            
             return layout
         }
     }

@@ -27,6 +27,7 @@ final class DetailViewController: UIViewController {
         collectionView.isPagingEnabled = true
         collectionView.decelerationRate = .fast
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         return collectionView
     }()
     
@@ -130,6 +131,7 @@ extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let imageCount = viewModel.fetchProductImageCount()
         changePageLabel(page: 1, totalPage: imageCount)
+        
         return imageCount
     }
     

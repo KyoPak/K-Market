@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         
         FirebaseApp.configure()
+        
         return true
     }
 

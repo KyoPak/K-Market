@@ -12,6 +12,7 @@ final class ListCollectionViewCell: CollectionCell {
         let button = UIButton()
         button.setImage(UIImage.init(systemName: "chevron.right"), for: .normal)
         button.tintColor = .gray
+        
         return button
     }()
     

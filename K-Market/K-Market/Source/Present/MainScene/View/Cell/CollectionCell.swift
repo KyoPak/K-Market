@@ -14,6 +14,7 @@ class CollectionCell: UICollectionViewCell {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
         return activityIndicator
     }()
     
@@ -22,6 +23,7 @@ class CollectionCell: UICollectionViewCell {
         imageView.tintColor = .label
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
     }()
     

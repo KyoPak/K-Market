@@ -25,11 +25,10 @@ extension UIImage {
                 }
             }
         }
-        if let data = imgData {
-            if data.count < sizeInBytes {
-                return data
-            }
+        if let data = imgData, data.count < sizeInBytes {
+            return data
         }
+        
         return nil
     }
 
