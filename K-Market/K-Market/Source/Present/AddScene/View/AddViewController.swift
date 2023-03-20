@@ -38,10 +38,15 @@ final class AddViewController: UIViewController {
 }
 
 // MARK: - Bind
-extension AddViewController {
+extension AddViewController: AlertPresentable {
     func bindData() {
         viewModel.imageDatas.bind { [weak self] _ in
             self?.addView.collectionView.reloadData()
+        }
+        
+        viewModel.error.bind { [weak self] error in
+            guard let error else { return }
+            self?.presentAlert(title: error)
         }
     }
 }

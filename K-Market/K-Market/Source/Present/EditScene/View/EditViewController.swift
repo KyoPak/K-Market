@@ -43,10 +43,8 @@ extension EditViewController {
 
     @objc func doneButtonTapped() {
         editView.packageData()
-        viewModel.patchProduct { [weak self] error in
-            if let error = error {
-                print(error)
-            } else {
+        viewModel.patchProduct { [weak self] result in
+            if result {
                 self?.navigationController?.popViewController(animated: true)
             }
         }

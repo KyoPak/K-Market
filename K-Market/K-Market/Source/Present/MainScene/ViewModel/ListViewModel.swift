@@ -19,6 +19,7 @@ protocol ListViewModelOutput {
     var userSubLocale: Observable<String> { get }
     var productList: Observable<[Product]> { get }
     var layoutStatus: Observable<CollectionType> { get }
+    var error: Observable<String?> { get }
     var loadImageUseCase: LoadImageUseCase { get }
     var fetchLocationUseCase: FetchLocationUseCase { get }
 }
@@ -30,6 +31,7 @@ final class DefaultListViewModel: ListViewModel {
     var productList = Observable<[Product]>([])
     var userSubLocale = Observable<String>(Constant.reject)
     var layoutStatus = Observable<CollectionType>(.list)
+    var error = Observable<String?>(nil)
     
     private(set) var userLocale = ""
     private(set) var loadImageUseCase: LoadImageUseCase
@@ -55,12 +57,13 @@ final class DefaultListViewModel: ListViewModel {
     
     func fetchProductList(pageNo: Int, itemsPerPage: Int) {
         fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: itemsPerPage) { [weak self] result in
-            switch result {
-            case .success(let datas):
-                self?.productList.value += datas
-            case .failure(let error):
-                //TODO: Delegate Alert
-                print(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let datas):
+                    self?.productList.value += datas
+                case .failure(let error):
+                    self?.error.value = error.description
+                }
             }
         }
     }

@@ -11,13 +11,14 @@ protocol DetailViewModelInput {
     func setup()
     func clear()
     func fetchImageData(index: Int, completion: @escaping (Data) -> Void)
-    func delete(completion: @escaping (NetworkError?) -> Void)
+    func delete(completion: @escaping (Bool) -> Void)
 }
 
 protocol DetailViewModelOutput {
     var product: Observable<Product?> { get }
     var productLocale:  Observable<String> { get }
     var productImages: Observable<[ProductImage]?> { get }
+    var error: Observable<String?> { get }
     var imageDatas: [Data] { get }
     
     func fetchProductImageCount() -> Int
@@ -33,6 +34,7 @@ final class DefaultDetailViewModel: DetailViewModel {
     var product: Observable<Product?> = Observable(nil)
     var productLocale: Observable<String> = Observable("")
     var productImages: Observable<[ProductImage]?> = Observable([])
+    var error = Observable<String?>(nil)
     
     private(set) var imageDatas: [Data] = []
     private var id: Int
@@ -67,8 +69,7 @@ final class DefaultDetailViewModel: DetailViewModel {
                     self.product.value = product
                     self.productImages.value = product.images
                 case .failure(let error):
-                    //TODO: - Alert
-                    print(error)
+                    self.error.value = error.description
                 }
             }
         }
@@ -90,16 +91,16 @@ final class DefaultDetailViewModel: DetailViewModel {
         imageDatas.removeAll()
     }
     
-    func delete(completion: @escaping (NetworkError?) -> Void) {
+    func delete(completion: @escaping (Bool) -> Void) {
         guard let id = product.value?.id else { return }
         deleteLocationUseCase.delete(id: id)
         deleteProductUseCase.deleteData(id: id) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
-                    completion(nil)
+                    completion(true)
                 case .failure(let error):
-                    completion(error)
+                    self.error.value = error.description
                 }
             }
         }
@@ -114,7 +115,7 @@ final class DefaultDetailViewModel: DetailViewModel {
                     self.imageDatas.append(data)
                     completion(data)
                 case .failure(let error):
-                    print(error)
+                    self.error.value = error.description
                 }
             }
         }

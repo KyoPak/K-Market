@@ -24,6 +24,7 @@ protocol AddViewModelOutput {
     var userLocale: String { get }
     var userSubLocale: String { get }
     var imageDatas: Observable<[Data]> { get }
+    var error: Observable<String?> { get }
     
     func fetchImageData(index: Int) -> Data
 }
@@ -35,6 +36,7 @@ final class DefaultAddViewModel: AddViewModel {
     private(set) var userLocale: String
     private(set) var userSubLocale: String
     private(set) var imageDatas: Observable<[Data]> = Observable([])
+    var error = Observable<String?>(nil)
     
     private var product: PostProduct?
     
@@ -62,7 +64,7 @@ final class DefaultAddViewModel: AddViewModel {
         guard let data = data else { return }
         imageDatas.value.append(data)
     }
-
+    
     func setupProduct(
         name: String?,
         price: String?,
@@ -88,17 +90,14 @@ final class DefaultAddViewModel: AddViewModel {
         guard let product = product else { return }
         
         postProductUseCase.postData(product, imageDatas: imageDatas.value) { result in
-            switch result {
-            case .success(let data):
-                self.postLocation(id: data.id)
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    self.postLocation(id: data.id)
                     completion(nil)
+                case .failure(let error):
+                    self.error.value = error.description
                 }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    completion(error)
-                }
-                print(error)
             }
         }
     }
