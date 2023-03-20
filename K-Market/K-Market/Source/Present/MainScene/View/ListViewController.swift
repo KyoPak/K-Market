@@ -30,6 +30,7 @@ final class ListViewController: UIViewController {
             collectionViewLayout: collectionViewLayoutChange(type: .list)
         )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         return collectionView
     }()
     
@@ -80,7 +81,7 @@ extension ListViewController {
 }
 
 // MARK: - Bind
-extension ListViewController {
+extension ListViewController: AlertPresentable {
     func bindData() {
         viewModel.productList.bind { [weak self] datas in
             DispatchQueue.main.async {
@@ -93,6 +94,11 @@ extension ListViewController {
             self.collectionView.collectionViewLayout = self.collectionViewLayoutChange(type: collectionType)
             self.collectionView.reloadData()
         }
+        
+        viewModel.error.bind { [weak self] error in
+            guard let error else { return }
+            self?.presentAlert(title: error)
+        }
     }
 }
 
@@ -103,7 +109,7 @@ extension ListViewController {
 
             var cell: CollectionCell
             
-            switch self.viewModel.fetchLayoutStatus() {
+            switch self.viewModel.layoutStatus.value {
             case .list:
                 guard let listCell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: ListCollectionViewCell.identifier,
@@ -162,15 +168,13 @@ extension ListViewController {
 extension ListViewController {
     private func presentLocationAlert() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let action = UIAlertAction(title: Constant.allow, style: .default) { _ in
+        let allowAction = UIAlertAction(title: Constant.allow, style: .default) { _ in
             guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
             UIApplication.shared.open(settingURL)
         }
         
-        let cancel = UIAlertAction(title: Constant.reject, style: .cancel)
-        
-        alert.addAction(action)
-        alert.addAction(cancel)
+        let cancelAction = UIAlertAction(title: Constant.reject, style: .cancel)
+        [allowAction, cancelAction].forEach(alert.addAction(_:))
         
         present(alert, animated: true)
     }
@@ -267,6 +271,7 @@ extension ListViewController {
             section.interGroupSpacing = 10
             
             let layout = UICollectionViewCompositionalLayout(section: section)
+            
             return layout
         }
     }

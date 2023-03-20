@@ -19,23 +19,23 @@ final class DefaultEditCoordinator: EditCoordinator {
     private let product: Product
     private let imageDatas: [Data]
     
-    private let sceneDIContainer: SceneViewModelDependencies
+    private let viewModelDIContainer: ViewModelDIManageable
     
     init(
         product: Product,
         imageDatas: [Data],
         navigationController: UINavigationController,
-        sceneDIContainer: SceneViewModelDependencies
+        viewModelDIContainer: ViewModelDIManageable
     ) {
         self.product = product
         self.imageDatas = imageDatas
         self.navigationController = navigationController
-        self.sceneDIContainer = sceneDIContainer
+        self.viewModelDIContainer = viewModelDIContainer
     }
     
     func start() {
         let viewController = EditViewController(
-            viewModel: sceneDIContainer.makeEditViewModel(product: product, imagesData: imageDatas)
+            viewModel: viewModelDIContainer.makeEditViewModel(product: product, imagesData: imageDatas)
         )
         
         viewController.coordinator = self

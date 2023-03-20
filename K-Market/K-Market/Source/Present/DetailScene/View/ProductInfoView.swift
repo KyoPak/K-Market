@@ -26,6 +26,7 @@ final class ProductInfoView: UIView {
         textView.isScrollEnabled = true
         textView.font = UIFont.systemFont(ofSize: 20)
         textView.translatesAutoresizingMaskIntoConstraints = false
+        
         return textView
     }()
     
@@ -33,6 +34,7 @@ final class ProductInfoView: UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .systemGray
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
@@ -40,6 +42,7 @@ final class ProductInfoView: UIView {
         let view = UIView(frame: .zero)
         view.backgroundColor = .systemGray
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     

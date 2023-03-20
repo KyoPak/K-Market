@@ -11,13 +11,14 @@ protocol DetailViewModelInput {
     func setup()
     func clear()
     func fetchImageData(index: Int, completion: @escaping (Data) -> Void)
-    func delete(completion: @escaping (NetworkError?) -> Void)
+    func delete(completion: @escaping (Bool) -> Void)
 }
 
 protocol DetailViewModelOutput {
     var product: Observable<Product?> { get }
     var productLocale:  Observable<String> { get }
     var productImages: Observable<[ProductImage]?> { get }
+    var error: Observable<String?> { get }
     var imageDatas: [Data] { get }
     
     func fetchProductImageCount() -> Int
@@ -29,9 +30,12 @@ protocol DetailViewModelOutput {
 protocol DetailViewModel: DetailViewModelInput, DetailViewModelOutput { }
 
 final class DefaultDetailViewModel: DetailViewModel {
+    // MARK: - OUTPUT
     var product: Observable<Product?> = Observable(nil)
-    var productImages: Observable<[ProductImage]?> = Observable([])
     var productLocale: Observable<String> = Observable("")
+    var productImages: Observable<[ProductImage]?> = Observable([])
+    var error = Observable<String?>(nil)
+    
     private(set) var imageDatas: [Data] = []
     private var id: Int
     
@@ -41,7 +45,7 @@ final class DefaultDetailViewModel: DetailViewModel {
     private let deleteProductUseCase: DeleteProductUseCase
     private let deleteLocationUseCase: DeleteLocationUseCase
     
-    
+    // MARK: - Init
     init(id: Int,
          fetchLocationUseCase: FetchLocationUseCase,
          fetchProductDetailUseCase: FetchProductDetailUseCase,
@@ -65,8 +69,7 @@ final class DefaultDetailViewModel: DetailViewModel {
                     self.product.value = product
                     self.productImages.value = product.images
                 case .failure(let error):
-                    //TODO: - Alert
-                    print(error)
+                    self.error.value = error.description
                 }
             }
         }
@@ -74,10 +77,11 @@ final class DefaultDetailViewModel: DetailViewModel {
     
     private func fetchLocation(id: Int) {
         fetchLocationUseCase.fetch(id: id) { location in
-            self.productLocale.value = location?.subLocality ?? "위치 미등록"
+            self.productLocale.value = location?.subLocality ?? Constant.reject
         }
     }
     
+    // MARK: - INPUT
     func setup() {
         fetchLocation(id: id)
         fetchProductDetailInfo(id: id)
@@ -87,23 +91,19 @@ final class DefaultDetailViewModel: DetailViewModel {
         imageDatas.removeAll()
     }
     
-    func delete(completion: @escaping (NetworkError?) -> Void) {
+    func delete(completion: @escaping (Bool) -> Void) {
         guard let id = product.value?.id else { return }
         deleteLocationUseCase.delete(id: id)
         deleteProductUseCase.deleteData(id: id) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
-                    completion(nil)
+                    completion(true)
                 case .failure(let error):
-                    completion(error)
+                    self.error.value = error.description
                 }
             }
         }
-    }
-    
-    func fetchProductImageCount() -> Int {
-        return productImages.value?.count ?? .zero
     }
     
     func fetchImageData(index: Int, completion: @escaping (Data) -> Void) {
@@ -115,10 +115,15 @@ final class DefaultDetailViewModel: DetailViewModel {
                     self.imageDatas.append(data)
                     completion(data)
                 case .failure(let error):
-                    print(error)
+                    self.error.value = error.description
                 }
             }
         }
+    }
+    
+    // MARK: - OUTPUT Method
+    func fetchProductImageCount() -> Int {
+        return productImages.value?.count ?? .zero
     }
     
     func customDate() -> String {
@@ -133,15 +138,15 @@ final class DefaultDetailViewModel: DetailViewModel {
         let second = calendar.dateComponents([.second], from: date, to: currentDate).second
         
         if let month = month, abs(month) > .zero {
-            return String(abs(month)) + "달 전"
+            return String(abs(month)) + Constant.month
         } else if let day = day, abs(day) > .zero {
-            return String(abs(day)) + "일 전"
+            return String(abs(day)) + Constant.day
         } else if let hour = hour, abs(hour) > .zero {
-            return String(abs(hour)) + "시간 전"
+            return String(abs(hour)) + Constant.hour
         } else if let minute = minute, abs(minute) > .zero {
-            return String(abs(minute)) + "분 전"
+            return String(abs(minute)) + Constant.minute
         } else if let second = second, abs(second) > .zero {
-            return String(abs(second)) + "초 전"
+            return String(abs(second)) + Constant.hour
         } else {
             return ""
         }
@@ -151,7 +156,7 @@ final class DefaultDetailViewModel: DetailViewModel {
         guard let stock = product.value?.stock else { return "" }
         
         if stock == Int.zero {
-            return String(format: "품절")
+            return String(format: Constant.soldOut)
         } else {
             if stock > 1000 {
                 return String(format: "수량 : %@K", String(stock / 1000))
@@ -167,5 +172,17 @@ final class DefaultDetailViewModel: DetailViewModel {
             return String(format: "%@ %@K", currency.rawValue, String(price / 1000))
         }
         return String(format: "%@ %@", currency.rawValue, String(price))
+    }
+}
+
+extension DefaultDetailViewModel {
+    private enum Constant {
+        static let reject = "위치 미등록"
+        static let soldOut = "품절"
+        static let month = "달 전"
+        static let day = "일 전"
+        static let hour = "시간 전"
+        static let minute = "분 전"
+        static let second = "초 전"
     }
 }

@@ -12,6 +12,7 @@ final class DetailImageCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
     }()
     

@@ -27,6 +27,7 @@ final class HeaderView: UIView {
         )
         control.selectedSegmentTintColor = .secondaryLabel
         control.translatesAutoresizingMaskIntoConstraints = false
+        
         return control
     }()
     

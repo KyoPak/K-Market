@@ -19,6 +19,7 @@ class UploadView: UIView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         return collectionView
     }()
 
@@ -53,6 +54,7 @@ class UploadView: UIView {
         textView.returnKeyType = .done
         textView.font = .systemFont(ofSize: 15)
         textView.translatesAutoresizingMaskIntoConstraints = false
+        
         return textView
     }()
     
@@ -60,6 +62,7 @@ class UploadView: UIView {
         let segmentedControl = UISegmentedControl(items: ["KRW", "USD"])
         segmentedControl.selectedSegmentIndex = .zero
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        
         return segmentedControl
     }()
     
@@ -112,11 +115,13 @@ extension UploadView: UITextFieldDelegate, UITextViewDelegate {
             priceTextField.becomeFirstResponder()
             return true
         }
+        
         return false
     }
     
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         descriptionTextView.resignFirstResponder()
+        
         return true
     }
 

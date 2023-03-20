@@ -27,6 +27,7 @@ final class DetailViewController: UIViewController {
         collectionView.isPagingEnabled = true
         collectionView.decelerationRate = .fast
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         return collectionView
     }()
     
@@ -63,10 +64,15 @@ final class DetailViewController: UIViewController {
     }
 }
 
-extension DetailViewController {
+extension DetailViewController: AlertPresentable {
     private func bindData() {
         viewModel.productImages.bind { [weak self] _ in
             self?.collectionView.reloadData()
+        }
+        
+        viewModel.error.bind { [weak self] error in
+            guard let error else { return }
+            self?.presentAlert(title: error)
         }
     }
     
@@ -125,6 +131,7 @@ extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let imageCount = viewModel.fetchProductImageCount()
         changePageLabel(page: 1, totalPage: imageCount)
+        
         return imageCount
     }
     
@@ -171,23 +178,20 @@ extension DetailViewController {
         
         let editAction = UIAlertAction(title: "수정", style: .default) { _ in
             guard let product = self.viewModel.product.value else { return }
-            
             self.coordinator?.makeEditCoordinator(product: product, imageDatas: self.viewModel.imageDatas)
         }
         
-        let deleteAction = UIAlertAction(title: "삭제", style: .default) { _ in
-            self.viewModel.delete { error in
-                if let error = error {
-                    print(error)
-                } else {
-                    self.navigationController?.popViewController(animated: true)
+        let deleteAction = UIAlertAction(title: "삭제", style: .default) { [weak self] _ in
+            self?.viewModel.delete { result in
+                if result {
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }
         }
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-        
         [editAction, deleteAction, cancelAction].forEach(alert.addAction(_:))
+        
         present(alert, animated: true)
     }
     
@@ -199,10 +203,7 @@ extension DetailViewController {
     }
     
     private func registerCell() {
-        collectionView.register(
-            DetailImageCell.self,
-            forCellWithReuseIdentifier: DetailImageCell.identifier
-        )
+        collectionView.register(DetailImageCell.self, forCellWithReuseIdentifier: DetailImageCell.identifier)
     }
     
     private func setupConstraint() {

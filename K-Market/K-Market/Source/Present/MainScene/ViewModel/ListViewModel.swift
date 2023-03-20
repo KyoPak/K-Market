@@ -15,28 +15,31 @@ protocol ListViewModelInput {
 }
 
 protocol ListViewModelOutput {
-    var productList: Observable<[Product]> { get }
-    var userSubLocale: Observable<String> { get }
     var userLocale: String { get }
+    var userSubLocale: Observable<String> { get }
+    var productList: Observable<[Product]> { get }
+    var layoutStatus: Observable<CollectionType> { get }
+    var error: Observable<String?> { get }
     var loadImageUseCase: LoadImageUseCase { get }
     var fetchLocationUseCase: FetchLocationUseCase { get }
-    var layoutStatus: Observable<CollectionType> { get }
-    
-    func fetchLayoutStatus() -> CollectionType
 }
 
 protocol ListViewModel: ListViewModelInput, ListViewModelOutput  { }
 
 final class DefaultListViewModel: ListViewModel {
-    private(set) var userLocale = ""
-    private let fetchUseCase: FetchProductListUseCase
-    private(set) var loadImageUseCase: LoadImageUseCase
-    private(set) var fetchLocationUseCase: FetchLocationUseCase
-    
+    // MARK: - OUTPUT
     var productList = Observable<[Product]>([])
     var userSubLocale = Observable<String>(Constant.reject)
     var layoutStatus = Observable<CollectionType>(.list)
+    var error = Observable<String?>(nil)
     
+    private(set) var userLocale = ""
+    private(set) var loadImageUseCase: LoadImageUseCase
+    private(set) var fetchLocationUseCase: FetchLocationUseCase
+    
+    private let fetchUseCase: FetchProductListUseCase
+    
+    // MARK: - Init
     init(
         fetchUseCase: FetchProductListUseCase,
         loadImageUseCase: LoadImageUseCase,
@@ -47,18 +50,20 @@ final class DefaultListViewModel: ListViewModel {
         self.fetchLocationUseCase = fetchLocationUseCase
     }
     
+    // MARK: - INPUT
     func clear() {
         productList.value.removeAll()
     }
     
     func fetchProductList(pageNo: Int, itemsPerPage: Int) {
         fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: itemsPerPage) { [weak self] result in
-            switch result {
-            case .success(let datas):
-                self?.productList.value += datas
-            case .failure(let error):
-                //TODO: Delegate Alert
-                print(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let datas):
+                    self?.productList.value += datas
+                case .failure(let error):
+                    self?.error.value = error.description
+                }
             }
         }
     }
@@ -70,10 +75,6 @@ final class DefaultListViewModel: ListViewModel {
     
     func setLayoutType(layoutIndex: Int) {
         layoutStatus.value = CollectionType(rawValue: layoutIndex) ?? .list
-    }
-    
-    func fetchLayoutStatus() -> CollectionType {
-        return layoutStatus.value
     }
 }
 

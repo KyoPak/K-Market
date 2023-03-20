@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let coordinator = DefaultCoordinator(
             navigationController: navigationController,
-            serviceDIContainer: ServiceDiContainer()
+            viewModelDIContainer: ServiceDiContainer().makeSceneDIContainer()
         )
         
         coordinator.start()

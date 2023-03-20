@@ -43,10 +43,8 @@ extension EditViewController {
 
     @objc func doneButtonTapped() {
         editView.packageData()
-        viewModel.patchProduct { [weak self] error in
-            if let error = error {
-                print(error)
-            } else {
+        viewModel.patchProduct { [weak self] result in
+            if result {
                 self?.navigationController?.popViewController(animated: true)
             }
         }
@@ -79,17 +77,17 @@ extension EditViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension EditViewController {
     func setupNavigation() {
-        title = "상품수정"
+        title = Constant.editTitle
 
         let cancelButtonItem = UIBarButtonItem(
-            title: "Cancel",
+            title: Constant.cancel,
             style: .plain,
             target: self,
             action: #selector(cancelButtonTapped)
         )
 
         let doneButtonItem = UIBarButtonItem(
-            title: "Done",
+            title: Constant.done,
             style: .plain,
             target: self,
             action: #selector(doneButtonTapped)
@@ -107,5 +105,13 @@ extension EditViewController {
         view.backgroundColor = .systemBackground
         editView.collectionView.dataSource = self
         editView.collectionView.delegate = self
+    }
+}
+
+extension EditViewController {
+    private enum Constant {
+        static let editTitle = "상품수정"
+        static let cancel = "취소"
+        static let done = "수정"
     }
 }

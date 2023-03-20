@@ -19,23 +19,23 @@ final class DefaultAddCoordinator: AddCoordinator {
     private let locale: String
     private let subLocale: String
     
-    private let sceneDIContainer: SceneViewModelDependencies
+    private let viewModelDIContainer: ViewModelDIManageable
     
     init(
         locale: String,
         subLocale: String,
         navigationController: UINavigationController,
-        sceneDIContainer: SceneViewModelDependencies
+        viewModelDIContainer: ViewModelDIManageable
     ) {
         self.locale = locale
         self.subLocale = subLocale
         self.navigationController = navigationController
-        self.sceneDIContainer = sceneDIContainer
+        self.viewModelDIContainer = viewModelDIContainer
     }
     
     func start() {
         let viewController = AddViewController(
-            viewModel: sceneDIContainer.makeAddViewModel(locale: locale, subLocale: subLocale)
+            viewModel: viewModelDIContainer.makeAddViewModel(locale: locale, subLocale: subLocale)
         )
         
         viewController.coordinator = self

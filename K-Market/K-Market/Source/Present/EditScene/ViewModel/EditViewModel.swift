@@ -8,7 +8,7 @@
 import Foundation
 
 protocol EditViewModelInput {
-    func patchProduct(completion: @escaping (NetworkError?) -> Void)
+    func patchProduct(completion: @escaping (Bool) -> Void)
     func setupProduct(
         name: String?,
         price: String?,
@@ -22,17 +22,21 @@ protocol EditViewModelInput {
 protocol EditViewModelOutput {
     var product: Product { get }
     var imageDatas: [Data] { get }
+    var error: Observable<String?> { get }
 }
 
 protocol EditViewModel: EditViewModelInput, EditViewModelOutput { }
 
 class DefaultEditViewModel: EditViewModel {
+    // MARK: - OUTPUT
     private(set) var product: Product
     private(set) var imageDatas: [Data] = []
-    private var editProduct: PostProduct?
+    var error = Observable<String?>(nil)
     
+    private var editProduct: PostProduct?
     private let patchProductUseCase: PatchProductUseCase
     
+    // MARK: - Init
     init(
         product: Product,
         imagesData: [Data],
@@ -43,6 +47,7 @@ class DefaultEditViewModel: EditViewModel {
         self.patchProductUseCase = patchProductUseCase
     }
     
+    // MARK: - INPUT
     func setupProduct(
         name: String?,
         price: String?,
@@ -64,16 +69,16 @@ class DefaultEditViewModel: EditViewModel {
         )
     }
     
-    func patchProduct(completion: @escaping (NetworkError?) -> Void) {
+    func patchProduct(completion: @escaping (Bool) -> Void) {
         guard let editProduct = editProduct else { return }
         
         patchProductUseCase.patchData(id: product.id, editProduct) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
-                    completion(nil)
+                    completion(true)
                 case .failure(let error):
-                    completion(error)
+                    self.error.value = error.description
                 }
             }
         }
