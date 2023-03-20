@@ -8,6 +8,8 @@
 import UIKit
 
 final class DetailViewController: UIViewController {
+    weak var coordinator: DetailCoordinator?
+    
     private let viewModel: DetailViewModel
     private let productInfoView: ProductInfoView
     
@@ -45,7 +47,9 @@ final class DetailViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         viewModel.clear()
+        coordinator?.didFinish()
     }
     
     init(viewModel: DetailViewModel) {
@@ -167,15 +171,8 @@ extension DetailViewController {
         
         let editAction = UIAlertAction(title: "수정", style: .default) { _ in
             guard let product = self.viewModel.product.value else { return }
-            let viewModel = DefaultEditViewModel(
-                product: product,
-                imagesData: self.viewModel.imageDatas,
-                patchProductUseCase: DefaultPatchProductUseCase(
-                    productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice()))
-            )
-            let editViewController = EditViewController(viewModel: viewModel)
             
-            self.navigationController?.pushViewController(editViewController, animated: true)
+            self.coordinator?.makeEditCoordinator(product: product, imageDatas: self.viewModel.imageDatas)
         }
         
         let deleteAction = UIAlertAction(title: "삭제", style: .default) { _ in

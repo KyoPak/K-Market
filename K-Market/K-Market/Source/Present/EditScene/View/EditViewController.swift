@@ -8,11 +8,18 @@
 import UIKit
 
 final class EditViewController: UIViewController {
+    weak var coordinator: EditCoordinator?
+    
     private let viewModel: EditViewModel
     private let editView: EditView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        coordinator?.didFinish()
     }
 
     init(viewModel: EditViewModel) {
