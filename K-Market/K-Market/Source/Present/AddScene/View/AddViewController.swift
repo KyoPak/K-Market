@@ -8,12 +8,19 @@
 import UIKit
 
 final class AddViewController: UIViewController {
+    weak var coordinator: AddCoordinator?
+    
     private let addView: AddView
     private let viewModel: AddViewModel
     private let picker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        coordinator?.didFinish()
     }
     
     init(viewModel: AddViewModel) {
