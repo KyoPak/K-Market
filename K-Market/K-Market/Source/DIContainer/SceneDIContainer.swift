@@ -74,6 +74,7 @@ extension SceneDIContainer: SceneViewModelDependencies {
     func makeListViewModel() -> ListViewModel {
         return DefaultListViewModel(
             fetchUseCase: makeFetchProductListUseCase(),
+            loadImageUseCase: makeLoadImageUseCase(),
             fetchLocationUseCase: makeFetchLocationUseCase()
         )
     }

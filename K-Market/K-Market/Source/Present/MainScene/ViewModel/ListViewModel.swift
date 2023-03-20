@@ -18,6 +18,8 @@ protocol ListViewModelOutput {
     var productList: Observable<[Product]> { get }
     var userSubLocale: Observable<String> { get }
     var userLocale: String { get }
+    var loadImageUseCase: LoadImageUseCase { get }
+    var fetchLocationUseCase: FetchLocationUseCase { get }
     var layoutStatus: Observable<CollectionType> { get }
     
     func fetchLayoutStatus() -> CollectionType
@@ -28,13 +30,21 @@ protocol ListViewModel: ListViewModelInput, ListViewModelOutput  { }
 final class DefaultListViewModel: ListViewModel {
     private(set) var userLocale = ""
     private let fetchUseCase: FetchProductListUseCase
+    private(set) var loadImageUseCase: LoadImageUseCase
+    private(set) var fetchLocationUseCase: FetchLocationUseCase
     
     var productList = Observable<[Product]>([])
     var userSubLocale = Observable<String>(Constant.reject)
     var layoutStatus = Observable<CollectionType>(.list)
     
-    init(fetchUseCase: FetchProductListUseCase) {
+    init(
+        fetchUseCase: FetchProductListUseCase,
+        loadImageUseCase: LoadImageUseCase,
+        fetchLocationUseCase: FetchLocationUseCase
+    ) {
         self.fetchUseCase = fetchUseCase
+        self.loadImageUseCase = loadImageUseCase
+        self.fetchLocationUseCase = fetchLocationUseCase
     }
     
     func clear() {

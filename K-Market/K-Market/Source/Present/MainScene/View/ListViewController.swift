@@ -21,6 +21,8 @@ final class ListViewController: UIViewController {
         case main
     }
     
+    weak var coordinator: ListCoordinator?
+    
     private lazy var dataSource = configureDataSource()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
@@ -65,36 +67,15 @@ final class ListViewController: UIViewController {
 
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailView = DetailViewController(viewModel: DefaultDetailViewModel(
-            id: viewModel.productList.value[indexPath.item].id,
-            fetchLocationUseCase: DefaultFetchLocationDataUseCase(locationRepository: DefaultLocationRepository(service: DefaultFireBaseService())),
-            fetchProductDetailUseCase: DefaultFetchProductDetailUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
-            loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
-            deleteProductUseCase: DefaultDeleteProductUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
-            deleteLocationUseCase: DefaultDeleteLocationUseCase(locationRepository: DefaultLocationRepository(service: DefaultFireBaseService()))
-        )
-                                              
-        )
-        
-        navigationController?.pushViewController(detailView, animated: true)
+        let id = viewModel.productList.value[indexPath.item].id
+        coordinator?.makeDetailCoordinator(id: id)
     }
 }
-
 
 // MARK: - Action
 extension ListViewController {
     @objc private func addButtonTapped() {
-        let addViewModel = DefaultAddViewModel(
-            locale: viewModel.userLocale,
-            subLocale: viewModel.userSubLocale.value,
-            postProductUseCase: DefaultPostProductUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())),
-            postLocationUseCase: DefaultPostLocationUseCase(locationRepository: DefaultLocationRepository(service: DefaultFireBaseService())),
-            loadImageUseCase: DefaultLoadImageUseCase(productRepository: DefaultProductRepository(networkService: DefaultNetworkSevice())))
-        
-        let addViewController = AddViewController(viewModel: addViewModel)
-        
-        addViewController.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(addViewController, animated: true)
+        coordinator?.makeAddCoordinator(locale: viewModel.userLocale, subLocale: viewModel.userSubLocale.value)
     }
 }
 
@@ -147,16 +128,8 @@ extension ListViewController {
             
             let cellViewModel = DefaultProductCellViewModel(
                 product: data,
-                loadImageUseCase: DefaultLoadImageUseCase(
-                    productRepository: DefaultProductRepository(
-                        networkService: DefaultNetworkSevice()
-                    )
-                ),
-                fetchLocationUseCase: DefaultFetchLocationDataUseCase(
-                    locationRepository: DefaultLocationRepository(
-                        service: DefaultFireBaseService()
-                    )
-                )
+                loadImageUseCase: self.viewModel.loadImageUseCase,
+                fetchLocationUseCase: self.viewModel.fetchLocationUseCase
             )
             
             cell.setupViewModel(cellViewModel)
