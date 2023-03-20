@@ -20,20 +20,20 @@ final class DefaultDetailCoordinator: DetailCoordinator {
     
     private let id: Int
     
-    private let sceneDIContainer: SceneViewModelDependencies
+    private let viewModelDIContainer: ViewModelDIManageable
     
     init(
         id: Int,
         navigationController: UINavigationController,
-        sceneDIContainer: SceneViewModelDependencies
+        viewModelDIContainer: ViewModelDIManageable
     ) {
         self.id = id
         self.navigationController = navigationController
-        self.sceneDIContainer = sceneDIContainer
+        self.viewModelDIContainer = viewModelDIContainer
     }
     
     func start() {
-        let viewController = DetailViewController(viewModel: sceneDIContainer.makeDetailViewModel(id: id))
+        let viewController = DetailViewController(viewModel: viewModelDIContainer.makeDetailViewModel(id: id))
         
         viewController.coordinator = self
         
@@ -45,7 +45,7 @@ final class DefaultDetailCoordinator: DetailCoordinator {
             product: product,
             imageDatas: imageDatas,
             navigationController: navigationController,
-            sceneDIContainer: sceneDIContainer
+            viewModelDIContainer: viewModelDIContainer
         )
         
         coordinator.parentCoordinator = self

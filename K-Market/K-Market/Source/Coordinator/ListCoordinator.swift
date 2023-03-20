@@ -18,18 +18,18 @@ final class DefaultListCoordinator: ListCoordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
-    private let sceneDIContainer: SceneViewModelDependencies
+    private let viewModelDIContainer: ViewModelDIManageable
     
     init(
         navigationController: UINavigationController,
-        sceneDIContainer: SceneViewModelDependencies
+        viewModelDIContainer: ViewModelDIManageable
     ) {
         self.navigationController = navigationController
-        self.sceneDIContainer = sceneDIContainer
+        self.viewModelDIContainer = viewModelDIContainer
     }
     
     func start() {
-        let viewController = ListViewController(viewModel: sceneDIContainer.makeListViewModel())
+        let viewController = ListViewController(viewModel: viewModelDIContainer.makeListViewModel())
         viewController.coordinator = self
         
         navigationController.pushViewController(viewController, animated: true)
@@ -39,7 +39,7 @@ final class DefaultListCoordinator: ListCoordinator {
         let coordinator = DefaultDetailCoordinator(
             id: id,
             navigationController: navigationController,
-            sceneDIContainer: sceneDIContainer
+            viewModelDIContainer: viewModelDIContainer
         )
         
         coordinator.parentCoordinator = self
@@ -53,7 +53,7 @@ final class DefaultListCoordinator: ListCoordinator {
             locale: locale,
             subLocale: subLocale,
             navigationController: navigationController,
-            sceneDIContainer: sceneDIContainer
+            viewModelDIContainer: viewModelDIContainer
         )
         
         coordinator.parentCoordinator = self

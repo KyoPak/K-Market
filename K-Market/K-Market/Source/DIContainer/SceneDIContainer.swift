@@ -69,8 +69,9 @@ final class SceneDIContainer {
     }
 }
 
-extension SceneDIContainer: SceneViewModelDependencies {
-    // MARK: - Make ViewModel
+
+// MARK: - Manage ViewModel DI
+extension SceneDIContainer: ViewModelDIManageable {
     func makeListViewModel() -> ListViewModel {
         return DefaultListViewModel(
             fetchUseCase: makeFetchProductListUseCase(),
@@ -106,7 +107,8 @@ extension SceneDIContainer: SceneViewModelDependencies {
     }
 }
 
-protocol SceneViewModelDependencies {
+// MARK: - ViewModel Inject Protocol
+protocol ViewModelDIManageable {
     func makeListViewModel() -> ListViewModel
     func makeDetailViewModel(id: Int) -> DetailViewModel
     func makeAddViewModel(locale: String, subLocale: String) -> AddViewModel

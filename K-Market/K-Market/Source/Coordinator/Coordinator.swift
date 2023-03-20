@@ -19,19 +19,19 @@ final class DefaultCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
-    private let serviceDIContainer: ServiceDiContainer
+    private let viewModelDIContainer: ViewModelDIManageable
     
     init(navigationController: UINavigationController,
-         serviceDIContainer: ServiceDiContainer
+         viewModelDIContainer: ViewModelDIManageable
     ) {
         self.navigationController = navigationController
-        self.serviceDIContainer = serviceDIContainer
+        self.viewModelDIContainer = viewModelDIContainer
     }
     
     func start() {
         let listCoordinator = DefaultListCoordinator(
             navigationController: navigationController,
-            sceneDIContainer: serviceDIContainer.makeSceneDIContainer()
+            viewModelDIContainer: viewModelDIContainer
         )
         
         listCoordinator.parentCoordinator = self
