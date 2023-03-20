@@ -48,7 +48,7 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
             if let subLocale = data?.subLocality {
                 self?.productLocale.value = subLocale
             } else {
-                self?.productLocale.value = "위치 미등록"
+                self?.productLocale.value = Constant.reject
             }
         }
     }
@@ -67,7 +67,7 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
     // MARK: - OUTPUT Method
     func customStockText() -> String {
         if product.stock == Int.zero {
-            return String(format: "품절")
+            return String(format: Constant.soldOut)
         } else {
             if product.stock > 1000 {
                 return String(format: "수량 : %@K", String(product.stock / 1000))
@@ -81,5 +81,12 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
             return String(format: "%@ %@K", product.currency.rawValue, String(price / 1000))
         }
         return String(format: "%@ %@", product.currency.rawValue, String(price))
+    }
+}
+
+extension DefaultProductCellViewModel {
+    private enum Constant {
+        static let reject = "위치 미등록"
+        static let soldOut = "품절"
     }
 }

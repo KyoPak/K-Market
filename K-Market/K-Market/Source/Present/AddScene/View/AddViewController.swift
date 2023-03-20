@@ -149,17 +149,17 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
 // MARK: - UI Constraints
 extension AddViewController {
     func setupNavigation() {
-        title = "상품등록"
+        title = Constant.rigisterTitle
         
         let cancelButtonItem = UIBarButtonItem(
-            title: "Cancel",
+            title: Constant.cancel,
             style: .plain,
             target: self,
             action: #selector(cancelButtonTapped)
         )
         
         let doneButtonItem = UIBarButtonItem(
-            title: "Done",
+            title: Constant.done,
             style: .plain,
             target: self,
             action: #selector(doneButtonTapped)
@@ -178,5 +178,13 @@ extension AddViewController {
         picker.delegate = self
         addView.collectionView.dataSource = self
         addView.collectionView.delegate = self
+    }
+}
+
+extension AddViewController {
+    private enum Constant {
+        static let rigisterTitle = "상품등록"
+        static let cancel = "취소"
+        static let done = "등록"
     }
 }

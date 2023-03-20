@@ -76,7 +76,7 @@ final class DefaultDetailViewModel: DetailViewModel {
     
     private func fetchLocation(id: Int) {
         fetchLocationUseCase.fetch(id: id) { location in
-            self.productLocale.value = location?.subLocality ?? "위치 미등록"
+            self.productLocale.value = location?.subLocality ?? Constant.reject
         }
     }
     
@@ -137,15 +137,15 @@ final class DefaultDetailViewModel: DetailViewModel {
         let second = calendar.dateComponents([.second], from: date, to: currentDate).second
         
         if let month = month, abs(month) > .zero {
-            return String(abs(month)) + "달 전"
+            return String(abs(month)) + Constant.month
         } else if let day = day, abs(day) > .zero {
-            return String(abs(day)) + "일 전"
+            return String(abs(day)) + Constant.day
         } else if let hour = hour, abs(hour) > .zero {
-            return String(abs(hour)) + "시간 전"
+            return String(abs(hour)) + Constant.hour
         } else if let minute = minute, abs(minute) > .zero {
-            return String(abs(minute)) + "분 전"
+            return String(abs(minute)) + Constant.minute
         } else if let second = second, abs(second) > .zero {
-            return String(abs(second)) + "초 전"
+            return String(abs(second)) + Constant.hour
         } else {
             return ""
         }
@@ -155,7 +155,7 @@ final class DefaultDetailViewModel: DetailViewModel {
         guard let stock = product.value?.stock else { return "" }
         
         if stock == Int.zero {
-            return String(format: "품절")
+            return String(format: Constant.soldOut)
         } else {
             if stock > 1000 {
                 return String(format: "수량 : %@K", String(stock / 1000))
@@ -171,5 +171,17 @@ final class DefaultDetailViewModel: DetailViewModel {
             return String(format: "%@ %@K", currency.rawValue, String(price / 1000))
         }
         return String(format: "%@ %@", currency.rawValue, String(price))
+    }
+}
+
+extension DefaultDetailViewModel {
+    private enum Constant {
+        static let reject = "위치 미등록"
+        static let soldOut = "품절"
+        static let month = "달 전"
+        static let day = "일 전"
+        static let hour = "시간 전"
+        static let minute = "분 전"
+        static let second = "초 전"
     }
 }
