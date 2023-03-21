@@ -88,6 +88,8 @@ final class DefaultListViewModel: ListViewModel {
     }
     
     func loadImage(index: Int, completion: @escaping (Data) -> Void) {
+        if index >= productList.value.count { return }
+        
         let thumbnail = productList.value[index].thumbnail
         
         if let data =  checkWrapperDataUseCase.check(thumbnail: thumbnail) {
