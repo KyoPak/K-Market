@@ -12,7 +12,6 @@ protocol ProductCellViewModelInput { }
 protocol ProductCellViewModelOutput {
     var product: Product { get }
     var productLocale: Observable<String> { get }
-    var imageData: Observable<Data?> { get }
     
     func customStockText() -> String
     func customPriceText(_ price: Double) -> String
@@ -24,22 +23,16 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
     // MARK: - OUTPUT
     private(set) var product: Product
     var productLocale: Observable<String> = Observable("")
-    var imageData: Observable<Data?> = Observable(nil)
     
-    private let loadImageUseCase: LoadImageUseCase
     private let fetchLocationUseCase: FetchLocationUseCase
     
     // MARK: - Init
     init(
         product: Product,
-        loadImageUseCase: LoadImageUseCase,
         fetchLocationUseCase: FetchLocationUseCase
     ) {
         self.product = product
-        self.loadImageUseCase = loadImageUseCase
         self.fetchLocationUseCase = fetchLocationUseCase
-        
-        loadImage()
         fetchLocationData()
     }
     
@@ -49,17 +42,6 @@ final class DefaultProductCellViewModel: ProductCellViewModel {
                 self?.productLocale.value = subLocale
             } else {
                 self?.productLocale.value = Constant.reject
-            }
-        }
-    }
-    
-    private func loadImage() {
-        loadImageUseCase.loadImage(thumbnail: product.thumbnail) { result in
-            switch result {
-            case .success(let data):
-                self.imageData.value = data
-            case .failure(let error):
-                print("Error : " ,error)
             }
         }
     }

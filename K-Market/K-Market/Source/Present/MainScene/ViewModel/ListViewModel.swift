@@ -9,9 +9,10 @@ import Foundation
 
 protocol ListViewModelInput {
     func clear()
-    func fetchProductList(pageNo: Int, itemsPerPage: Int)
+    func fetchProductList()
     func setUserLocation(locale: String, subLocale: String)
     func setLayoutType(layoutIndex: Int)
+    func loadImage(index: Int, completion: @escaping (Data) -> Void)
 }
 
 protocol ListViewModelOutput {
@@ -38,6 +39,7 @@ final class DefaultListViewModel: ListViewModel {
     private(set) var fetchLocationUseCase: FetchLocationUseCase
     
     private let fetchUseCase: FetchProductListUseCase
+    private var pageNo = Constant.pageUnit
     
     // MARK: - Init
     init(
@@ -52,11 +54,16 @@ final class DefaultListViewModel: ListViewModel {
     
     // MARK: - INPUT
     func clear() {
+        pageNo = Constant.pageUnit
         productList.value.removeAll()
     }
     
-    func fetchProductList(pageNo: Int, itemsPerPage: Int) {
-        fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: itemsPerPage) { [weak self] result in
+    func fetchProductList() {
+        defer {
+            pageNo += Constant.pageUnit
+        }
+        
+        fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: Constant.itemsPerPage) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let datas):
@@ -76,10 +83,25 @@ final class DefaultListViewModel: ListViewModel {
     func setLayoutType(layoutIndex: Int) {
         layoutStatus.value = CollectionType(rawValue: layoutIndex) ?? .list
     }
+    
+    func loadImage(index: Int, completion: @escaping (Data) -> Void) {
+        loadImageUseCase.loadImage(thumbnail: productList.value[index].thumbnail) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    completion(data)
+                case .failure(let error):
+                    print("Error : " ,error)
+                }
+            }
+        }
+    }
 }
 
 extension DefaultListViewModel {
     private enum Constant {
         static let reject = "위치 미등록"
+        static let itemsPerPage = 15
+        static let pageUnit = 1
     }
 }
