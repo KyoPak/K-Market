@@ -64,20 +64,14 @@ class CollectionCell: UICollectionViewCell {
         salePriceLabel.text = viewModel?.customPriceText(viewModel?.product.bargainPrice ?? .zero)
         viewModel?.product.discountedPrice == .zero ? salePriceLabel.isHidden = true : changePriceLabel()
         
-        viewModel?.imageData.bind({ [weak self] data in
-            DispatchQueue.main.async {
-                guard let data = data else {
-                    self?.imageView.image = UIImage(named: "photo")
-                    return
-                }
-                
-                self?.imageView.image = UIImage(data: data)
-            }
-        })
-        
         viewModel?.productLocale.bind({ [weak self] locale in
             self?.locationLabel.text = locale
         })
+    }
+    
+    func setupImage(data: Data) {
+        imageView.image = UIImage(data: data)
+        indicatorView.stopAnimating()
     }
     
     func changePriceLabel() {

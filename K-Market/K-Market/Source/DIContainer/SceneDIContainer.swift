@@ -11,12 +11,14 @@ final class SceneDIContainer {
     struct ServiceDependencies {
         let apiDataService: NetworkSevice
         let locationDataService: FireBaseService
+        let wrapperDataService: CacheService
     }
     
     private let serviceDependencies: ServiceDependencies
     
     private lazy var productRepository: ProductRepository = makeProductRepository()
     private lazy var locationRepository: LocationRepository = makeLocationRepository()
+    private lazy var wrapperdataRepository: WrapperDataRepository = makeWrapperDataRepository()
     
     init(serviceDependencies: ServiceDependencies) {
         self.serviceDependencies = serviceDependencies
@@ -29,6 +31,10 @@ final class SceneDIContainer {
     
     func makeLocationRepository() -> LocationRepository {
         return DefaultLocationRepository(service: serviceDependencies.locationDataService)
+    }
+    
+    func makeWrapperDataRepository() -> WrapperDataRepository {
+        return DefaultWrapperDataRepository(cacheService: serviceDependencies.wrapperDataService)
     }
     
     // MARK: - Make UseCase
@@ -67,6 +73,10 @@ final class SceneDIContainer {
     func makeDeleteLocationUseCase() -> DeleteLocationUseCase {
         return DefaultDeleteLocationUseCase(locationRepository: locationRepository)
     }
+    
+    func makeCheckWrapperDataUseCase() -> CheckWrapperDataUseCase {
+        return DefaultCheckWrapperDataUseCase(wrapperDataRepository: wrapperdataRepository)
+    }
 }
 
 
@@ -76,7 +86,8 @@ extension SceneDIContainer: ViewModelDIManageable {
         return DefaultListViewModel(
             fetchUseCase: makeFetchProductListUseCase(),
             loadImageUseCase: makeLoadImageUseCase(),
-            fetchLocationUseCase: makeFetchLocationUseCase()
+            fetchLocationUseCase: makeFetchLocationUseCase(),
+            checkWrapperDataUseCase: makeCheckWrapperDataUseCase()
         )
     }
     

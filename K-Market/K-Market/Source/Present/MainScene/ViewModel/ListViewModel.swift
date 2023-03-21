@@ -9,9 +9,10 @@ import Foundation
 
 protocol ListViewModelInput {
     func clear()
-    func fetchProductList(pageNo: Int, itemsPerPage: Int)
+    func fetchProductList()
     func setUserLocation(locale: String, subLocale: String)
     func setLayoutType(layoutIndex: Int)
+    func loadImage(index: Int, completion: @escaping (Data) -> Void)
 }
 
 protocol ListViewModelOutput {
@@ -36,27 +37,36 @@ final class DefaultListViewModel: ListViewModel {
     private(set) var userLocale = ""
     private(set) var loadImageUseCase: LoadImageUseCase
     private(set) var fetchLocationUseCase: FetchLocationUseCase
+    private let checkWrapperDataUseCase: CheckWrapperDataUseCase
     
     private let fetchUseCase: FetchProductListUseCase
+    private var pageNo = Constant.pageUnit
     
     // MARK: - Init
     init(
         fetchUseCase: FetchProductListUseCase,
         loadImageUseCase: LoadImageUseCase,
-        fetchLocationUseCase: FetchLocationUseCase
+        fetchLocationUseCase: FetchLocationUseCase,
+        checkWrapperDataUseCase: CheckWrapperDataUseCase
     ) {
         self.fetchUseCase = fetchUseCase
         self.loadImageUseCase = loadImageUseCase
         self.fetchLocationUseCase = fetchLocationUseCase
+        self.checkWrapperDataUseCase = checkWrapperDataUseCase
     }
     
     // MARK: - INPUT
     func clear() {
+        pageNo = Constant.pageUnit
         productList.value.removeAll()
     }
     
-    func fetchProductList(pageNo: Int, itemsPerPage: Int) {
-        fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: itemsPerPage) { [weak self] result in
+    func fetchProductList() {
+        defer {
+            pageNo += Constant.pageUnit
+        }
+        
+        fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: Constant.itemsPerPage) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let datas):
@@ -76,10 +86,36 @@ final class DefaultListViewModel: ListViewModel {
     func setLayoutType(layoutIndex: Int) {
         layoutStatus.value = CollectionType(rawValue: layoutIndex) ?? .list
     }
+    
+    func loadImage(index: Int, completion: @escaping (Data) -> Void) {
+        if index >= productList.value.count { return }
+        
+        let thumbnail = productList.value[index].thumbnail
+        
+        if let data =  checkWrapperDataUseCase.check(thumbnail: thumbnail) {
+            DispatchQueue.main.async {
+                completion(data)
+            }
+        } else {
+            loadImageUseCase.loadImage(thumbnail: thumbnail) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data):
+                        self.checkWrapperDataUseCase.save(thumbnail: thumbnail, data: data)
+                        completion(data)
+                    case .failure(let error):
+                        print("Error : " ,error)
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension DefaultListViewModel {
     private enum Constant {
         static let reject = "위치 미등록"
+        static let itemsPerPage = 15
+        static let pageUnit = 1
     }
 }

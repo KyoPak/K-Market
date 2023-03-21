@@ -51,7 +51,7 @@ final class ListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.clear()
-        viewModel.fetchProductList(pageNo: 1, itemsPerPage: 15)
+        viewModel.fetchProductList()
     }
     
     init(viewModel: ListViewModel) {
@@ -70,6 +70,17 @@ extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let id = viewModel.productList.value[indexPath.item].id
         coordinator?.makeDetailCoordinator(id: id)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let collectionViewContentSizeY = scrollView.contentSize.height
+        let contentOffsetY = scrollView.contentOffset.y
+        let heightRemainBottomHeight = collectionViewContentSizeY - contentOffsetY
+        let frameHeight = scrollView.frame.size.height
+        
+        if heightRemainBottomHeight < frameHeight {
+            viewModel.fetchProductList()
+        }
     }
 }
 
@@ -134,12 +145,18 @@ extension ListViewController {
             
             let cellViewModel = DefaultProductCellViewModel(
                 product: data,
-                loadImageUseCase: self.viewModel.loadImageUseCase,
                 fetchLocationUseCase: self.viewModel.fetchLocationUseCase
             )
             
+            cell.indicatorView.startAnimating()
             cell.setupViewModel(cellViewModel)
             cell.setupBind()
+            
+            self.viewModel.loadImage(index: indexPath.item) { data in
+                if indexPath == collectionView.indexPath(for: cell) {
+                    cell.setupImage(data: data)
+                }
+            }
             
             return cell
         }
