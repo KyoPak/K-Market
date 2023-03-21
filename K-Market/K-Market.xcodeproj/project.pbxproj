@@ -50,6 +50,8 @@
 		3C4015AD29C4492F007448A8 /* ProductInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015AC29C4492F007448A8 /* ProductInfoView.swift */; };
 		3C4015B229C4AF4B007448A8 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015B129C4AF4B007448A8 /* AddViewController.swift */; };
 		3C4015B429C4AF63007448A8 /* AddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015B329C4AF63007448A8 /* AddViewModel.swift */; };
+		3C63BFF129C951E800ADCB42 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C63BFF029C951E800ADCB42 /* CacheService.swift */; };
+		3C63BFF329C9530000ADCB42 /* WrapperData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C63BFF229C9530000ADCB42 /* WrapperData.swift */; };
 		3C7DD6DC29C76BF6004E66D1 /* DeleteLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DD6DB29C76BF6004E66D1 /* DeleteLocationUseCase.swift */; };
 		3CA09F4D29C75F4C00C51452 /* DeleteDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09F4C29C75F4C00C51452 /* DeleteDataRequest.swift */; };
 		3CA09F4F29C7660400C51452 /* DeleteURIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09F4E29C7660400C51452 /* DeleteURIRequest.swift */; };
@@ -141,6 +143,8 @@
 		3C4015AC29C4492F007448A8 /* ProductInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoView.swift; sourceTree = "<group>"; };
 		3C4015B129C4AF4B007448A8 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		3C4015B329C4AF63007448A8 /* AddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModel.swift; sourceTree = "<group>"; };
+		3C63BFF029C951E800ADCB42 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
+		3C63BFF229C9530000ADCB42 /* WrapperData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperData.swift; sourceTree = "<group>"; };
 		3C7DD6DB29C76BF6004E66D1 /* DeleteLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteLocationUseCase.swift; sourceTree = "<group>"; };
 		3CA09F4C29C75F4C00C51452 /* DeleteDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDataRequest.swift; sourceTree = "<group>"; };
 		3CA09F4E29C7660400C51452 /* DeleteURIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteURIRequest.swift; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 				3C23C2DF29BB020D00802CEC /* Repository */,
 				3C13A80529B9CB7800E2FB03 /* ProductStorage */,
 				3C23C2FD29BB28EF00802CEC /* LocationStorage */,
+				3C63BFEF29C951AE00ADCB42 /* ImageTemporaryStorage */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				3C13A7FC29B9B6BC00E2FB03 /* LocationData.swift */,
 				3CFA1E1129C58E5B0024BA3C /* PostProduct.swift */,
 				3CB4B5FB29C69E860012BBB1 /* PostResponse.swift */,
+				3C63BFF229C9530000ADCB42 /* WrapperData.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -486,6 +492,14 @@
 				3C4015B329C4AF63007448A8 /* AddViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3C63BFEF29C951AE00ADCB42 /* ImageTemporaryStorage */ = {
+			isa = PBXGroup;
+			children = (
+				3C63BFF029C951E800ADCB42 /* CacheService.swift */,
+			);
+			path = ImageTemporaryStorage;
 			sourceTree = "<group>";
 		};
 		3CA9B6FB29BCAB1300C3B28D /* Protocol */ = {
@@ -775,6 +789,7 @@
 				3CFA1E1929C5FA060024BA3C /* ListFetchRequest.swift in Sources */,
 				3C244F9029C85B92007FCA2E /* AlertPresentable.swift in Sources */,
 				3C13A7FD29B9B6BC00E2FB03 /* LocationData.swift in Sources */,
+				3C63BFF129C951E800ADCB42 /* CacheService.swift in Sources */,
 				3C13A7FB29B9B3AB00E2FB03 /* ProductPage.swift in Sources */,
 				3CFA1E1B29C5FA3C0024BA3C /* DetailFetchRequest.swift in Sources */,
 				3C13A7E529B9A74300E2FB03 /* ListViewController.swift in Sources */,
@@ -782,6 +797,7 @@
 				3CA09F4F29C7660400C51452 /* DeleteURIRequest.swift in Sources */,
 				3C4015A229C41794007448A8 /* DetailViewModel.swift in Sources */,
 				3C40159B29C2E92C007448A8 /* Observabel.swift in Sources */,
+				3C63BFF329C9530000ADCB42 /* WrapperData.swift in Sources */,
 				3C13A80229B9C85600E2FB03 /* HTTPMethod.swift in Sources */,
 				3CB4B60529C6A33B0012BBB1 /* EditPatchRequest.swift in Sources */,
 				3C23C2E529BB10A300802CEC /* URLComponents+Extension.swift in Sources */,
