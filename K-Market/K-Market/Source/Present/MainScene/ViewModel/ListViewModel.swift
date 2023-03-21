@@ -37,6 +37,7 @@ final class DefaultListViewModel: ListViewModel {
     private(set) var userLocale = ""
     private(set) var loadImageUseCase: LoadImageUseCase
     private(set) var fetchLocationUseCase: FetchLocationUseCase
+    private let checkWrapperDataUseCase: CheckWrapperDataUseCase
     
     private let fetchUseCase: FetchProductListUseCase
     private var pageNo = Constant.pageUnit
@@ -45,11 +46,13 @@ final class DefaultListViewModel: ListViewModel {
     init(
         fetchUseCase: FetchProductListUseCase,
         loadImageUseCase: LoadImageUseCase,
-        fetchLocationUseCase: FetchLocationUseCase
+        fetchLocationUseCase: FetchLocationUseCase,
+        checkWrapperDataUseCase: CheckWrapperDataUseCase
     ) {
         self.fetchUseCase = fetchUseCase
         self.loadImageUseCase = loadImageUseCase
         self.fetchLocationUseCase = fetchLocationUseCase
+        self.checkWrapperDataUseCase = checkWrapperDataUseCase
     }
     
     // MARK: - INPUT
@@ -85,13 +88,22 @@ final class DefaultListViewModel: ListViewModel {
     }
     
     func loadImage(index: Int, completion: @escaping (Data) -> Void) {
-        loadImageUseCase.loadImage(thumbnail: productList.value[index].thumbnail) { result in
+        let thumbnail = productList.value[index].thumbnail
+        
+        if let data =  checkWrapperDataUseCase.check(thumbnail: thumbnail) {
             DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    completion(data)
-                case .failure(let error):
-                    print("Error : " ,error)
+                completion(data)
+            }
+        } else {
+            loadImageUseCase.loadImage(thumbnail: thumbnail) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data):
+                        self.checkWrapperDataUseCase.save(thumbnail: thumbnail, data: data)
+                        completion(data)
+                    case .failure(let error):
+                        print("Error : " ,error)
+                    }
                 }
             }
         }
