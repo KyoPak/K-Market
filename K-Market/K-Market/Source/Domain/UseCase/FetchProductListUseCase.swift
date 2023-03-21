@@ -41,7 +41,7 @@ extension DefaultFetchProductUseCase: FetchProductListUseCase {
         itemsPerPage: Int,
         completion: @escaping (Result<[Product], NetworkError>) -> Void
     ) {
-        let request = ListFetchRequest(pageNo: pageNo, itemsPerPage: itemsPerPage)
+        let request = FetchListRequest(pageNo: pageNo, itemsPerPage: itemsPerPage)
         productRepository.request(customRequest: request) { result in
             switch result {
             case .success(let data):
