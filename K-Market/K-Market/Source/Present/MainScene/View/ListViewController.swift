@@ -148,6 +148,7 @@ extension ListViewController {
                 fetchLocationUseCase: self.viewModel.fetchLocationUseCase
             )
             
+            cell.indicatorView.startAnimating()
             cell.setupViewModel(cellViewModel)
             cell.setupBind()
             

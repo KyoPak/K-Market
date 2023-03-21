@@ -71,6 +71,7 @@ class CollectionCell: UICollectionViewCell {
     
     func setupImage(data: Data) {
         imageView.image = UIImage(data: data)
+        indicatorView.stopAnimating()
     }
     
     func changePriceLabel() {
