@@ -168,16 +168,7 @@ extension ListViewController {
         var snapshot = SnapShot()
         snapshot.appendSections([.main])
         snapshot.appendItems(data)
-        snapshot.reloadSections([.main])
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
-    }
-    
-    private func reloadSnapshot(data: [Product]) {
-        var snapshot = SnapShot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(data)
-        snapshot.reloadSections([.main])
-        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
 
