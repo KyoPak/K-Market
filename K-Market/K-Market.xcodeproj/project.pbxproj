@@ -54,6 +54,7 @@
 		3C63BFF329C9530000ADCB42 /* WrapperData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C63BFF229C9530000ADCB42 /* WrapperData.swift */; };
 		3C63BFF529C9653D00ADCB42 /* WrapperDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C63BFF429C9653D00ADCB42 /* WrapperDataRepository.swift */; };
 		3C63BFF729C9654600ADCB42 /* DefaultWrapperDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C63BFF629C9654600ADCB42 /* DefaultWrapperDataRepository.swift */; };
+		3C63BFF929C9664B00ADCB42 /* CheckWrapperDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C63BFF829C9664B00ADCB42 /* CheckWrapperDataUseCase.swift */; };
 		3C7DD6DC29C76BF6004E66D1 /* DeleteLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DD6DB29C76BF6004E66D1 /* DeleteLocationUseCase.swift */; };
 		3CA09F4D29C75F4C00C51452 /* DeleteDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09F4C29C75F4C00C51452 /* DeleteDataRequest.swift */; };
 		3CA09F4F29C7660400C51452 /* DeleteURIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09F4E29C7660400C51452 /* DeleteURIRequest.swift */; };
@@ -149,6 +150,7 @@
 		3C63BFF229C9530000ADCB42 /* WrapperData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperData.swift; sourceTree = "<group>"; };
 		3C63BFF429C9653D00ADCB42 /* WrapperDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperDataRepository.swift; sourceTree = "<group>"; };
 		3C63BFF629C9654600ADCB42 /* DefaultWrapperDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWrapperDataRepository.swift; sourceTree = "<group>"; };
+		3C63BFF829C9664B00ADCB42 /* CheckWrapperDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckWrapperDataUseCase.swift; sourceTree = "<group>"; };
 		3C7DD6DB29C76BF6004E66D1 /* DeleteLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteLocationUseCase.swift; sourceTree = "<group>"; };
 		3CA09F4C29C75F4C00C51452 /* DeleteDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDataRequest.swift; sourceTree = "<group>"; };
 		3CA09F4E29C7660400C51452 /* DeleteURIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteURIRequest.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				3CB4B60C29C6A9140012BBB1 /* PatchProductUseCase.swift */,
 				3CA09F5229C7673600C51452 /* DeleteProductUseCase.swift */,
 				3C7DD6DB29C76BF6004E66D1 /* DeleteLocationUseCase.swift */,
+				3C63BFF829C9664B00ADCB42 /* CheckWrapperDataUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 				3CFA1E0729C5667A0024BA3C /* AddView.swift in Sources */,
 				3C23C2E729BB12C700802CEC /* DefaultProductRepository.swift in Sources */,
 				3C13A80C29B9CC9A00E2FB03 /* NetworkError.swift in Sources */,
+				3C63BFF929C9664B00ADCB42 /* CheckWrapperDataUseCase.swift in Sources */,
 				3CB4B60F29C6AE480012BBB1 /* EditView.swift in Sources */,
 				3C13A7E329B9A74300E2FB03 /* SceneDelegate.swift in Sources */,
 				3C4015AB29C44775007448A8 /* FetchProductDetailUseCase.swift in Sources */,
