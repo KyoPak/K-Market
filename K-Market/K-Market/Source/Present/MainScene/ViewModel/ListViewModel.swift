@@ -18,7 +18,8 @@ protocol ListViewModelInput {
 protocol ListViewModelOutput {
     var userLocale: String { get }
     var userSubLocale: Observable<String> { get }
-    var productList: Observable<[Product]> { get }
+    var productList: Observable<[UniqueProduct]> { get }
+    var recentProductList: Observable<[UniqueProduct]> { get }
     var layoutStatus: Observable<CollectionType> { get }
     var error: Observable<String?> { get }
     var loadImageUseCase: LoadImageUseCase { get }
@@ -29,7 +30,8 @@ protocol ListViewModel: ListViewModelInput, ListViewModelOutput  { }
 
 final class DefaultListViewModel: ListViewModel {
     // MARK: - OUTPUT
-    var productList = Observable<[Product]>([])
+    var productList = Observable<[UniqueProduct]>([])
+    var recentProductList = Observable<[UniqueProduct]>([])
     var userSubLocale = Observable<String>(Constant.reject)
     var layoutStatus = Observable<CollectionType>(.list)
     var error = Observable<String?>(nil)
@@ -59,21 +61,34 @@ final class DefaultListViewModel: ListViewModel {
     func clear() {
         pageNo = Constant.pageUnit
         productList.value.removeAll()
+        recentProductList.value.removeAll()
     }
     
     func fetchProductList() {
-        defer {
-            pageNo += Constant.pageUnit
-        }
-        
         fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: Constant.itemsPerPage) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let datas):
-                    self?.productList.value += datas
+                    if self?.pageNo == Constant.pageUnit {
+                        var temp: [UniqueProduct] = []
+                        for index in 0..<5 {
+                            let data = UniqueProduct(product: datas[index])
+                            temp.append(data)
+                        }
+                        self?.recentProductList.value = temp
+                    }
+                    
+                    var temp: [UniqueProduct] = []
+                    for index in 0..<datas.count {
+                        let data = UniqueProduct(product: datas[index])
+                        temp.append(data)
+                    }
+                    
+                    self?.productList.value += temp
                 case .failure(let error):
                     self?.error.value = error.description
                 }
+                self?.pageNo += Constant.pageUnit
             }
         }
     }
@@ -90,7 +105,7 @@ final class DefaultListViewModel: ListViewModel {
     func loadImage(index: Int, completion: @escaping (Data) -> Void) {
         if index >= productList.value.count { return }
         
-        let thumbnail = productList.value[index].thumbnail
+        let thumbnail = productList.value[index].product.thumbnail
         
         if let data =  checkWrapperDataUseCase.check(thumbnail: thumbnail) {
             DispatchQueue.main.async {
