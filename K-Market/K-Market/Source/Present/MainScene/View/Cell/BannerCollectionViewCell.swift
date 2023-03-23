@@ -13,7 +13,9 @@ final class BannerCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
+        imageView.layer.borderWidth = 1
+        imageView.layer.cornerRadius = 10
+        imageView.layer.borderColor = UIColor.systemGray.cgColor
         return imageView
     }()
     

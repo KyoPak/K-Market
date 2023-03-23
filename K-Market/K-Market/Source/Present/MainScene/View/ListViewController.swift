@@ -133,7 +133,7 @@ extension ListViewController {
             guard let layoutStatus = self?.viewModel.layoutStatus.value else{ return  nil }
             guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
             
-            var applySection: NSCollectionLayoutSection
+            var section: NSCollectionLayoutSection
                                                                                     
             let itemSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
@@ -142,7 +142,9 @@ extension ListViewController {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             if sectionKind == .banner {
-                item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+                item.contentInsets = NSDirectionalEdgeInsets(
+                    top: .zero, leading: .zero, bottom: 10, trailing: .zero
+                )
                 
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
@@ -150,12 +152,11 @@ extension ListViewController {
                 )
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
-                applySection = NSCollectionLayoutSection(group: group)
-                applySection.interGroupSpacing = .zero
+                section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .groupPagingCentered
+                section.interGroupSpacing = .zero
                 
-                applySection.orthogonalScrollingBehavior = .groupPagingCentered
-                
-                return applySection
+                return section
                 
             } else if sectionKind == .main {
                 switch layoutStatus {
@@ -166,9 +167,8 @@ extension ListViewController {
                     )
                     
                     let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-                    let section = NSCollectionLayoutSection(group: group)
                     
-                    applySection = section
+                    section = NSCollectionLayoutSection(group: group)
                 case .grid:
                     let groupSize = NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
@@ -180,12 +180,10 @@ extension ListViewController {
                     let spacing = CGFloat(10)
                     group.interItemSpacing = .fixed(spacing)
                     
-                    let section = NSCollectionLayoutSection(group: group)
+                    section = NSCollectionLayoutSection(group: group)
                     section.interGroupSpacing = 10
-                    
-                    applySection = section
                 }
-                return applySection
+                return section
             }
             return nil
         }
@@ -435,6 +433,7 @@ extension ListViewController {
             headerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             headerView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.1),
+            
             collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
