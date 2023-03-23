@@ -16,6 +16,7 @@ enum CollectionType: Int {
 final class ListViewController: UIViewController {
     typealias DataSource = UICollectionViewDiffableDataSource<Section, UniqueProduct>
     typealias SnapShot = NSDiffableDataSourceSnapshot<Section, UniqueProduct>
+    typealias HeaderRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderView>
     
     enum Section: Int {
         case banner
@@ -47,6 +48,7 @@ final class ListViewController: UIViewController {
         registerCell()
         setupConstraint()
         setupCoreLocationAuthority()
+        configureSupplementaryView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +125,24 @@ extension ListViewController: AlertPresentable {
 
 // MARK: - DataSource and SnapShot
 extension ListViewController {
+    private func configureSupplementaryView() {
+        let headerRegistration = HeaderRegistration(elementKind: Constant.header) { view, _, indexPath in
+            view.apply(indexPath.section)
+        }
+        
+        dataSource.supplementaryViewProvider = { [weak self] _, kind, index in
+            switch kind {
+            case Constant.header:
+                return self?.collectionView.dequeueConfiguredReusableSupplementary(
+                    using: headerRegistration,
+                    for: index
+                )
+            default:
+                return UICollectionReusableView()
+            }
+        }
+    }
+    
     private func createLayout() -> UICollectionViewLayout {
         
         let sectionProvider = { [weak self] (
@@ -152,10 +172,16 @@ extension ListViewController {
                 )
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.1)),
+                    elementKind: Constant.header,
+                    alignment: .top
+                )
+                
                 section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .groupPagingCentered
                 section.interGroupSpacing = .zero
-                
+                section.boundarySupplementaryItems = [sectionHeader]
                 return section
                 
             } else if sectionKind == .main {
@@ -183,6 +209,14 @@ extension ListViewController {
                     section = NSCollectionLayoutSection(group: group)
                     section.interGroupSpacing = 10
                 }
+                
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.1)),
+                    elementKind: Constant.header,
+                    alignment: .top
+                )
+                section.boundarySupplementaryItems = [sectionHeader]
+                
                 return section
             }
             return nil
@@ -434,7 +468,7 @@ extension ListViewController {
             headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             headerView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.1),
             
-            collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
+            collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 10)
@@ -448,5 +482,6 @@ extension ListViewController {
         static let add = "+"
         static let allow = "허용"
         static let reject = "거부"
+        static let header = "header-element-kind"
     }
 }

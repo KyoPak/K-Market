@@ -50,6 +50,7 @@
 		3C4015AD29C4492F007448A8 /* ProductInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015AC29C4492F007448A8 /* ProductInfoView.swift */; };
 		3C4015B229C4AF4B007448A8 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015B129C4AF4B007448A8 /* AddViewController.swift */; };
 		3C4015B429C4AF63007448A8 /* AddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015B329C4AF63007448A8 /* AddViewModel.swift */; };
+		3C5FDD1C29CC232F007115E4 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5FDD1B29CC232F007115E4 /* SectionHeaderView.swift */; };
 		3C63BFF129C951E800ADCB42 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C63BFF029C951E800ADCB42 /* CacheService.swift */; };
 		3C63BFF329C9530000ADCB42 /* WrapperData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C63BFF229C9530000ADCB42 /* WrapperData.swift */; };
 		3C63BFF529C9653D00ADCB42 /* WrapperDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C63BFF429C9653D00ADCB42 /* WrapperDataRepository.swift */; };
@@ -147,6 +148,7 @@
 		3C4015AC29C4492F007448A8 /* ProductInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoView.swift; sourceTree = "<group>"; };
 		3C4015B129C4AF4B007448A8 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		3C4015B329C4AF63007448A8 /* AddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModel.swift; sourceTree = "<group>"; };
+		3C5FDD1B29CC232F007115E4 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		3C63BFF029C951E800ADCB42 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		3C63BFF229C9530000ADCB42 /* WrapperData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperData.swift; sourceTree = "<group>"; };
 		3C63BFF429C9653D00ADCB42 /* WrapperDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperDataRepository.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				3CB7C82F29BC889A001E7992 /* Cell */,
 				3C13A7E429B9A74300E2FB03 /* ListViewController.swift */,
 				3C40159729C1AD23007448A8 /* HeaderView.swift */,
+				3C5FDD1B29CC232F007115E4 /* SectionHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				3CB7C83729BC8C57001E7992 /* ProductCellViewModel.swift in Sources */,
 				3C23C30529BC13E100802CEC /* DefaultLocationRepository.swift in Sources */,
 				3CFA1E0929C576B80024BA3C /* UITextField+Extension.swift in Sources */,
+				3C5FDD1C29CC232F007115E4 /* SectionHeaderView.swift in Sources */,
 				3C63BFF729C9654600ADCB42 /* DefaultWrapperDataRepository.swift in Sources */,
 				3CFA1E0729C5667A0024BA3C /* AddView.swift in Sources */,
 				3C23C2E729BB12C700802CEC /* DefaultProductRepository.swift in Sources */,
