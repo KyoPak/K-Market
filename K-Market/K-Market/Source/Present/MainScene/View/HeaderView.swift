@@ -31,7 +31,7 @@ final class HeaderView: UIView {
         return control
     }()
     
-    private let locationLabel = UILabel(font: .preferredFont(forTextStyle: .title3))
+    private let locationLabel = UILabel(font: .preferredFont(forTextStyle: .subheadline))
 
     init(viewModel: ListViewModel) {
         self.viewModel = viewModel
@@ -50,7 +50,7 @@ final class HeaderView: UIView {
 extension HeaderView {
     func bindData() {
         viewModel.userSubLocale.bind { [weak self] subLocale in
-            self?.locationLabel.text = subLocale
+            self?.locationLabel.text = "📍내 위치는 " + subLocale
         }
     }
 }
