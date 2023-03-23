@@ -42,10 +42,8 @@ extension SectionHeaderView {
     private func setupConstraints() {
         let safeArea = safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            titleLabel.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.5),
-            titleLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
-            titleLabel.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -5)
+            titleLabel.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10)
         ])
     }
 }
