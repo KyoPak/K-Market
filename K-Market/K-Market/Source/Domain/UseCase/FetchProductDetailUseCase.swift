@@ -33,7 +33,7 @@ final class DefaultFetchProductDetailUseCase {
 
 extension DefaultFetchProductDetailUseCase: FetchProductDetailUseCase {
     func fetchData(id: Int, completion: @escaping (Result<Product, NetworkError>) -> Void) {
-        let request = DetailFetchRequest(id: id)
+        let request = FetchDetailRequest(id: id)
         productRepository.request(customRequest: request) { result in
             switch result {
             case .success(let data):

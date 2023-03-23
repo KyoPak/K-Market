@@ -14,10 +14,12 @@ enum CollectionType: Int {
 }
 
 final class ListViewController: UIViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, Product>
-    typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Product>
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, UniqueProduct>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Section, UniqueProduct>
+    typealias HeaderRegistration = UICollectionView.SupplementaryRegistration<SectionHeaderView>
     
-    enum Section {
+    enum Section: Int {
+        case banner
         case main
     }
     
@@ -25,10 +27,7 @@ final class ListViewController: UIViewController {
     
     private lazy var dataSource = configureDataSource()
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: collectionViewLayoutChange(type: .list)
-        )
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView
@@ -46,10 +45,12 @@ final class ListViewController: UIViewController {
         registerCell()
         setupConstraint()
         setupCoreLocationAuthority()
+        configureSupplementaryView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        applySectionSnapshot()
         viewModel.clear()
         viewModel.fetchProductList()
     }
@@ -68,7 +69,7 @@ final class ListViewController: UIViewController {
 
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let id = viewModel.productList.value[indexPath.item].id
+        let id = viewModel.productList.value[indexPath.item].product.id
         coordinator?.makeDetailCoordinator(id: id)
     }
     
@@ -96,13 +97,19 @@ extension ListViewController: AlertPresentable {
     func bindData() {
         viewModel.productList.bind { [weak self] datas in
             DispatchQueue.main.async {
-                self?.applySnapshot(data: datas)
+                self?.applyMainSnapshot(data: datas)
             }
         }
-
+        
+        viewModel.recentProductList.bind { [weak self] datas in
+            DispatchQueue.main.async {
+                self?.applyBannerSnapshot(data: datas)
+            }
+        }
+        
         viewModel.layoutStatus.bind { [weak self] collectionType in
             guard let self = self else { return }
-            self.collectionView.collectionViewLayout = self.collectionViewLayoutChange(type: collectionType)
+            self.collectionView.collectionViewLayout = self.createLayout()
             self.collectionView.reloadData()
         }
         
@@ -113,71 +120,213 @@ extension ListViewController: AlertPresentable {
     }
 }
 
+// MARK: - CollectionView SetUp
+extension ListViewController {
+    private func createLayout() -> UICollectionViewLayout {
+        
+        let sectionProvider = { [weak self] (
+            sectionIndex: Int,
+            layoutEnvironment: NSCollectionLayoutEnvironment
+        ) -> NSCollectionLayoutSection? in
+            
+            guard let layoutStatus = self?.viewModel.layoutStatus.value else{ return  nil }
+            guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
+            
+            var section: NSCollectionLayoutSection
+                                                                                    
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1.0)
+            )
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.1)
+                ),
+                elementKind: Constant.header,
+                alignment: .top
+            )
+            
+            // Banner Layout
+            if sectionKind == .banner {
+                item.contentInsets = NSDirectionalEdgeInsets(
+                    top: .zero, leading: .zero, bottom: 10, trailing: .zero
+                )
+                
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.4)
+                )
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
+                section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .groupPagingCentered
+                section.interGroupSpacing = .zero
+                section.boundarySupplementaryItems = [sectionHeader]
+                
+                return section
+                
+            // Main Layout
+            } else if sectionKind == .main {
+                switch layoutStatus {
+                case .list:
+                    let groupSize = NSCollectionLayoutSize(
+                        widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1 / 8))
+                    
+                    let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+                    
+                    section = NSCollectionLayoutSection(group: group)
+                case .grid:
+                    let groupSize = NSCollectionLayoutSize(
+                        widthDimension: .fractionalWidth(1.0),
+                        heightDimension: .fractionalHeight(1 / 2.5)
+                    )
+                    let group = NSCollectionLayoutGroup.horizontal(
+                        layoutSize: groupSize, subitem: item, count: 2
+                    )
+                    let spacing = CGFloat(10)
+                    group.interItemSpacing = .fixed(spacing)
+                    
+                    section = NSCollectionLayoutSection(group: group)
+                    section.interGroupSpacing = 10
+                }
+                
+                section.boundarySupplementaryItems = [sectionHeader]
+                
+                return section
+            }
+            return nil
+        }
+        return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
+    }
+    
+    private func configureSupplementaryView() {
+        let headerRegistration = HeaderRegistration(elementKind: Constant.header) { view, _, indexPath in
+            view.apply(indexPath.section)
+        }
+        
+        dataSource.supplementaryViewProvider = { [weak self] _, kind, index in
+            switch kind {
+            case Constant.header:
+                return self?.collectionView.dequeueConfiguredReusableSupplementary(
+                    using: headerRegistration,
+                    for: index
+                )
+            default:
+                return UICollectionReusableView()
+            }
+        }
+    }
+    
+    private func registerCell() {
+        collectionView.register(
+            ListCollectionViewCell.self,
+            forCellWithReuseIdentifier: ListCollectionViewCell.identifier
+        )
+        
+        collectionView.register(
+            GridCollectionViewCell.self,
+            forCellWithReuseIdentifier: GridCollectionViewCell.identifier
+        )
+        
+        collectionView.register(
+            BannerCollectionViewCell.self,
+            forCellWithReuseIdentifier: BannerCollectionViewCell.identifier
+        )
+    }
+}
+
 // MARK: - DataSource and SnapShot
 extension ListViewController {
     private func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, data in
-
-            var cell: CollectionCell
             
-            switch self.viewModel.layoutStatus.value {
-            case .list:
-                guard let listCell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: ListCollectionViewCell.identifier,
+            guard let section = Section(rawValue: indexPath.section) else { return UICollectionViewCell() }
+            
+            // Configure Bannner Cell
+            if section == .banner {
+                guard let bannerCell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: BannerCollectionViewCell.identifier,
                     for: indexPath
-                ) as? ListCollectionViewCell
+                ) as? BannerCollectionViewCell
                 else {
                     let errorCell = UICollectionViewCell()
                     return errorCell
                 }
-                cell = listCell
-            case .grid:
-                guard let gridCell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: GridCollectionViewCell.identifier,
-                    for: indexPath
-                ) as? GridCollectionViewCell
-                else {
-                    let errorCell = UICollectionViewCell()
-                    return errorCell
+                
+                self.viewModel.loadImage(index: indexPath.item) { data in
+                    if indexPath == collectionView.indexPath(for: bannerCell) {
+                        bannerCell.uploadImage(data)
+                    }
                 }
-                cell = gridCell
-            }
-            
-            let cellViewModel = DefaultProductCellViewModel(
-                product: data,
-                fetchLocationUseCase: self.viewModel.fetchLocationUseCase
-            )
-            
-            cell.indicatorView.startAnimating()
-            cell.setupViewModel(cellViewModel)
-            cell.setupBind()
-            
-            self.viewModel.loadImage(index: indexPath.item) { data in
-                if indexPath == collectionView.indexPath(for: cell) {
-                    cell.setupImage(data: data)
+                
+                return bannerCell
+              
+            // Configure Main Cell
+            } else {
+                var cell: CollectionCell
+                
+                switch self.viewModel.layoutStatus.value {
+                case .list:
+                    guard let listCell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: ListCollectionViewCell.identifier,
+                        for: indexPath
+                    ) as? ListCollectionViewCell
+                    else {
+                        let errorCell = UICollectionViewCell()
+                        return errorCell
+                    }
+                    cell = listCell
+                case .grid:
+                    guard let gridCell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: GridCollectionViewCell.identifier,
+                        for: indexPath
+                    ) as? GridCollectionViewCell
+                    else {
+                        let errorCell = UICollectionViewCell()
+                        return errorCell
+                    }
+                    cell = gridCell
                 }
+                
+                let cellViewModel = DefaultProductCellViewModel(
+                    product: data.product,
+                    fetchLocationUseCase: self.viewModel.fetchLocationUseCase
+                )
+                
+                cell.indicatorView.startAnimating()
+                cell.setupViewModel(cellViewModel)
+                cell.setupBind()
+                
+                self.viewModel.loadImage(index: indexPath.item) { data in
+                    if indexPath == collectionView.indexPath(for: cell) {
+                        cell.setupImage(data: data)
+                    }
+                }
+                
+                return cell
             }
-            
-            return cell
         }
         
         return dataSource
     }
     
-    private func applySnapshot(data: [Product], animatingDifferences: Bool = true) {
+    private func applySectionSnapshot() {
         var snapshot = SnapShot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(data)
-        snapshot.reloadSections([.main])
-        dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+        snapshot.appendSections([.banner, .main])
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    private func reloadSnapshot(data: [Product]) {
-        var snapshot = SnapShot()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(data)
-        snapshot.reloadSections([.main])
-        dataSource.apply(snapshot, animatingDifferences: false)
+    private func applyMainSnapshot(data: [UniqueProduct], animatingDifferences: Bool = true) {
+        var mainSnapshot = NSDiffableDataSourceSectionSnapshot<UniqueProduct>()
+        mainSnapshot.append(data)
+        dataSource.apply(mainSnapshot, to: .main, animatingDifferences: false)
+    }
+    
+    private func applyBannerSnapshot(data: [UniqueProduct], animatingDifferences: Bool = true) {
+        var bannerSnapshot = NSDiffableDataSourceSectionSnapshot<UniqueProduct>()
+        bannerSnapshot.append(data)
+        dataSource.apply(bannerSnapshot, to: .banner, animatingDifferences: false)
     }
 }
 
@@ -242,58 +391,6 @@ extension ListViewController: CLLocationManagerDelegate {
     }
 }
 
-// MARK: - CollectionView SetUp
-extension ListViewController {
-    private func registerCell() {
-        collectionView.register(
-            ListCollectionViewCell.self,
-            forCellWithReuseIdentifier: ListCollectionViewCell.identifier
-        )
-        collectionView.register(
-            GridCollectionViewCell.self,
-            forCellWithReuseIdentifier: GridCollectionViewCell.identifier
-        )
-    }
-    
-    private func collectionViewLayoutChange(type: CollectionType) -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        switch type {
-        case .list:
-            let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1 / 8)
-            )
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-            
-            let section = NSCollectionLayoutSection(group: group)
-            let layout = UICollectionViewCompositionalLayout(section: section)
-            
-            return layout
-        case .grid:
-            let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1 / 2.5)
-            )
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-            let spacing = CGFloat(10)
-            group.interItemSpacing = .fixed(spacing)
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.interGroupSpacing = 10
-            
-            let layout = UICollectionViewCompositionalLayout(section: section)
-            
-            return layout
-        }
-    }
-}
-
 // MARK: - UI SetUp
 extension ListViewController {
     private func setupNavigation() {
@@ -322,12 +419,13 @@ extension ListViewController {
     private func setupConstraint() {
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-
+            
             headerView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             headerView.heightAnchor.constraint(equalTo: safeArea.heightAnchor, multiplier: 0.1),
-            collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
+            
+            collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 10),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -10),
             collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 10)
@@ -341,5 +439,6 @@ extension ListViewController {
         static let add = "+"
         static let allow = "허용"
         static let reject = "거부"
+        static let header = "header-element-kind"
     }
 }

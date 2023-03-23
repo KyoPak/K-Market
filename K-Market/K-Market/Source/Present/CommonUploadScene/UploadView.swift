@@ -138,7 +138,7 @@ extension UploadView: UITextFieldDelegate, UITextViewDelegate {
         shouldChangeTextIn range: NSRange,
         replacementText text: String
     ) -> Bool {
-        return descriptionTextView.text.count <= Constant.maxText && text != ""
+        return descriptionTextView.text.count <= Constant.maxText
     }
 }
 

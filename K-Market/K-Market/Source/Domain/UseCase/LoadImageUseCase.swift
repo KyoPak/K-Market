@@ -19,7 +19,7 @@ final class DefaultLoadImageUseCase: LoadImageUseCase {
     }
     
     func loadImage(thumbnail: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-        let request = ImageLoadRequest(thumbnail: thumbnail)
+        let request = LoadImageRequest(thumbnail: thumbnail)
         
         productRepository.request(customRequest: request) { result in
             switch result {
