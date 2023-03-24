@@ -65,6 +65,8 @@
 		3C8A190329CDD64F00160067 /* FetchLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9B6F929BCA22200C3B28D /* FetchLocationUseCase.swift */; };
 		3C8A190529CDD91100160067 /* PostLocationUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A190429CDD91100160067 /* PostLocationUseCaseTest.swift */; };
 		3C8A190629CDD9F100160067 /* PostLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E2929C601C80024BA3C /* PostLocationUseCase.swift */; };
+		3C8A190829CDDCD000160067 /* DeleteLocationUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A190729CDDCD000160067 /* DeleteLocationUseCaseTest.swift */; };
+		3C8A190929CDDD5500160067 /* DeleteLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DD6DB29C76BF6004E66D1 /* DeleteLocationUseCase.swift */; };
 		3CA09F4D29C75F4C00C51452 /* DeleteDataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09F4C29C75F4C00C51452 /* DeleteDataRequest.swift */; };
 		3CA09F4F29C7660400C51452 /* DeleteURIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09F4E29C7660400C51452 /* DeleteURIRequest.swift */; };
 		3CA09F5329C7673600C51452 /* DeleteProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09F5229C7673600C51452 /* DeleteProductUseCase.swift */; };
@@ -166,6 +168,7 @@
 		3C63BFF829C9664B00ADCB42 /* CheckWrapperDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckWrapperDataUseCase.swift; sourceTree = "<group>"; };
 		3C7DD6DB29C76BF6004E66D1 /* DeleteLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteLocationUseCase.swift; sourceTree = "<group>"; };
 		3C8A190429CDD91100160067 /* PostLocationUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationUseCaseTest.swift; sourceTree = "<group>"; };
+		3C8A190729CDDCD000160067 /* DeleteLocationUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteLocationUseCaseTest.swift; sourceTree = "<group>"; };
 		3CA09F4C29C75F4C00C51452 /* DeleteDataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDataRequest.swift; sourceTree = "<group>"; };
 		3CA09F4E29C7660400C51452 /* DeleteURIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteURIRequest.swift; sourceTree = "<group>"; };
 		3CA09F5229C7673600C51452 /* DeleteProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductUseCase.swift; sourceTree = "<group>"; };
@@ -465,6 +468,7 @@
 				3C4CA7AA29CDCEEA00680099 /* Mock */,
 				3C4CA7A829CDCAB300680099 /* FetchLocationUseCaseTest.swift */,
 				3C8A190429CDD91100160067 /* PostLocationUseCaseTest.swift */,
+				3C8A190729CDDCD000160067 /* DeleteLocationUseCaseTest.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -899,6 +903,8 @@
 			files = (
 				3C4CA7AD29CDCF4A00680099 /* LocationRepository.swift in Sources */,
 				3C23C2EF29BB1E6B00802CEC /* ProductRepositoryTest.swift in Sources */,
+				3C8A190829CDDCD000160067 /* DeleteLocationUseCaseTest.swift in Sources */,
+				3C8A190929CDDD5500160067 /* DeleteLocationUseCase.swift in Sources */,
 				3C8A190529CDD91100160067 /* PostLocationUseCaseTest.swift in Sources */,
 				3C4CA7AC29CDCEFB00680099 /* MockLocationRepository.swift in Sources */,
 				3C8A190629CDD9F100160067 /* PostLocationUseCase.swift in Sources */,
