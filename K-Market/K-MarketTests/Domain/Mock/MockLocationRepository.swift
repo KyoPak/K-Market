@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@testable import K_Market
 
 final class MockLocationRepository: LocationRepository {
     private var locationDatas: [LocationData] = [
