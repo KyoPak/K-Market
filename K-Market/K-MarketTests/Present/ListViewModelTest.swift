@@ -28,6 +28,8 @@ final class ListViewModelTest: XCTestCase {
             fetchLocationUseCase: mockFetchLocationUseCase,
             checkWrapperDataUseCase: mockCheckWrapperUseCase
         )
+        
+        listViewModel.fetchProductList()
     }
 
     override func tearDownWithError() throws {
@@ -48,5 +50,13 @@ final class ListViewModelTest: XCTestCase {
         // Then
         XCTAssertEqual(listViewModel.userLocale, testLocale)
         XCTAssertEqual(listViewModel.userSubLocale.value, subLocale)
+    }
+    
+    func test_setLayoutType() {
+        // When
+        listViewModel.setLayoutType(layoutIndex: 0)
+
+        // Then
+        XCTAssertEqual(listViewModel.layoutStatus.value, .list)
     }
 }
