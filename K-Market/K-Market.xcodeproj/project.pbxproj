@@ -51,6 +51,7 @@
 		3C4015AD29C4492F007448A8 /* ProductInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015AC29C4492F007448A8 /* ProductInfoView.swift */; };
 		3C4015B229C4AF4B007448A8 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015B129C4AF4B007448A8 /* AddViewController.swift */; };
 		3C4015B429C4AF63007448A8 /* AddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4015B329C4AF63007448A8 /* AddViewModel.swift */; };
+		3C41993929CEA93E00C04097 /* WrapperDataRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C41993829CEA93E00C04097 /* WrapperDataRepositoryTest.swift */; };
 		3C4CA7A929CDCAB300680099 /* FetchLocationUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4CA7A829CDCAB300680099 /* FetchLocationUseCaseTest.swift */; };
 		3C4CA7AC29CDCEFB00680099 /* MockLocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4CA7AB29CDCEFB00680099 /* MockLocationRepository.swift */; };
 		3C4CA7AD29CDCF4A00680099 /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C23C30029BB2F7A00802CEC /* LocationRepository.swift */; };
@@ -158,6 +159,7 @@
 		3C4015AC29C4492F007448A8 /* ProductInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoView.swift; sourceTree = "<group>"; };
 		3C4015B129C4AF4B007448A8 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		3C4015B329C4AF63007448A8 /* AddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModel.swift; sourceTree = "<group>"; };
+		3C41993829CEA93E00C04097 /* WrapperDataRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperDataRepositoryTest.swift; sourceTree = "<group>"; };
 		3C4CA7A829CDCAB300680099 /* FetchLocationUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLocationUseCaseTest.swift; sourceTree = "<group>"; };
 		3C4CA7AB29CDCEFB00680099 /* MockLocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationRepository.swift; sourceTree = "<group>"; };
 		3C5FDD1B29CC232F007115E4 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				3C23C2EE29BB1E6B00802CEC /* ProductRepositoryTest.swift */,
+				3C41993829CEA93E00C04097 /* WrapperDataRepositoryTest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 			files = (
 				3C4CA7AD29CDCF4A00680099 /* LocationRepository.swift in Sources */,
 				3C23C2EF29BB1E6B00802CEC /* ProductRepositoryTest.swift in Sources */,
+				3C41993929CEA93E00C04097 /* WrapperDataRepositoryTest.swift in Sources */,
 				3C8A190829CDDCD000160067 /* DeleteLocationUseCaseTest.swift in Sources */,
 				3C8A190929CDDD5500160067 /* DeleteLocationUseCase.swift in Sources */,
 				3C8A190529CDD91100160067 /* PostLocationUseCaseTest.swift in Sources */,
