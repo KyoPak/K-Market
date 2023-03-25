@@ -28,8 +28,6 @@ final class ListViewModelTest: XCTestCase {
             fetchLocationUseCase: mockFetchLocationUseCase,
             checkWrapperDataUseCase: mockCheckWrapperUseCase
         )
-        
-        listViewModel.fetchProductList()
     }
 
     override func tearDownWithError() throws {
@@ -58,5 +56,36 @@ final class ListViewModelTest: XCTestCase {
 
         // Then
         XCTAssertEqual(listViewModel.layoutStatus.value, .list)
+    }
+    
+    func test_fetchData() {
+        // When
+        listViewModel.fetchProductList()
+        
+        let expectation = XCTestExpectation(description: "ProductList Fetch")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // 1초 뒤에 실행
+            // Then
+            XCTAssertEqual(self.listViewModel.recentProductList.value.count, 5)
+            XCTAssertEqual(self.listViewModel.productList.value.count, 15)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func test_clearData() {
+        // Given
+        listViewModel.fetchProductList()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // 1초 뒤에 실행
+            XCTAssertEqual(self.listViewModel.recentProductList.value.count, 5)
+            XCTAssertEqual(self.listViewModel.productList.value.count, 15)
+            
+            // When
+            self.listViewModel.clear()
+            // Then
+            XCTAssertEqual(self.listViewModel.recentProductList.value.count, .zero)
+            XCTAssertEqual(self.listViewModel.productList.value.count, .zero)
+        }
     }
 }
