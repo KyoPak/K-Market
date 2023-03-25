@@ -21,34 +21,23 @@ final class DefaultPostProductUseCase {
     init(productRepository: ProductRepository) {
         self.productRepository = productRepository
     }
-    
-    private func convert(data: Data) throws -> PostResponse {
-        let decodeManager = DecodeManager<PostResponse>()
-        let product = decodeManager.decode(data)
-        
-        switch product {
-        case .success(let data):
-            return data
-        case .failure(let error):
-            throw error
-        }
-    }
 }
 
-extension DefaultPostProductUseCase: PostProductUseCase {
+extension DefaultPostProductUseCase: PostProductUseCase, Fetchable {
+    typealias T = PostResponse
+    
     func postData(
         _ data: PostProduct,
         imageDatas: [Data],
         completion: @escaping (Result<PostResponse, NetworkError>) -> Void
     ) {
-        
         let request = PostDataRequest(postData: data, imagesDatas: imageDatas)
         
         productRepository.request(customRequest: request) { result in
             switch result {
             case .success(let data):
                 do {
-                    let products = try self.convert(data: data)
+                    let products = try self.convert(data: data) as T
                     completion(.success(products))
                 } catch {
                     guard let error = error as? NetworkError else { return }
