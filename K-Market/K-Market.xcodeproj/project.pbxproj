@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3C0F4C3429CED44A00E74108 /* ListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F4C3329CED44A00E74108 /* ListViewModelTest.swift */; };
 		3C0F4C3629CED46C00E74108 /* MockUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0F4C3529CED46C00E74108 /* MockUseCase.swift */; };
+		3C11681E29D15A9100ED0F42 /* DetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11681D29D15A9100ED0F42 /* DetailViewModelTest.swift */; };
+		3C11682129D161E600ED0F42 /* StubProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C11682029D161E600ED0F42 /* StubProvider.swift */; };
 		3C13A7E129B9A74300E2FB03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A7E029B9A74300E2FB03 /* AppDelegate.swift */; };
 		3C13A7E329B9A74300E2FB03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A7E229B9A74300E2FB03 /* SceneDelegate.swift */; };
 		3C13A7E529B9A74300E2FB03 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C13A7E429B9A74300E2FB03 /* ListViewController.swift */; };
@@ -115,6 +117,8 @@
 /* Begin PBXFileReference section */
 		3C0F4C3329CED44A00E74108 /* ListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModelTest.swift; sourceTree = "<group>"; };
 		3C0F4C3529CED46C00E74108 /* MockUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUseCase.swift; sourceTree = "<group>"; };
+		3C11681D29D15A9100ED0F42 /* DetailViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelTest.swift; sourceTree = "<group>"; };
+		3C11682029D161E600ED0F42 /* StubProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubProvider.swift; sourceTree = "<group>"; };
 		3C13A7DD29B9A74300E2FB03 /* K-Market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "K-Market.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C13A7E029B9A74300E2FB03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C13A7E229B9A74300E2FB03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -232,10 +236,20 @@
 		3C0F4C3229CED43500E74108 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				3C11681F29D15F1B00ED0F42 /* Mock */,
 				3C0F4C3329CED44A00E74108 /* ListViewModelTest.swift */,
-				3C0F4C3529CED46C00E74108 /* MockUseCase.swift */,
+				3C11681D29D15A9100ED0F42 /* DetailViewModelTest.swift */,
 			);
 			path = Present;
+			sourceTree = "<group>";
+		};
+		3C11681F29D15F1B00ED0F42 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				3C0F4C3529CED46C00E74108 /* MockUseCase.swift */,
+				3C11682029D161E600ED0F42 /* StubProvider.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		3C13A7D429B9A74300E2FB03 = {
@@ -929,8 +943,10 @@
 				3C23C2EF29BB1E6B00802CEC /* ProductRepositoryTest.swift in Sources */,
 				3C0F4C3429CED44A00E74108 /* ListViewModelTest.swift in Sources */,
 				3C41993929CEA93E00C04097 /* WrapperDataRepositoryTest.swift in Sources */,
+				3C11682129D161E600ED0F42 /* StubProvider.swift in Sources */,
 				3C8A190829CDDCD000160067 /* DeleteLocationUseCaseTest.swift in Sources */,
 				3C8A190529CDD91100160067 /* PostLocationUseCaseTest.swift in Sources */,
+				3C11681E29D15A9100ED0F42 /* DetailViewModelTest.swift in Sources */,
 				3C4CA7AC29CDCEFB00680099 /* MockLocationRepository.swift in Sources */,
 				3C4CA7A929CDCAB300680099 /* FetchLocationUseCaseTest.swift in Sources */,
 			);
