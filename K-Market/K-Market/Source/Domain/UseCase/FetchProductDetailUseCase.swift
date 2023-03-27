@@ -17,28 +17,19 @@ final class DefaultFetchProductDetailUseCase {
     init(productRepository: ProductRepository) {
         self.productRepository = productRepository
     }
-    
-    private func convert(data: Data) throws -> Product {
-        let decodeManager = DecodeManager<Product>()
-        let product = decodeManager.decode(data)
-        
-        switch product {
-        case .success(let data):
-            return data
-        case .failure(let error):
-            throw error
-        }
-    }
 }
 
-extension DefaultFetchProductDetailUseCase: FetchProductDetailUseCase {
+extension DefaultFetchProductDetailUseCase: FetchProductDetailUseCase, Fetchable {
+    typealias T = Product
+    
     func fetchData(id: Int, completion: @escaping (Result<Product, NetworkError>) -> Void) {
         let request = FetchDetailRequest(id: id)
+        
         productRepository.request(customRequest: request) { result in
             switch result {
             case .success(let data):
                 do {
-                    let products = try self.convert(data: data)
+                    let products = try self.convert(data: data) as T
                     completion(.success(products))
                 } catch {
                     guard let error = error as? NetworkError else { return }

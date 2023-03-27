@@ -1,5 +1,5 @@
 //
-//  K_MarketTests.swift
+//  ProductRepositoryTest.swift
 //  K-MarketTests
 //
 //  Created by parkhyo on 2023/03/10.
@@ -14,7 +14,7 @@ class MockNetworkService: NetworkSevice {
         completion: @escaping (Result<Data, K_Market.NetworkError>) -> Void
     ) {
         // 요청한 request URL String값에 대한 Data를 전달
-        guard let urlText = request?.url?.description, let data =  urlText.data(using: .utf8)
+        guard let urlText = request?.url?.description, let data = urlText.data(using: .utf8)
         else {
             completion(.failure(NetworkError.networking))
             return
@@ -23,29 +23,29 @@ class MockNetworkService: NetworkSevice {
     }
 }
 
-final class NetworkRepositoryTest: XCTestCase {
+final class ProductRepositoryTest: XCTestCase {
     
-    private var networkRepository: NetworkRepository!
+    private var prouctRepository: ProductRepository!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        networkRepository = DefaultNetworkRepository(networkService: MockNetworkService())
+        prouctRepository = DefaultProductRepository(networkService: MockNetworkService())
     }
     
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        networkRepository = nil
+        prouctRepository = nil
     }
     
     func test_request() {
         // Given
-        let customRequest = ListFetchRequest(pageNo: 10, itemsPerPage: 10)
+        let customRequest = FetchListRequest(pageNo: 10, itemsPerPage: 10)
         guard let expectData = customRequest.url?.description.data(using: .utf8) else { return }
         
         // When
         let expectation = XCTestExpectation(description: "동일한 Request Data")
         
-        networkRepository.request(customRequest: customRequest) { result in
+        prouctRepository.request(customRequest: customRequest) { result in
             switch result {
             case .success(let data):
                 if expectData == data {

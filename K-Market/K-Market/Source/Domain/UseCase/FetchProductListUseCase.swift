@@ -21,33 +21,24 @@ final class DefaultFetchProductUseCase {
     init(productRepository: ProductRepository) {
         self.productRepository = productRepository
     }
-    
-    private func convert(data: Data) throws -> [Product] {
-        let decodeManager = DecodeManager<ProductPage>()
-        let products = decodeManager.decode(data)
-        
-        switch products {
-        case .success(let productList):
-            return productList.pages
-        case .failure(let error):
-            throw error
-        }
-    }
 }
 
-extension DefaultFetchProductUseCase: FetchProductListUseCase {
+extension DefaultFetchProductUseCase: FetchProductListUseCase, Fetchable {
+    typealias T = ProductPage
+    
     func fetchData(
         pageNo: Int,
         itemsPerPage: Int,
         completion: @escaping (Result<[Product], NetworkError>) -> Void
     ) {
         let request = FetchListRequest(pageNo: pageNo, itemsPerPage: itemsPerPage)
+        
         productRepository.request(customRequest: request) { result in
             switch result {
             case .success(let data):
                 do {
-                    let products = try self.convert(data: data)
-                    completion(.success(products))
+                    let product = try self.convert(data: data) as T
+                    completion(.success(product.pages))
                 } catch {
                     guard let error = error as? NetworkError else { return }
                     completion(.failure(error))
