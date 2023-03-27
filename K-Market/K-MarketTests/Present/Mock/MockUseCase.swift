@@ -20,6 +20,23 @@ final class MockFetchUseCase: FetchProductListUseCase {
     }
 }
 
+final class MockFetchProductDetailUseCase: FetchProductDetailUseCase {
+    private var stubProvider = StubProvider()
+    
+    func fetchData(id: Int, completion: @escaping (Result<Product, NetworkError>) -> Void) {
+        let data = stubProvider.productList.filter { data in
+            if data.id == id {
+                return true
+            } else { return false }
+        }
+        
+        guard let data = data.first else { completion(.failure(.data))
+            return
+        }
+        
+        completion(.success(data))
+    }
+}
 
 final class MockLoadImageUseCase: LoadImageUseCase {
     func loadImage(thumbnail: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
@@ -71,3 +88,12 @@ final class MockFetchLocationUseCase: FetchLocationUseCase {
 }
 
 
+final class MockDeleteProductUserCase: DeleteProductUseCase {
+    func deleteData(id: Int, completion: @escaping (Result<Bool, K_Market.NetworkError>) -> Void) {
+        completion(.success(true))
+    }
+}
+
+final class MockDeleteLocationUseCase: DeleteLocationUseCase {
+    func delete(id: Int) { }
+}
