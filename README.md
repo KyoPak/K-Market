@@ -24,13 +24,14 @@ Refactoring 전 프로젝트가 보고 싶으시면 아래 링크를 눌러주�
 
 ## 실행 화면
 
-|List|Grid|Detail|
+|Main|Banner|상품위치|
 |:---:|:--:|:--:|
-|     |    |    |
+|![](https://i.imgur.com/b1PCvPu.gif)|![](https://i.imgur.com/pK3G34L.gif)|<img width = "550px" img src= "https://i.imgur.com/XXlZTc5.jpg" >|
+
 
 |등록  |수정  |삭제 |
 |:---:|:--:|:--:|
-|     |    |    |
+|![](https://i.imgur.com/Ctghd9g.gif)|![](https://i.imgur.com/gyaNrkR.gif)|![](https://i.imgur.com/fvDvIBb.gif)|
 
 
 ## 폴더 구조
