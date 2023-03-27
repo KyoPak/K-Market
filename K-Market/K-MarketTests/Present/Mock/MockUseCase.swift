@@ -8,6 +8,7 @@
 import Foundation
 @testable import K_Market
 
+// MARK: - FetchProductListUseCase Mocking
 final class MockFetchUseCase: FetchProductListUseCase {
     private var stubProvider = StubProvider()
     
@@ -20,17 +21,17 @@ final class MockFetchUseCase: FetchProductListUseCase {
     }
 }
 
+// MARK: - FetchProductDetailUseCase Mocking
 final class MockFetchProductDetailUseCase: FetchProductDetailUseCase {
     private var stubProvider = StubProvider()
     
     func fetchData(id: Int, completion: @escaping (Result<Product, NetworkError>) -> Void) {
         let data = stubProvider.productList.filter { data in
-            if data.id == id {
-                return true
-            } else { return false }
+            return data.id == id
         }
         
-        guard let data = data.first else { completion(.failure(.data))
+        guard let data = data.first else {
+            completion(.failure(.data))
             return
         }
         
@@ -38,13 +39,14 @@ final class MockFetchProductDetailUseCase: FetchProductDetailUseCase {
     }
 }
 
+// MARK: - LoadImageUseCase Mocking
 final class MockLoadImageUseCase: LoadImageUseCase {
     func loadImage(thumbnail: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         completion(.success(thumbnail.data(using: .utf8)!))
     }
 }
 
-
+// MARK: - CheckWrapperDataUseCase Mocking
 final class MockCheckWrapperDataUseCase: CheckWrapperDataUseCase {
     private var datas: [String : Data] = [
         "test01" : "test01".data(using: .utf8)!,
@@ -61,7 +63,7 @@ final class MockCheckWrapperDataUseCase: CheckWrapperDataUseCase {
     }
 }
 
-
+// MARK: - FetchLocationUseCase Mocking
 final class MockFetchLocationUseCase: FetchLocationUseCase {
     private lazy var datas: [LocationData] = [
         stub(id: 1, locality: "test01"),
@@ -75,25 +77,22 @@ final class MockFetchLocationUseCase: FetchLocationUseCase {
     }
     
     func fetch(id: Int, completion: @escaping (LocationData?) -> Void) {
-        var data = datas.filter { findData in
-            if findData.id == id {
-                return true
-            } else {
-                return false
-            }
+        let data = datas.filter { findData in
+            return findData.id == id
         }
         
         completion(data.first)
     }
 }
 
-
+// MARK: - DeleteProductUseCase Mocking
 final class MockDeleteProductUserCase: DeleteProductUseCase {
     func deleteData(id: Int, completion: @escaping (Result<Bool, K_Market.NetworkError>) -> Void) {
         completion(.success(true))
     }
 }
 
+// MARK: - DeleteLocationUseCase Mocking
 final class MockDeleteLocationUseCase: DeleteLocationUseCase {
     func delete(id: Int) { }
 }
