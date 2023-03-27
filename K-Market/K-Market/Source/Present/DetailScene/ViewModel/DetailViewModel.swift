@@ -158,7 +158,7 @@ final class DefaultDetailViewModel: DetailViewModel {
         if stock == Int.zero {
             return String(format: Constant.soldOut)
         } else {
-            if stock > 1000 {
+            if stock >= 1000 {
                 return String(format: "수량 : %@K", String(stock / 1000))
             }
             return String(format: "수량 : %@", String(stock))
@@ -168,7 +168,7 @@ final class DefaultDetailViewModel: DetailViewModel {
     func customPriceText(_ price: Double?) -> String {
         guard let currency = product.value?.currency, let price = price else { return "" }
         
-        if price > 1000 {
+        if price >= 1000 {
             return String(format: "%@ %@K", currency.rawValue, String(price / 1000))
         }
         return String(format: "%@ %@", currency.rawValue, String(price))
