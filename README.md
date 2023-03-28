@@ -26,7 +26,7 @@ Refactoring 전 프로젝트가 보고 싶으시면 아래 링크를 눌러주�
 
 |Main|Banner|상품위치|
 |:---:|:--:|:--:|
-|![](https://i.imgur.com/b1PCvPu.gif)|![](https://i.imgur.com/pK3G34L.gif)|<img width = "550px" img src= "https://i.imgur.com/XXlZTc5.jpg" >|
+|<img width = "300px" img src= "https://user-images.githubusercontent.com/59204352/228113115-947ada98-ea54-46b1-99df-0379c32601ca.gif">|<img width = "300px" img src= "https://user-images.githubusercontent.com/59204352/228112728-16868ae6-2617-4f32-8cbc-1f0282a86d2f.gif">|<img width = "300px" img src= "https://i.imgur.com/XXlZTc5.jpg" >|
 
 
 |등록  |수정  |삭제 |
