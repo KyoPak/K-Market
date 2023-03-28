@@ -28,7 +28,7 @@ extension EditView {
         descriptionTextView.text = viewModel.product.description
         stockTextField.text = String(viewModel.product.stock)
         priceTextField.text = String(viewModel.product.price)
-        salePriceTextField.text = String(viewModel.product.bargainPrice)
+        salePriceTextField.text = String(viewModel.product.discountedPrice)
         currencySegmentedControl.selectedSegmentIndex = viewModel.product.currency == .KRW ? .zero : 1
     }
     

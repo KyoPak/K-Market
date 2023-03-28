@@ -183,7 +183,7 @@ extension UploadView {
     private enum Constant {
         static let name = "글 제목"
         static let price = "가격"
-        static let salePrice = "할인 가격(선택 사항)"
+        static let salePrice = "할인 금액(선택 사항)"
         static let stock = "수량"
         static let maxText = 1000
     }
