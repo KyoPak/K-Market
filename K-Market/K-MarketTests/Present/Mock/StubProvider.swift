@@ -41,8 +41,18 @@ struct StubProvider {
             stock: 1000,
             createdAt: Date(),
             issuedAt: Date(),
-            images: nil,
+            images: stubProductImage(),
             vendors: nil
         )
+    }
+    
+    private func stubProductImage() -> [ProductImage] {
+        return [
+            ProductImage(id: 0, url: "testImage00", thumbnailUrl: "url00", issuedAt: Date()),
+            ProductImage(id: 1, url: "testImage01", thumbnailUrl: "url01", issuedAt: Date()),
+            ProductImage(id: 2, url: "testImage02", thumbnailUrl: "url02", issuedAt: Date()),
+            ProductImage(id: 3, url: "testImage03", thumbnailUrl: "url03", issuedAt: Date()),
+            ProductImage(id: 4, url: "testImage04", thumbnailUrl: "url04", issuedAt: Date())
+        ]
     }
 }
