@@ -74,6 +74,8 @@
 		3CA61E8E29CB531000BC136B /* UniqueProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA61E8D29CB531000BC136B /* UniqueProduct.swift */; };
 		3CA6D28829D3F08300EEC7AF /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6D28729D3F08300EEC7AF /* URLSessionProtocol.swift */; };
 		3CA6D28B29D3F0A900EEC7AF /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6D28A29D3F0A900EEC7AF /* URLSession+Extension.swift */; };
+		3CA6D28D29D3F27D00EEC7AF /* NetworkServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6D28C29D3F27D00EEC7AF /* NetworkServiceTest.swift */; };
+		3CA6D29029D40AF700EEC7AF /* MockNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA6D28F29D40AF700EEC7AF /* MockNetwork.swift */; };
 		3CA9B6FA29BCA22200C3B28D /* FetchLocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9B6F929BCA22200C3B28D /* FetchLocationUseCase.swift */; };
 		3CA9B6FD29BCAB2700C3B28D /* UseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA9B6FC29BCAB2700C3B28D /* UseIdentifiable.swift */; };
 		3CB4B5FC29C69E860012BBB1 /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB4B5FB29C69E860012BBB1 /* PostResponse.swift */; };
@@ -184,6 +186,8 @@
 		3CA61E8D29CB531000BC136B /* UniqueProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueProduct.swift; sourceTree = "<group>"; };
 		3CA6D28729D3F08300EEC7AF /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		3CA6D28A29D3F0A900EEC7AF /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
+		3CA6D28C29D3F27D00EEC7AF /* NetworkServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTest.swift; sourceTree = "<group>"; };
+		3CA6D28F29D40AF700EEC7AF /* MockNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetwork.swift; sourceTree = "<group>"; };
 		3CA9B6F929BCA22200C3B28D /* FetchLocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchLocationUseCase.swift; sourceTree = "<group>"; };
 		3CA9B6FC29BCAB2700C3B28D /* UseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseIdentifiable.swift; sourceTree = "<group>"; };
 		3CB4B5FB29C69E860012BBB1 /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
@@ -427,8 +431,10 @@
 		3C23C2F529BB225600802CEC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3CA6D28E29D40AE100EEC7AF /* Mock */,
 				3C23C2EE29BB1E6B00802CEC /* ProductRepositoryTest.swift */,
 				3C41993829CEA93E00C04097 /* WrapperDataRepositoryTest.swift */,
+				3CA6D28C29D3F27D00EEC7AF /* NetworkServiceTest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -605,6 +611,14 @@
 				3CA6D28729D3F08300EEC7AF /* URLSessionProtocol.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		3CA6D28E29D40AE100EEC7AF /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				3CA6D28F29D40AF700EEC7AF /* MockNetwork.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		3CA9B6FB29BCAB1300C3B28D /* Protocol */ = {
@@ -955,11 +969,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CA6D29029D40AF700EEC7AF /* MockNetwork.swift in Sources */,
 				3C0F4C3629CED46C00E74108 /* MockUseCase.swift in Sources */,
 				3C23C2EF29BB1E6B00802CEC /* ProductRepositoryTest.swift in Sources */,
 				3C0F4C3429CED44A00E74108 /* ListViewModelTest.swift in Sources */,
 				3C41993929CEA93E00C04097 /* WrapperDataRepositoryTest.swift in Sources */,
 				3C11682129D161E600ED0F42 /* StubProvider.swift in Sources */,
+				3CA6D28D29D3F27D00EEC7AF /* NetworkServiceTest.swift in Sources */,
 				3C8A190829CDDCD000160067 /* DeleteLocationUseCaseTest.swift in Sources */,
 				3C8A190529CDD91100160067 /* PostLocationUseCaseTest.swift in Sources */,
 				3C11681E29D15A9100ED0F42 /* DetailViewModelTest.swift in Sources */,
