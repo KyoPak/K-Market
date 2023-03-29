@@ -19,11 +19,9 @@ final class DefaultNetworkSevice: NetworkSevice {
     }
     
     func request(_ request: URLRequest?, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-        let sesseion = URLSession(configuration: .default)
-        
         guard let request = request else { return }
         
-        sesseion.dataTask(with: request) { data, response, error in
+        session.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 completion(.failure(.networking))
                 return
