@@ -87,8 +87,19 @@ final class MockFetchLocationUseCase: FetchLocationUseCase {
 
 // MARK: - DeleteProductUseCase Mocking
 final class MockDeleteProductUserCase: DeleteProductUseCase {
+    private var stubProvider = StubProvider()
+    
     func deleteData(id: Int, completion: @escaping (Result<Bool, K_Market.NetworkError>) -> Void) {
-        completion(.success(true))
+        
+        var products = stubProvider.productList.filter { product in
+            return product.id == id
+        }
+        
+        if products.count != 1 {
+            completion(.failure(.networking))
+        } else {
+            completion(.success(true))
+        }
     }
 }
 

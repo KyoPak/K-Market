@@ -51,7 +51,7 @@ final class DetailViewModelTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "정상적인 변경")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.async {
             // When
             let text = self.detailViewModel.customStockText()
             if "수량 : 1K" ==  text {
@@ -69,7 +69,7 @@ final class DetailViewModelTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "정상적인 변경")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.async {
             // When
             let text = self.detailViewModel.customPriceText(self.detailViewModel.product.value?.price)
             if "KRW 1.0K" ==  text {
@@ -92,7 +92,7 @@ final class DetailViewModelTest: XCTestCase {
         
         // When
         detailViewModel.setup()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.async {
             let data = self.detailViewModel.product.value
             // Then
             XCTAssertEqual(productID, data?.id)
@@ -104,5 +104,23 @@ final class DetailViewModelTest: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_deleteProduct() {
+        // Given
+        detailViewModel.setup()
+        
+        let expectation = XCTestExpectation(description: "성공적인 삭제")
+        
+    
+        DispatchQueue.main.async {
+            // When
+            self.detailViewModel.delete { result in
+                XCTAssertEqual(result, true)
+                expectation.fulfill()
+            }
+        }
+        
+        wait(for: [expectation], timeout: 10.0)
     }
 }
