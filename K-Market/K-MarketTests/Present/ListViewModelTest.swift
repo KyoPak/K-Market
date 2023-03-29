@@ -63,7 +63,7 @@ final class ListViewModelTest: XCTestCase {
         listViewModel.fetchProductList()
         
         let expectation = XCTestExpectation(description: "ProductList Fetch")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // 1초 뒤에 실행
+        DispatchQueue.main.async {
             // Then
             XCTAssertEqual(self.listViewModel.recentProductList.value.count, 5)
             XCTAssertEqual(self.listViewModel.productList.value.count, 15)
@@ -79,7 +79,7 @@ final class ListViewModelTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Clear Data")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // 1초 뒤에 실행
+        DispatchQueue.main.async {
             XCTAssertEqual(self.listViewModel.recentProductList.value.count, 5)
             XCTAssertEqual(self.listViewModel.productList.value.count, 15)
             
