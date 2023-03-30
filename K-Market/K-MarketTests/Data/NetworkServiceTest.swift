@@ -27,21 +27,16 @@ final class NetworkServiceTest: XCTestCase {
         let testURLRequest = FetchListRequest(pageNo: 1, itemsPerPage: 10).createRequest()
         let testData = "ServerData".data(using: .utf8)
         
-        let expectation = XCTestExpectation(description: "테스트 성공")
-        
         // When
         networkService.request(testURLRequest) { result in
             switch result {
             case .success(let data):
                 // Then
                 XCTAssertEqual(testData, data)
-                expectation.fulfill()
             case .failure(_):
                 XCTFail("Test Fail")
             }
         }
-        
-        wait(for: [expectation], timeout: 1.0)
     }
     
     func test_Fail() {
@@ -50,19 +45,15 @@ final class NetworkServiceTest: XCTestCase {
         let testURLRequest = FetchListRequest(pageNo: 1, itemsPerPage: 10).createRequest()
         let testData = "ServerData".data(using: .utf8)
         
-        let expectation = XCTestExpectation(description: "테스트 실패 확인")
-        
         // When
         networkService.request(testURLRequest) { result in
             switch result {
             case .success(_):
                 XCTFail("Test Fail")
-            case .failure(_):
+            case .failure(let error):
                 // Then
-                expectation.fulfill()
+                XCTAssertEqual(error, NetworkError.networking)
             }
         }
-        
-        wait(for: [expectation], timeout: 1.0)
     }
 }

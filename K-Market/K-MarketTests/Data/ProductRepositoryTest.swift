@@ -43,20 +43,14 @@ final class ProductRepositoryTest: XCTestCase {
         guard let expectData = customRequest.url?.description.data(using: .utf8) else { return }
         
         // When
-        let expectation = XCTestExpectation(description: "동일한 Request Data")
-        
         prouctRepository.request(customRequest: customRequest) { result in
             switch result {
             case .success(let data):
-                if expectData == data {
-                    // Then
-                    expectation.fulfill()
-                }
+                // Then
+                XCTAssertEqual(expectData, data)
             case .failure(_):
                 XCTFail("Fail Test")
             }
         }
-        
-        wait(for: [expectation], timeout: 0.5)
     }
 }
