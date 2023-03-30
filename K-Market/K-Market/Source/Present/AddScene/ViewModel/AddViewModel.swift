@@ -42,21 +42,18 @@ final class DefaultAddViewModel: AddViewModel {
     
     private let postProductUseCase: PostProductUseCase
     private let postLocationUseCase: PostLocationUseCase
-    private let loadImageUseCase: LoadImageUseCase
     
     // MARK: - Init
     init(
         locale: String,
         subLocale: String,
         postProductUseCase: PostProductUseCase,
-        postLocationUseCase: PostLocationUseCase,
-        loadImageUseCase: LoadImageUseCase
+        postLocationUseCase: PostLocationUseCase
     ) {
         self.userLocale = locale
         self.userSubLocale = subLocale
         self.postProductUseCase = postProductUseCase
         self.postLocationUseCase = postLocationUseCase
-        self.loadImageUseCase = loadImageUseCase
     }
     
     // MARK: - INPUT
@@ -90,14 +87,12 @@ final class DefaultAddViewModel: AddViewModel {
         guard let product = product else { return }
         
         postProductUseCase.postData(product, imageDatas: imageDatas.value) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    self.postLocation(id: data.id)
-                    completion(nil)
-                case .failure(let error):
-                    self.error.value = error.description
-                }
+            switch result {
+            case .success(let data):
+                self.postLocation(id: data.id)
+                completion(nil)
+            case .failure(let error):
+                self.error.value = error.description
             }
         }
     }

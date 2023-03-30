@@ -44,8 +44,10 @@ extension EditViewController {
     @objc func doneButtonTapped() {
         editView.packageData()
         viewModel.patchProduct { [weak self] result in
-            if result {
-                self?.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.async {
+                if result {
+                    self?.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }

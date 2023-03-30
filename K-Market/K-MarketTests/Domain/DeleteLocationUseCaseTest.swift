@@ -30,19 +30,12 @@ final class DeleteLocationUseCaseTest: XCTestCase {
         // Given
         let testID = 5
         
-        let expectation = XCTestExpectation(description: "데이터 삭제 확인")
         deleteLocationUseCase.delete(id: testID)
         
         // When
         mockLocationRepository.load(testID, completion: { data in
-            if data == nil {
-                // Then
-                expectation.fulfill()
-            } else {
-                XCTFail("Test Fail")
-            }
+            // Then
+            XCTAssertNil(data)
         })
-        
-        wait(for: [expectation], timeout: 0.5)
     }
 }

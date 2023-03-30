@@ -87,12 +87,49 @@ final class MockFetchLocationUseCase: FetchLocationUseCase {
 
 // MARK: - DeleteProductUseCase Mocking
 final class MockDeleteProductUserCase: DeleteProductUseCase {
+    private var stubProvider = StubProvider()
+    
     func deleteData(id: Int, completion: @escaping (Result<Bool, K_Market.NetworkError>) -> Void) {
-        completion(.success(true))
+        
+        var products = stubProvider.productList.filter { product in
+            return product.id == id
+        }
+        
+        if products.count != 1 {
+            completion(.failure(.networking))
+        } else {
+            completion(.success(true))
+        }
     }
 }
 
 // MARK: - DeleteLocationUseCase Mocking
 final class MockDeleteLocationUseCase: DeleteLocationUseCase {
     func delete(id: Int) { }
+}
+
+// MARK: - PostProductUseCase Mocking
+final class MockPostProductUseCase: PostProductUseCase {
+    func postData(
+        _ data: K_Market.PostProduct,
+        imageDatas: [Data],
+        completion: @escaping (Result<K_Market.PostResponse, K_Market.NetworkError>) -> Void
+    ) {
+        let result = PostResponse(id: 99)
+        completion(.success(result))
+    }
+}
+
+// MARK: - PostLocationUseCase Mocking
+final class MockPostLocationUseCase: PostLocationUseCase {
+    func add(id: Int, locale: String, subLocale: String) {
+        return
+    }
+}
+
+// MARK: - PatchProductUseCase Mocking
+final class MockPatchProductUseCase: PatchProductUseCase {
+    func patchData(id: Int, _ data: K_Market.PostProduct, completion: @escaping (Result<Bool, K_Market.NetworkError>) -> Void) {
+        completion(.success(true))
+    }
 }

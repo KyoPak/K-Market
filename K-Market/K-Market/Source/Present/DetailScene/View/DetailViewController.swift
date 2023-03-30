@@ -67,12 +67,16 @@ final class DetailViewController: UIViewController {
 extension DetailViewController: AlertPresentable {
     private func bindData() {
         viewModel.productImages.bind { [weak self] _ in
-            self?.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
         }
         
         viewModel.error.bind { [weak self] error in
             guard let error else { return }
-            self?.presentAlert(title: error)
+            DispatchQueue.main.async {
+                self?.presentAlert(title: error)
+            }
         }
     }
     
@@ -149,7 +153,9 @@ extension DetailViewController: UICollectionViewDataSource {
         }
 
         viewModel.fetchImageData(index: indexPath.item) { data in
-            cell.uploadImage(data)
+            DispatchQueue.main.async {
+                cell.uploadImage(data)
+            }
         }
 
         return cell

@@ -12,12 +12,16 @@ protocol NetworkSevice {
 }
 
 final class DefaultNetworkSevice: NetworkSevice {
+    private let session: URLSessionProtocol
+    
+    init(session: URLSessionProtocol = URLSession.shared) {
+        self.session = session
+    }
+    
     func request(_ request: URLRequest?, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-        let sesseion = URLSession(configuration: .default)
-        
         guard let request = request else { return }
         
-        sesseion.dataTask(with: request) { data, response, error in
+        session.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 completion(.failure(.networking))
                 return

@@ -63,14 +63,12 @@ final class DefaultDetailViewModel: DetailViewModel {
     
     private func fetchProductDetailInfo(id: Int) {
         fetchProductDetailUseCase.fetchData(id: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let product):
-                    self.product.value = product
-                    self.productImages.value = product.images
-                case .failure(let error):
-                    self.error.value = error.description
-                }
+            switch result {
+            case .success(let product):
+                self.product.value = product
+                self.productImages.value = product.images
+            case .failure(let error):
+                self.error.value = error.description
             }
         }
     }
@@ -95,13 +93,11 @@ final class DefaultDetailViewModel: DetailViewModel {
         guard let id = product.value?.id else { return }
         deleteLocationUseCase.delete(id: id)
         deleteProductUseCase.deleteData(id: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    completion(true)
-                case .failure(let error):
-                    self.error.value = error.description
-                }
+            switch result {
+            case .success(_):
+                completion(true)
+            case .failure(let error):
+                self.error.value = error.description
             }
         }
     }
@@ -109,14 +105,12 @@ final class DefaultDetailViewModel: DetailViewModel {
     func fetchImageData(index: Int, completion: @escaping (Data) -> Void) {
         guard let url = productImages.value?[index].url else { return }
         loadImageUseCase.loadImage(thumbnail: url) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    self.imageDatas.append(data)
-                    completion(data)
-                case .failure(let error):
-                    self.error.value = error.description
-                }
+            switch result {
+            case .success(let data):
+                self.imageDatas.append(data)
+                completion(data)
+            case .failure(let error):
+                self.error.value = error.description
             }
         }
     }

@@ -30,19 +30,12 @@ final class PostLocationUseCaseTest: XCTestCase {
         // Given
         let testID = 6
         
-        let expectation = XCTestExpectation(description: "동일한 ID")
         postLocationUseCase.add(id: testID, locale: "신규 Data", subLocale: "신규 Data")
         
         // When
         mockLocationRepository.load(testID, completion: { data in
-            if data?.id == testID {
-                // Then
-                expectation.fulfill()
-            } else {
-                XCTFail("Test Fail")
-            }
+            // Then
+            XCTAssertEqual(data?.id, testID)
         })
-        
-        wait(for: [expectation], timeout: 0.5)
     }
 }
