@@ -126,3 +126,10 @@ final class MockPostLocationUseCase: PostLocationUseCase {
         return
     }
 }
+
+// MARK: - PatchProductUseCase Mocking
+final class MockPatchProductUseCase: PatchProductUseCase {
+    func patchData(id: Int, _ data: K_Market.PostProduct, completion: @escaping (Result<Bool, K_Market.NetworkError>) -> Void) {
+        completion(.success(true))
+    }
+}

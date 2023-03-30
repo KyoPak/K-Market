@@ -96,6 +96,7 @@
 		3CB7C83729BC8C57001E7992 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83629BC8C57001E7992 /* ProductCellViewModel.swift */; };
 		3CB7C83929BC8E5E001E7992 /* LoadImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB7C83829BC8E5E001E7992 /* LoadImageUseCase.swift */; };
 		3CCB499D29D5820F00227E24 /* AddViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCB499C29D5820F00227E24 /* AddViewModelTest.swift */; };
+		3CCB499F29D5897200227E24 /* EditViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCB499E29D5897200227E24 /* EditViewModelTest.swift */; };
 		3CFA1E0729C5667A0024BA3C /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0629C5667A0024BA3C /* AddView.swift */; };
 		3CFA1E0929C576B80024BA3C /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */; };
 		3CFA1E0C29C57F560024BA3C /* UploadImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFA1E0B29C57F560024BA3C /* UploadImageCell.swift */; };
@@ -209,6 +210,7 @@
 		3CB7C83629BC8C57001E7992 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
 		3CB7C83829BC8E5E001E7992 /* LoadImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageUseCase.swift; sourceTree = "<group>"; };
 		3CCB499C29D5820F00227E24 /* AddViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModelTest.swift; sourceTree = "<group>"; };
+		3CCB499E29D5897200227E24 /* EditViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModelTest.swift; sourceTree = "<group>"; };
 		3CFA1E0629C5667A0024BA3C /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		3CFA1E0829C576B80024BA3C /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		3CFA1E0B29C57F560024BA3C /* UploadImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UploadImageCell.swift; path = "K-Market/Source/Present/AddScene/View/UploadImageCell.swift"; sourceTree = SOURCE_ROOT; };
@@ -250,6 +252,7 @@
 				3C0F4C3329CED44A00E74108 /* ListViewModelTest.swift */,
 				3C11681D29D15A9100ED0F42 /* DetailViewModelTest.swift */,
 				3CCB499C29D5820F00227E24 /* AddViewModelTest.swift */,
+				3CCB499E29D5897200227E24 /* EditViewModelTest.swift */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -982,6 +985,7 @@
 				3C8A190829CDDCD000160067 /* DeleteLocationUseCaseTest.swift in Sources */,
 				3CCB499D29D5820F00227E24 /* AddViewModelTest.swift in Sources */,
 				3C8A190529CDD91100160067 /* PostLocationUseCaseTest.swift in Sources */,
+				3CCB499F29D5897200227E24 /* EditViewModelTest.swift in Sources */,
 				3C11681E29D15A9100ED0F42 /* DetailViewModelTest.swift in Sources */,
 				3C4CA7AC29CDCEFB00680099 /* MockLocationRepository.swift in Sources */,
 				3C4CA7A929CDCAB300680099 /* FetchLocationUseCaseTest.swift in Sources */,
