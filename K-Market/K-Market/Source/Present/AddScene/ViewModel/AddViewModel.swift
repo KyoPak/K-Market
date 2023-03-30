@@ -90,14 +90,12 @@ final class DefaultAddViewModel: AddViewModel {
         guard let product = product else { return }
         
         postProductUseCase.postData(product, imageDatas: imageDatas.value) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    self.postLocation(id: data.id)
-                    completion(nil)
-                case .failure(let error):
-                    self.error.value = error.description
-                }
+            switch result {
+            case .success(let data):
+                self.postLocation(id: data.id)
+                completion(nil)
+            case .failure(let error):
+                self.error.value = error.description
             }
         }
     }

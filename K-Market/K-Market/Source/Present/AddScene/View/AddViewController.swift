@@ -60,10 +60,10 @@ extension AddViewController {
     @objc func doneButtonTapped() {
         addView.packageData()
         viewModel.postProduct { [weak self] error in
-            if error == nil {
-                self?.navigationController?.popViewController(animated: true)
-            } else {
-                //TODO: - Alert
+            DispatchQueue.main.async {
+                if error == nil {
+                    self?.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
