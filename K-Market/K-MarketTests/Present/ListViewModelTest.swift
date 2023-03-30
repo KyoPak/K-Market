@@ -59,39 +59,26 @@ final class ListViewModelTest: XCTestCase {
     }
     
     func test_fetchData() {
-        // When
+        // Given, When
         listViewModel.fetchProductList()
         
-        let expectation = XCTestExpectation(description: "ProductList Fetch")
-        DispatchQueue.main.async {
-            // Then
-            XCTAssertEqual(self.listViewModel.recentProductList.value.count, 5)
-            XCTAssertEqual(self.listViewModel.productList.value.count, 15)
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 3.0)
+        // Then
+        XCTAssertEqual(self.listViewModel.recentProductList.value.count, 5)
+        XCTAssertEqual(self.listViewModel.productList.value.count, 15)
     }
     
     func test_clearData() {
         // Given
         listViewModel.fetchProductList()
         
-        let expectation = XCTestExpectation(description: "Clear Data")
-        
-        DispatchQueue.main.async {
-            XCTAssertEqual(self.listViewModel.recentProductList.value.count, 5)
-            XCTAssertEqual(self.listViewModel.productList.value.count, 15)
+        XCTAssertEqual(self.listViewModel.recentProductList.value.count, 5)
+        XCTAssertEqual(self.listViewModel.productList.value.count, 15)
             
-            // When
-            self.listViewModel.clear()
-            // Then
-            XCTAssertEqual(self.listViewModel.recentProductList.value.count, .zero)
-            XCTAssertEqual(self.listViewModel.productList.value.count, .zero)
-            
-            expectation.fulfill()
-        }
+        // When
+        self.listViewModel.clear()
         
-        wait(for: [expectation], timeout: 1.0)
+        // Then
+        XCTAssertEqual(self.listViewModel.recentProductList.value.count, .zero)
+        XCTAssertEqual(self.listViewModel.productList.value.count, .zero)
     }
 }
