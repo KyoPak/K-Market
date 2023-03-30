@@ -107,3 +107,22 @@ final class MockDeleteProductUserCase: DeleteProductUseCase {
 final class MockDeleteLocationUseCase: DeleteLocationUseCase {
     func delete(id: Int) { }
 }
+
+// MARK: - PostProductUseCase Mocking
+final class MockPostProductUseCase: PostProductUseCase {
+    func postData(
+        _ data: K_Market.PostProduct,
+        imageDatas: [Data],
+        completion: @escaping (Result<K_Market.PostResponse, K_Market.NetworkError>) -> Void
+    ) {
+        let result = PostResponse(id: 99)
+        completion(.success(result))
+    }
+}
+
+// MARK: - PostLocationUseCase Mocking
+final class MockPostLocationUseCase: PostLocationUseCase {
+    func add(id: Int, locale: String, subLocale: String) {
+        return
+    }
+}
