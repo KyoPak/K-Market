@@ -42,21 +42,18 @@ final class DefaultAddViewModel: AddViewModel {
     
     private let postProductUseCase: PostProductUseCase
     private let postLocationUseCase: PostLocationUseCase
-    private let loadImageUseCase: LoadImageUseCase
     
     // MARK: - Init
     init(
         locale: String,
         subLocale: String,
         postProductUseCase: PostProductUseCase,
-        postLocationUseCase: PostLocationUseCase,
-        loadImageUseCase: LoadImageUseCase
+        postLocationUseCase: PostLocationUseCase
     ) {
         self.userLocale = locale
         self.userSubLocale = subLocale
         self.postProductUseCase = postProductUseCase
         self.postLocationUseCase = postLocationUseCase
-        self.loadImageUseCase = loadImageUseCase
     }
     
     // MARK: - INPUT

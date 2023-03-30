@@ -107,8 +107,7 @@ extension SceneDIContainer: ViewModelDIManageable {
             locale: locale,
             subLocale: subLocale,
             postProductUseCase: makePostProductUseCase(),
-            postLocationUseCase: makePostLocationUseCase(),
-            loadImageUseCase: makeLoadImageUseCase()
+            postLocationUseCase: makePostLocationUseCase()
         )
     }
     
