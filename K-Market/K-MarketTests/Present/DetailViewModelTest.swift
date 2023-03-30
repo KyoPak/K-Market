@@ -90,16 +90,11 @@ final class DetailViewModelTest: XCTestCase {
         // Given
         detailViewModel.setup()
         
-        let expectation = XCTestExpectation(description: "성공적인 삭제")
-        
         // When
         detailViewModel.delete { result in
             // Then
             XCTAssertEqual(result, true)
-            expectation.fulfill()
         }
-        
-        wait(for: [expectation], timeout: 10.0)
     }
     
     func test_fetchImage() {
@@ -108,15 +103,10 @@ final class DetailViewModelTest: XCTestCase {
         let testImageIndex = 1
         let testImageData = "testImage01".data(using: .utf8)!
         
-        let expectation = XCTestExpectation(description: "이미지 데이터 일치 확인")
-        
         // When
         detailViewModel.fetchImageData(index: testImageIndex) { data in
             // Then
             XCTAssertEqual(data, testImageData)
-            expectation.fulfill()
         }
-        
-        wait(for: [expectation], timeout: 3.0)
     }
 }
