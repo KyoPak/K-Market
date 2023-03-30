@@ -92,16 +92,18 @@ final class ProductInfoView: UIView {
 extension ProductInfoView {
     private func bindData() {
         viewModel.product.bind { [weak self] data in
-            self?.clearPriceLabel()
-            
-            self?.nameLabel.text = data?.name
-            self?.dateLabel.text = self?.viewModel.customDate()
-            self?.descriptionView.text = data?.description ?? ""
-            self?.stockLabel.text = self?.viewModel.customStockText()
-            self?.priceLabel.text = self?.viewModel.customPriceText(data?.price)
-            self?.salePriceLabel.text = self?.viewModel.customPriceText(data?.bargainPrice)
-            
-            data?.discountedPrice == .zero ? self?.salePriceLabel.isHidden = true : self?.changePriceLabel()
+            DispatchQueue.main.async {
+                self?.clearPriceLabel()
+                
+                self?.nameLabel.text = data?.name
+                self?.dateLabel.text = self?.viewModel.customDate()
+                self?.descriptionView.text = data?.description ?? ""
+                self?.stockLabel.text = self?.viewModel.customStockText()
+                self?.priceLabel.text = self?.viewModel.customPriceText(data?.price)
+                self?.salePriceLabel.text = self?.viewModel.customPriceText(data?.bargainPrice)
+                
+                data?.discountedPrice == .zero ? self?.salePriceLabel.isHidden = true : self?.changePriceLabel()
+            }
         }
         
         viewModel.productLocale.bind { [weak self] locale in
