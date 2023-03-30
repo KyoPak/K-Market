@@ -30,15 +30,10 @@ final class FetchLocationUseCaseTest: XCTestCase {
         // Given
         let testID = 1
         
-        let expectation = XCTestExpectation(description: "동일한 ID")
         // When
         fetchLocationUseCase.fetch(id: testID) { datas in
-            if datas?.id == 1 {
-                // Then
-                expectation.fulfill()
-            }
+            // Then
+            XCTAssertEqual(datas?.id, 1)
         }
-        
-        wait(for: [expectation], timeout: 0.5)
     }
 }
