@@ -2,6 +2,7 @@
 
 - User가 상품을 등록하고 수정하고 삭제할 수 있는 거래 App입니다.
 - 상품 등록 당시의 User의 위치를 저장하고 다른 User에게 보여줍니다.
+- Clean Architecture을 도입한 만큼 Unit Test에 집중하였습니다.
 
 Refactoring 전 프로젝트가 보고 싶으시면 아래 링크를 눌러주세요.
 
@@ -171,21 +172,26 @@ K-Market
 │           └── Type
 │               └── Observabel.swift
 └── K-MarketTests
-├── Data
-│   ├── ProductRepositoryTest.swift
-│   └── WrapperDataRepositoryTest.swift
-├── Domain
-│   ├── DeleteLocationUseCaseTest.swift
-│   ├── FetchLocationUseCaseTest.swift
-│   ├── Mock
-│   │   └── MockLocationRepository.swift
-│   └── PostLocationUseCaseTest.swift
-└── Present
-    ├── DetailViewModelTest.swift
-    ├── ListViewModelTest.swift
-    └── Mock
-        ├── MockUseCase.swift
-        └── StubProvider.swift
+	├── Data
+	│   ├── Mock
+	│   │   └── MockNetwork.swift
+	│   ├── NetworkServiceTest.swift
+	│   ├── ProductRepositoryTest.swift
+	│   └── WrapperDataRepositoryTest.swift
+	├── Domain
+	│   ├── DeleteLocationUseCaseTest.swift
+	│   ├── FetchLocationUseCaseTest.swift
+	│   ├── Mock
+	│   │   └── MockLocationRepository.swift
+	│   └── PostLocationUseCaseTest.swift
+	└── Present
+	    ├── AddViewModelTest.swift
+	    ├── DetailViewModelTest.swift
+	    ├── EditViewModelTest.swift
+	    ├── ListViewModelTest.swift
+	    └── Mock
+	       ├── MockUseCase.swift
+	       └── StubProvider.swift
 ```
 </details>
 
