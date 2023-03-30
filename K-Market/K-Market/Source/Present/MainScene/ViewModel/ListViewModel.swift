@@ -66,30 +66,28 @@ final class DefaultListViewModel: ListViewModel {
     
     func fetchProductList() {
         fetchUseCase.fetchData(pageNo: pageNo, itemsPerPage: Constant.itemsPerPage) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let datas):
-                    if self?.pageNo == Constant.pageUnit {
-                        var temp: [UniqueProduct] = []
-                        for index in 0..<5 {
-                            let data = UniqueProduct(product: datas[index])
-                            temp.append(data)
-                        }
-                        self?.recentProductList.value = temp
-                    }
-                    
+            switch result {
+            case .success(let datas):
+                if self?.pageNo == Constant.pageUnit {
                     var temp: [UniqueProduct] = []
-                    for index in 0..<datas.count {
+                    for index in 0..<5 {
                         let data = UniqueProduct(product: datas[index])
                         temp.append(data)
                     }
-                    
-                    self?.productList.value += temp
-                case .failure(let error):
-                    self?.error.value = error.description
+                    self?.recentProductList.value = temp
                 }
-                self?.pageNo += Constant.pageUnit
+                
+                var temp: [UniqueProduct] = []
+                for index in 0..<datas.count {
+                    let data = UniqueProduct(product: datas[index])
+                    temp.append(data)
+                }
+                
+                self?.productList.value += temp
+            case .failure(let error):
+                self?.error.value = error.description
             }
+            self?.pageNo += Constant.pageUnit
         }
     }
     
@@ -108,19 +106,15 @@ final class DefaultListViewModel: ListViewModel {
         let thumbnail = productList.value[index].product.thumbnail
         
         if let data =  checkWrapperDataUseCase.check(thumbnail: thumbnail) {
-            DispatchQueue.main.async {
-                completion(data)
-            }
+            completion(data)
         } else {
             loadImageUseCase.loadImage(thumbnail: thumbnail) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let data):
-                        self.checkWrapperDataUseCase.save(thumbnail: thumbnail, data: data)
-                        completion(data)
-                    case .failure(let error):
-                        print("Error : " ,error)
-                    }
+                switch result {
+                case .success(let data):
+                    self.checkWrapperDataUseCase.save(thumbnail: thumbnail, data: data)
+                    completion(data)
+                case .failure(let error):
+                    print("Error : " ,error)
                 }
             }
         }

@@ -115,7 +115,9 @@ extension ListViewController: AlertPresentable {
         
         viewModel.error.bind { [weak self] error in
             guard let error else { return }
-            self?.presentAlert(title: error)
+            DispatchQueue.main.async {
+                self?.presentAlert(title: error)
+            }
         }
     }
 }
@@ -255,8 +257,10 @@ extension ListViewController {
                 }
                 
                 self.viewModel.loadImage(index: indexPath.item) { data in
-                    if indexPath == collectionView.indexPath(for: bannerCell) {
-                        bannerCell.uploadImage(data)
+                    DispatchQueue.main.async {
+                        if indexPath == collectionView.indexPath(for: bannerCell) {
+                            bannerCell.uploadImage(data)
+                        }
                     }
                 }
                 
@@ -299,8 +303,10 @@ extension ListViewController {
                 cell.setupBind()
                 
                 self.viewModel.loadImage(index: indexPath.item) { data in
-                    if indexPath == collectionView.indexPath(for: cell) {
-                        cell.setupImage(data: data)
+                    DispatchQueue.main.async {
+                        if indexPath == collectionView.indexPath(for: cell) {
+                            cell.setupImage(data: data)
+                        }
                     }
                 }
                 
