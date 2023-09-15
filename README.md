@@ -18,10 +18,6 @@ Refactoring 전 프로젝트가 보고 싶으시면 아래 링크를 눌러주�
 
 
 ## 팀 소개
-|[Kyo](https://github.com/KyoPak)|
-|:---:|
-| <img width="180px" img src= "https://user-images.githubusercontent.com/59204352/193524215-4f9636e8-1cdb-49f1-9a17-1e4fe8d76655.PNG" >|
-
 
 ## 실행 화면
 
